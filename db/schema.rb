@@ -13,32 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20141029101024) do
 
-  create_table "carts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "name"
-    t.text     "description"
-    t.integer  "count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "items", force: :cascade do |t|
-    t.integer "cart_id"
-    t.integer "product_id"
-    t.integer "qty"
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.text     "title"
-    t.text     "description"
-    t.float    "price"
-    t.integer  "deleted"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: :cascade do |t|
-    t.integer  "email"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
