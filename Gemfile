@@ -30,7 +30,7 @@ gem "trailblazer-rails"
 gem "trailblazer"#, "1.1.0"
 gem "reform"#, "2.1.0"
 
-gem "trailblazer-cells"
+# gem "trailblazer-cells"
 gem "cells"#, "4.0.3"
 gem "cells-haml"#, "0.0.8"
 gem "haml", github: "haml/haml", ref: "7c7c169"
