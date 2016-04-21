@@ -3,4 +3,7 @@
 = simple_form_for @form do |f|
 	= f.input :firstname
 	= f.input :lastname
+	= f.select :gender, options_for_select(["Male", "Female", "You"])
+	= f.input :email
+	= f.input :phone
 	= f.submit

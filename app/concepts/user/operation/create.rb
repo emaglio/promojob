@@ -5,7 +5,14 @@ class User < ActiveRecord::Base
 
       contract do
       	property :firstname
-      	validates :firstname, presence: true
+        property :lastname
+        property :email
+        property :gender
+        property :phone
+        validates :firstname, :lastname, :gender, :email, :phone , presence: true
+        validates_uniqueness_of :phone
+        validates_uniqueness_of :email  
+        #would be good to put validate for the length of the phone and format of the email
       end
 
       def process(params)
@@ -16,3 +23,7 @@ class User < ActiveRecord::Base
   
   end
 end
+
+'''
+validates :phone, :email, unique: true 
+'''

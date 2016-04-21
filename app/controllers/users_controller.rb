@@ -14,7 +14,17 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		
+		present User::Update
+	end
+
+	def edit
+		form User::Update
+	end
+
+	def update
+		run User::Update do |op|
+			return redirect_to op.model
+		end
 	end
 
 end
