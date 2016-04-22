@@ -9,9 +9,25 @@ class User < ActiveRecord::Base
         property :email
         property :gender
         property :phone
-        validates :firstname, :lastname, :gender, :email, :phone , presence: true
+        property :password
+        validates :firstname, :lastname, :gender , presence: true
         validates_uniqueness_of :phone
-        validates_uniqueness_of :email  
+        validates_uniqueness_of :email
+
+
+        validates :phone, length: {in: 10..10, message:"Double check your phone number please"}
+
+        VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+        VALID_PASSWORD_REGEX = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/
+        
+        validates :email, presence: true,
+                  format: {with: VALID_EMAIL_REGEX}
+    
+        validates :password,  presence: true,
+                              length: {in: 5..20, too_short: "must have at least 5 characters",
+                              too_long: "must have at most 20 characters"},
+                              format: {with: VALID_PASSWORD_REGEX, 
+                              message: "must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter"}  
         #would be good to put validate for the length of the phone and format of the email
       end
 
@@ -23,7 +39,3 @@ class User < ActiveRecord::Base
   
   end
 end
-
-'''
-validates :phone, :email, unique: true 
-'''
