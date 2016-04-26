@@ -17,3 +17,8 @@ rake db:migrate
 
 ## Running
 This is a Ruby on Rails application. Start the server with `rails server`.
+
+## Production
+
+1. Compile assets: `rake assets:precompile`
+2. Run server: `RAILS_SERVE_STATIC_FILES=true RAILS_ENV=production rails s` (Thanks @fernandes!)

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-    
+
 	def new
 		form User::Create
-		render
+		render User::Cell::New, @form
 	end
 
 	def create
