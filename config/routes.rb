@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'products#index'
+  root to: "users#new" # this is what the application shows when you access localhost:3000/.
 
-  post 'carts/add' => 'carts#add_item'
-  resources :carts
-  resources :products
   resources :users
 end
