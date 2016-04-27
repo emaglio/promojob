@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   class Update < Create
       
-      model User, :find
+    model User, :find
   
   end
 end
