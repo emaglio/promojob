@@ -23,6 +23,7 @@ class UserOperationTest < MiniTest::Spec
     #not sure about the message's error above
   end
 
+
   it "Fails" do
     res,op = User::Create.run(user: { firstname: "", lastname: "Maglio", gender: "Male", email: "my2@email.com", phone: "0410000010", password: "Test1" })
     res.must_equal false

@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
     model User, :find
   
   end
+  
 end

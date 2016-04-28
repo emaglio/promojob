@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160428110320) do
     t.datetime "updated_at"
     t.string   "title"
   end
+  
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
