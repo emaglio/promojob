@@ -10,11 +10,13 @@ class UsersController < ApplicationController
 			return redirect_to op.model
 		end
 
-		render :new
+		render User::Cell::New, @form
 	end
 
 	def show
 		present User::Update
+
+		render User::Cell::Show, @model
 	end
 
 	def edit
@@ -25,6 +27,13 @@ class UsersController < ApplicationController
 		run User::Update do |op|
 			return redirect_to op.model
 		end
+	end
+
+	def index
+		# TODO: make operation!
+		@model = User.all
+
+		render User::Cell::Index, @model
 	end
 
 end
