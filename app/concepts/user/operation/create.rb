@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
       	validate(params[:user]) do
       		contract.save
       	end
+        
       end
   
   end

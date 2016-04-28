@@ -26,5 +26,6 @@ class UsersController < ApplicationController
 			return redirect_to op.model
 		end
 	end
+	
 
 end

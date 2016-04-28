@@ -4,4 +4,5 @@ class Job < ActiveRecord::Base
 		model Job, :find
 	
 	end
+  
 end

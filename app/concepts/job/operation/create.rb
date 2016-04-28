@@ -1,6 +1,6 @@
 class Job < ActiveRecord::Base
 	class Create < Trailblazer::Operation # =>Job::Create 
-	    include Module
+	    include Model
 	    model Job, :create
 
 	    contract do
@@ -17,6 +17,7 @@ class Job < ActiveRecord::Base
 	    	validate(params[:job]) do
 	    		contract.save
 	    	end
+	    	
 	    end
 
 	end
