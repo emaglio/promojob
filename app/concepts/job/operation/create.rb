@@ -4,13 +4,13 @@ class Job < ActiveRecord::Base
 	    model Job, :create
 
 	    contract do
-	    	property :jobtitle
+	    	property :title
 	    	property :company
 	    	property :requirements
 	    	property :description
 	    	property :salary
 
-	    	validates :jobtitle, :requirements, :description , presence: true
+	    	validates :title, :requirements, :description , presence: true
 	    end
 
 	    def process(params)

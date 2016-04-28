@@ -1,11 +1,11 @@
 require 'test_helper'
 
-	class JobOperationTest < MiniTest::Spec
+class JobOperationTest < MiniTest::Spec
   	
 	it "validates correct input" do
-	  op = Job::Create.(job: { jobtitle: "AppSpec", comapany: "Nick's", requirements: "Beeing cool", description: "Showing hasses", salary: "100 $/hour" })
+	  op = Job::Create.(job: { title: "AppSpec", comapany: "Nick's", requirements: "Beeing cool", description: "Showing hasses", salary: "100 $/hour" })
 	  op.model.persisted?.must_equal true
-	  op.model.jobtitle.must_equal "AppSpec"
+	  op.model.title.must_equal "AppSpec"
 	  op.model.comapny.must_equal "Nick's"
 	  op.model.requirements.must_equal "Beeing cool"
 	  op.model.description.must_equal "Showing hasses"
