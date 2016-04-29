@@ -17,13 +17,13 @@ group :development do
 end
 
 group :development, :test do
-  gem "minitest-rails-capybara"
-  gem "minitest-line"
 end
 
 group :test do
   gem "memory_test_fix"
   gem "sqlite3"
+  gem "minitest-rails-capybara"
+  gem "minitest-line"
 end
 
 gem "trailblazer-rails"

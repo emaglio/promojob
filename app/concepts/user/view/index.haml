@@ -1,14 +1,11 @@
-.user-index
-  .row
-    %h1 All Users
-
-  .row
-    You've got #{total} users.
-
-  %hr
-
-  .row
-    %ul
-      = cell("user/cell/item", collection: model)
+%main{:role => "main"}
+  %h4
+    All Users
 
 
+.row
+  You've got #{total} users.
+
+.row
+  %ul.mobile-list
+    = cell("user/cell/item", collection: model)
