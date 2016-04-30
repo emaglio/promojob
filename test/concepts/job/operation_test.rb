@@ -12,6 +12,7 @@ class JobOperationTest < MiniTest::Spec
 	  op.model.salary.must_equal "100 $/hour"
 	end
 
+<<<<<<< HEAD
 	it "fails" do
 	  res,op = Job::Create.run(job: { title: "", company: "Nick's", requirements: "Beeing cool", description: "Showing hasses", salary: "100 $/hour" })
 	  res.must_equal false
@@ -23,4 +24,7 @@ class JobOperationTest < MiniTest::Spec
 	  res.must_equal false
 	  op.errors.to_s.must_equal "{:description=>[\"can't be blank\"]}"
 	end
+=======
+
+>>>>>>> 90a60630481bb5a41c3df778afd50a11d7396eba
 end
