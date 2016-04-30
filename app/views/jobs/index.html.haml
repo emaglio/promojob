@@ -1,0 +1,6 @@
+%h1 Listing Jobs
+
+= @jobs.each do |job|
+  = job.title
+  = link_to 'Apply', apply_job_path(job)
+= end

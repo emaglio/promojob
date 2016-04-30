@@ -1,5 +1,9 @@
 class JobsController < ApplicationController
     
+	def index
+		#not sure
+	end
+
 	def new
 		form Job::Create
 		render

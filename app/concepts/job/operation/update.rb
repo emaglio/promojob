@@ -1,5 +1,5 @@
 class Job < ActiveRecord::Base
-	class Update < Create # => Job::Create
+	class Update < Create #=> Job::Create
 		
 		model Job, :find
 	

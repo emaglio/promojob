@@ -28,7 +28,6 @@ class User < ActiveRecord::Base
                               too_long: "must have at most 20 characters"},
                               format: {with: VALID_PASSWORD_REGEX, 
                               message: "must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter"}  
-        #would be good to put validate for the length of the phone and format of the email
       end
 
       def process(params)
