@@ -31,8 +31,7 @@ class UsersController < ApplicationController
 	
 
 	def index
-		# TODO: make operation!
-		@model = User.all
+		present User::Index
 
 		render User::Cell::Index, @model
 	end

@@ -3,8 +3,15 @@ class Job < ActiveRecord::Base
     include Model
     model JobApplication, :create
 
+    contract do
+      property :job_id
+      property :user_id
+    end
+
     def process(params)
-      model.update_attributes(params)
+      validate(params)do
+        contract.save
+      end
     end
 
   end

@@ -1,12 +1,13 @@
 class JobsController < ApplicationController
     
 	def index
-		#not sure
+		present	Job::Index
+		render Job::Cell::Index, @model
 	end
 
 	def new
 		form Job::Create
-		render
+		render Job::Cell::New, @form
 	end
 
 	def create
@@ -14,11 +15,12 @@ class JobsController < ApplicationController
 			return redirect_to op.model
 		end
 
-		render :new
+		render Job::Cell::Create, @form
 	end
 
 	def show
 		present Job::Update
+		render Job::Cell::Show, @model
 	end
 
 	def edit
