@@ -1,0 +1,10 @@
+%h1 Create Job
+
+
+= simple_form_for @form do |f|
+	= f.input :title
+	= f.input :company
+	= f.input :requirements
+	= f.input :description
+	= f.input :salary
+	= f.submit

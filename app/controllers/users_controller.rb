@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 			return redirect_to op.model
 		end
 	end
+	
 
 	def index
 		# TODO: make operation!

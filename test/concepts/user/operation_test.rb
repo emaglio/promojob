@@ -14,32 +14,31 @@ class UserOperationTest < MiniTest::Spec
   end
 
   it "unique email and phone" do
-    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my@email.com", phone: "0410100001", password: "Test1" })
-    res.must_equal false
-    op.errors.to_s.must_equal "{:email=>[\"has already been taken\"]}"
-    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my1@email.com", phone: "0410123456", password: "Test1" })
+    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my1@email.com", phone: "0410100001", password: "Test1" })
+    res.must_equal true
+    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my1@email.com", phone: "0410100001", password: "Test1" })
     res.must_equal false
     op.errors.to_s.must_equal "{:phone=>[\"has already been taken\"], :email=>[\"has already been taken\"]}"
-    #not sure about the message's error above
   end
 
+
   it "Fails" do
-    res,op = User::Create.run(user: { firstname: "", lastname: "Maglio", gender: "Male", email: "my2@email.com", phone: "0410000010", password: "Test1" })
+    res,op = User::Create.run(user: { firstname: "", lastname: "Maglio", gender: "Male", email: "my3@email.com", phone: "0410000010", password: "Test1" })
     res.must_equal false
     op.errors.to_s.must_equal "{:firstname=>[\"can't be blank\"]}"
-    res,op = User::Create.run(user: { firstname: "Ema", lastname: "", gender: "Male", email: "my3@email.com", phone: "0410000100", password: "Test1" })
+    res,op = User::Create.run(user: { firstname: "Ema", lastname: "", gender: "Male", email: "my4@email.com", phone: "0410000100", password: "Test1" })
     res.must_equal false
     op.errors.to_s.must_equal "{:lastname=>[\"can't be blank\"]}"
-    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "", email: "my4@email.com", phone: "0410001000", password: "Test1" })
+    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "", email: "my5@email.com", phone: "0410001000", password: "Test1" })
     res.must_equal false
     op.errors.to_s.must_equal "{:gender=>[\"can't be blank\"]}"
     res,op = User::Create.run(user: { firstname: "ema", lastname: "Maglio", gender: "Male", email: "", phone: "0410010000", password: "Test1" })
     res.must_equal false
     op.errors.to_s.must_equal "{:email=>[\"can't be blank\", \"is invalid\"]}"
-    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my5@email.com", phone: "", password: "Test1" })
+    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my6@email.com", phone: "", password: "Test1" })
     res.must_equal false
     op.errors.to_s.must_equal "{:phone=>[\"Double check your phone number please\"]}"
-    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my6@email.com", phone: "0410010000", password: "" })
+    res,op = User::Create.run(user: { firstname: "Ema", lastname: "Maglio", gender: "Male", email: "my7@email.com", phone: "0410010000", password: "" })
     res.must_equal false
     op.errors.to_s.must_equal "{:password=>[\"can't be blank\", \"must have at least 5 characters\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
   end
