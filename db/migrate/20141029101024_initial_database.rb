@@ -7,9 +7,10 @@ class InitialDatabase < ActiveRecord::Migration
       t.string :email
       t.string :phone
       t.string :gender
+      t.string :password
 
       t.timestamps
     end
-    
+
   end
 end
