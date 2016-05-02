@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/apotonick/cells.git
+  revision: 4b0dfc51c7d30521d5085092939b92a731d5e1f3
+  branch: cells-rails
+  specs:
+    cells (4.1.0)
+      tilt (>= 1.4, < 3)
+      uber (>= 0.0.9)
+
+GIT
   remote: git://github.com/haml/haml.git
   revision: 7c7c16930b7fefd6dd9869a3af73f8d86c673b77
   ref: 7c7c169
@@ -6,22 +15,17 @@ GIT
     haml (4.1.0.beta.1)
       tilt
 
-PATH
-  remote: ../cells
-  specs:
-    cells (4.1.0)
-      tilt (>= 1.4, < 3)
-      uber (>= 0.0.9)
-
-PATH
-  remote: ../cells-rails
+GIT
+  remote: git://github.com/trailblazer/cells-rails.git
+  revision: a078433d3df497cc31601f6a44c8592cf6347a39
   specs:
     cells-rails (0.0.2)
       actionpack (>= 3.0)
       cells (>= 4.0)
 
-PATH
-  remote: ../trailblazer-cells
+GIT
+  remote: git://github.com/trailblazer/trailblazer-cells.git
+  revision: 067093180cd3709156575361efb07a816e8b40d1
   specs:
     trailblazer-cells (0.0.1)
       cells (>= 4.1.0, < 5.0.0)
@@ -97,6 +101,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.9.1)
     execjs (2.6.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
     foundation-rails (5.4.5.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -248,6 +254,7 @@ DEPENDENCIES
   cells-haml
   cells-rails!
   coffee-rails (~> 4.0.0)
+  factory_girl
   foundation-rails (= 5.4.5.0)
   haml!
   haml-rails

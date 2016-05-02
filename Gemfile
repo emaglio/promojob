@@ -30,8 +30,10 @@ gem "trailblazer-rails"
 gem "trailblazer"#, "1.1.0"
 gem "reform"#, "2.1.0"
 
-gem "trailblazer-cells", path: "../trailblazer-cells"
-gem "cells", path: "../cells" #, "4.0.3"
-gem "cells-rails", path: "../cells-rails" #, "4.0.3"
+gem "trailblazer-cells", github: "trailblazer/trailblazer-cells" #path: "../trailblazer-cells"
+gem "cells", github: "apotonick/cells", branch: "cells-rails" #path: "../cells" #, "4.0.3"
+gem "cells-rails", github: "trailblazer/cells-rails" #path: "../cells-rails" #, "4.0.3"
 gem "cells-haml"#, "0.0.8"
 gem "haml", github: "haml/haml", ref: "7c7c169"
+
+gem "factory_girl"

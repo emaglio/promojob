@@ -1,3 +1,3 @@
 class Job < ActiveRecord::Base
-	has_one :user
+	has_many :jobs, through: :job_applications
 end

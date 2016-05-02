@@ -12,9 +12,13 @@ Minitest::Spec.class_eval do
     # DatabaseCleaner.clean
     # Thing.delete_all
     # Comment.delete_all
-    # User.delete_all
+    User.delete_all
   end
+  include FactoryGirl::Syntax::Methods
 end
+
+FactoryGirl.find_definitions
+
 
 Cell::TestCase.class_eval do
   include Capybara::DSL
