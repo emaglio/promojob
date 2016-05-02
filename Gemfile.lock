@@ -11,7 +11,14 @@ PATH
   specs:
     cells (4.1.0)
       tilt (>= 1.4, < 3)
-      uber (~> 0.0.9)
+      uber (>= 0.0.9)
+
+PATH
+  remote: ../cells-rails
+  specs:
+    cells-rails (0.0.2)
+      actionpack (>= 3.0)
+      cells (>= 4.0)
 
 PATH
   remote: ../trailblazer-cells
@@ -239,6 +246,7 @@ DEPENDENCIES
   binding_of_caller
   cells!
   cells-haml
+  cells-rails!
   coffee-rails (~> 4.0.0)
   foundation-rails (= 5.4.5.0)
   haml!
