@@ -9,6 +9,7 @@ class Job < ActiveRecord::Base
 	    	property :requirements
 	    	property :description
 	    	property :salary
+	    	property :startingday
 
 	    	validates :title, :requirements, :description , presence: true
 	    end

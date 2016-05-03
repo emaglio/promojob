@@ -6,6 +6,9 @@ class Job < ActiveRecord::Base
     contract do
       property :job_id
       property :user_id
+      property :status
+      property :message
+      validates :job_id, :user_id, presence: true # maybe no sense
     end
 
     def process(params)
