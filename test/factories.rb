@@ -8,6 +8,15 @@ FactoryGirl.define  do
     phone "0410123456"
     password "Test1"
   end
-  
+
+  factory :job do
+    title "AppSpec"
+    company "Nick's"
+    requirements "Beeing cool"
+    description "Showing hasses"
+    salary "100 $/hour"
+    startingday "12/12/12"
+  end
+
 end
     
