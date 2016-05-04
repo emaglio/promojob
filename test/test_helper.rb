@@ -45,4 +45,29 @@ Trailblazer::Test::Integration.class_eval do
     end
     click_button "Sign in!"
   end
+
+
+
+  let (:user) { be }
+
+  it do
+    # test setup
+    # user = User::Create...
+    # job  = Job::Create
+
+    user = User.new( email: ".....", firstname: "")
+    user.save
+
+    user
+
+# realistic test scenario!
+
+    # run what to test
+    Job::Apply.(
+      user_id: user.id,
+      job_id: job.id
+      )
+
+    # test side effects
+  end
 end

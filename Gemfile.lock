@@ -1,34 +1,10 @@
 GIT
-  remote: git://github.com/apotonick/cells.git
-  revision: 4b0dfc51c7d30521d5085092939b92a731d5e1f3
-  branch: cells-rails
-  specs:
-    cells (4.1.0)
-      tilt (>= 1.4, < 3)
-      uber (>= 0.0.9)
-
-GIT
   remote: git://github.com/haml/haml.git
   revision: 7c7c16930b7fefd6dd9869a3af73f8d86c673b77
   ref: 7c7c169
   specs:
     haml (4.1.0.beta.1)
       tilt
-
-GIT
-  remote: git://github.com/trailblazer/cells-rails.git
-  revision: a078433d3df497cc31601f6a44c8592cf6347a39
-  specs:
-    cells-rails (0.0.2)
-      actionpack (>= 3.0)
-      cells (>= 4.0)
-
-GIT
-  remote: git://github.com/trailblazer/trailblazer-cells.git
-  revision: 067093180cd3709156575361efb07a816e8b40d1
-  specs:
-    trailblazer-cells (0.0.1)
-      cells (>= 4.1.0, < 5.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -80,9 +56,15 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    cells (4.1.0.rc1)
+      tilt (>= 1.4, < 3)
+      uber (>= 0.0.9)
     cells-haml (0.0.10)
       cells (>= 4.0.1, <= 6.0.0)
       haml (>= 4.1.0.beta.1)
+    cells-rails (0.0.3)
+      actionpack (>= 3.0)
+      cells (>= 4.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -232,6 +214,8 @@ GEM
       declarative
       reform (>= 2.0.0, < 3.0.0)
       uber (>= 0.0.15)
+    trailblazer-cells (0.0.2)
+      cells (>= 4.1.0.rc1, < 5.0.0)
     trailblazer-loader (0.0.9)
     trailblazer-rails (0.2.4)
       trailblazer (>= 1.0.4)
@@ -250,9 +234,9 @@ PLATFORMS
 
 DEPENDENCIES
   binding_of_caller
-  cells!
+  cells (= 4.1.0.rc1)
   cells-haml
-  cells-rails!
+  cells-rails
   coffee-rails (~> 4.0.0)
   factory_girl
   foundation-rails (= 5.4.5.0)
@@ -272,7 +256,7 @@ DEPENDENCIES
   therubyracer
   thin
   trailblazer
-  trailblazer-cells!
+  trailblazer-cells
   trailblazer-rails
   uglifier (>= 1.3.0)
 
