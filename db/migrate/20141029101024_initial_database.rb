@@ -12,5 +12,16 @@ class InitialDatabase < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :jobs do |t|
+      t.string    :title
+      t.string    :company
+      t.text      :requirements
+      t.text      :description
+      t.string    :salary
+      t.datetime  :starts_at
+
+      t.timestamps
+    end
+
   end
 end

@@ -6,7 +6,7 @@ module Job::Cell
     property :requirements
     property :description
     property :salary
-    property :startingday
+    property :starts_at
   end
 
 
