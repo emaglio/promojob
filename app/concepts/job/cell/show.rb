@@ -1,4 +1,5 @@
 module Job::Cell
+  
   class Show < Trailblazer::Cell
     property :id
     property :title
@@ -8,6 +9,5 @@ module Job::Cell
     property :salary
     property :startingday
   end
-
 
 end
