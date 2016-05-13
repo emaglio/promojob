@@ -15,7 +15,7 @@ FactoryGirl.define  do
     requirements "Beeing cool"
     description "Showing hasses"
     salary "100 $/hour"
-    startingday "12/12/12"
+    starts_at "12/12/12"
   end
 
 end

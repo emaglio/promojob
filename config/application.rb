@@ -29,3 +29,6 @@ end
 
 # railties have to be loaded here.
 require 'trailblazer/rails/railtie'
+
+# datepicker
+require 'simple-form-datepicker'
