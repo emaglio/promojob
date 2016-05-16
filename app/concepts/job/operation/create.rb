@@ -1,5 +1,5 @@
 class Job < ActiveRecord::Base
-	class Create < Trailblazer::Operation # =>Job::Create 
+	class Create < Trailblazer::Operation
 	    include Model
 	    model Job, :create
 
@@ -9,7 +9,7 @@ class Job < ActiveRecord::Base
 	    	property :requirements
 	    	property :description
 	    	property :salary
-	    	property :startingday
+	    	property :starts_at
 
 	    	validates :title, :requirements, :description , presence: true
 	    end
@@ -18,7 +18,7 @@ class Job < ActiveRecord::Base
 	    	validate(params[:job]) do
 	    		contract.save
 	    	end
-	    	
+
 	    end
 
 	end

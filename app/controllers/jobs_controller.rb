@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-    
+
 	def index
 		present	Job::Index
 		render Job::Cell::Index, @model
@@ -15,7 +15,7 @@ class JobsController < ApplicationController
 			return redirect_to op.model
 		end
 
-		render Job::Cell::Create, @form
+		render Job::Cell::New, @form
 	end
 
 	def show
@@ -32,5 +32,5 @@ class JobsController < ApplicationController
 			return redirect_to op.model
 		end
 	end
-	
+
 end

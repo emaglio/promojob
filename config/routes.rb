@@ -4,3 +4,11 @@ Rails.application.routes.draw do
   resources :jobs
   resources :job_applications
 end
+
+
+
+# job_applications
+# job_id
+# user_id
+# state: [applied, rejected, hired]
+# message:
