@@ -12,6 +12,7 @@ class Job < ActiveRecord::Base
     end
 
     def process(params)
+      # raise params.inspect
       validate(params)do
         contract.save
       end

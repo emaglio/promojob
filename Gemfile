@@ -31,7 +31,7 @@ gem "trailblazer"#, "1.1.0"
 gem "reform"#, "2.1.0"
 
 # gem "trailblazer-cells", github: "trailblazer/trailblazer-cells" #path: "../trailblazer-cells"
-gem "cells", "4.1.0.rc1"
+gem "cells", "4.1.1"
 gem "trailblazer-cells"
 gem "cells-rails"
 gem "cells-haml"#, "0.0.8"
