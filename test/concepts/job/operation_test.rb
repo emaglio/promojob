@@ -10,7 +10,7 @@ class JobOperationTest < MiniTest::Spec
 	  op.model.requirements.must_equal "Beeing cool"
 	  op.model.description.must_equal "Showing hasses"
 	  op.model.salary.must_equal "100 $/hour"
-	  # op.model.starts_at.must_equal "Wed, 12 Dec 0012 00:00:00 UTC +00:00"
+	  op.model.starts_at.must_equal ""
 	end
 
 	it "fails" do
