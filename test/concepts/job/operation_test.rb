@@ -10,7 +10,7 @@ class JobOperationTest < MiniTest::Spec
 	  op.model.requirements.must_equal "Beeing cool"
 	  op.model.description.must_equal "Showing hasses"
 	  op.model.salary.must_equal "100 $/hour"
-	  op.model.starts_at.must_equal ""
+	  op.model.starts_at.must_equal ""#needed different king of test
 	end
 
 	it "fails" do

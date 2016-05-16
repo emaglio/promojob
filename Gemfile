@@ -39,5 +39,5 @@ gem "haml", github: "haml/haml", ref: "7c7c169"
 
 gem "factory_girl"
 
-gem "simple-form-datepicker"
-gem "jquery-ui-rails"
+#date picker
+gem 'foundation-datetimepicker-rails'
