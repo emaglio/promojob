@@ -10,7 +10,7 @@ class UserOperationTest < MiniTest::Spec
     op.model.gender.must_equal "Male"
     op.model.email.must_equal "my@email.com"
     op.model.phone.must_equal "0410123456"
-    op.model.password.must_equal "Test1"
+    assert op.model.auth_meta_data["confirmed_at"]
   end
 
   it "unique email and phone" do
@@ -40,22 +40,22 @@ class UserOperationTest < MiniTest::Spec
     op.errors.to_s.must_equal "{:phone=>[\"Double check your phone number please\"]}"
     res,op = User::Create.run(user: attributes_for(:user, password: ""))
     res.must_equal false
-    op.errors.to_s.must_equal "{:password=>[\"can't be blank\", \"must have at least 5 characters\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
+    op.errors.to_s.must_equal "{:password=>[\"Passwords don't match\", \"can't be blank\", \"must have at least 5 characters\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
   end
 
   it "password fails" do
     res,op = User::Create.run(user: attributes_for(:user, password: "Test"))
     res.must_equal false
-    op.errors.to_s.must_equal "{:password=>[\"must have at least 5 characters\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
+    op.errors.to_s.must_equal "{:password=>[\"Passwords don't match\", \"must have at least 5 characters\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
     res,op = User::Create.run(user: attributes_for(:user, password: "Testing"))
     res.must_equal false
-    op.errors.to_s.must_equal "{:password=>[\"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
+    op.errors.to_s.must_equal "{:password=>[\"Passwords don't match\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
     res,op = User::Create.run(user: attributes_for(:user, password: "test1"))
     res.must_equal false
-    op.errors.to_s.must_equal "{:password=>[\"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
+    op.errors.to_s.must_equal "{:password=>[\"Passwords don't match\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
     res,op = User::Create.run(user: attributes_for(:user, password: "TEST1"))
     res.must_equal false
-    op.errors.to_s.must_equal "{:password=>[\"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
+    op.errors.to_s.must_equal "{:password=>[\"Passwords don't match\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"
   end
 
   it "email format fails" do

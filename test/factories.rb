@@ -7,6 +7,7 @@ FactoryGirl.define  do
     email "my@email.com"
     phone "0410123456"
     password "Test1"
+    confirm_password "Test1"
   end
 
   factory :job do

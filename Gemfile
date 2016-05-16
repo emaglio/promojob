@@ -41,3 +41,5 @@ gem "factory_girl"
 
 #date picker
 gem 'foundation-datetimepicker-rails'
+
+gem "tyrant", github: "apotonick/tyrant" 

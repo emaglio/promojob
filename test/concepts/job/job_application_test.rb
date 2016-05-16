@@ -20,4 +20,13 @@ class JobApplicationTest < MiniTest::Spec
     res.must_equal false
     op.errors.to_s.must_equal "{:job_id=>[\"can't be blank\"], :user_id=>[\"can't be blank\"]}"
   end
+
+  it "no duplicate application" do
+    res,op = Job::Apply.run({ user_id: user.id, job_id: job.id})
+    res.must_equal true
+    res,op = Job::Apply.run({ user_id: user.id, job_id: job.id})
+    res.must_equal false 
+    # op.errors.to_s.must_equal
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502101350) do
+ActiveRecord::Schema.define(version: 20160516092716) do
 
   create_table "job_applications", force: :cascade do |t|
     t.integer  "job_id"
@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 20160502101350) do
     t.string   "email"
     t.string   "phone"
     t.string   "gender"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "auth_meta_data"
   end
 
 end
