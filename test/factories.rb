@@ -1,5 +1,5 @@
 FactoryGirl.define  do
-  
+
   factory :user do
     firstname "Ema"
     lastname "Maglio"
@@ -15,8 +15,7 @@ FactoryGirl.define  do
     requirements "Beeing cool"
     description "Showing hasses"
     salary "100 $/hour"
-    starts_at "01-02-16"
+    starts_at "01-02-2016 12:12"
   end
-
 end
-    
+
