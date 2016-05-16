@@ -4,4 +4,10 @@ class ApplicationController < ActionController::Base
 
     super(html: cell(cell_constant, model, layout: RailsFoundation::Cell::Layout))
   end
+
+  def tyrant
+    Tyrant::Session.new(request.env['warden'])
+  end
+  
+
 end
