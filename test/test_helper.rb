@@ -43,6 +43,6 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Email',    with: email
       fill_in 'Password', with: password
     end
-    click_button "Sign in!"
+    click_button "Sign in"
   end
 end

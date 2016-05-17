@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     run Session::SignIn do |op|
       tyrant.sign_in!(op.model)
-      return redirect_to root_path
+      return redirect_to jobs_path
     end
 
     render Session::Cell::SignIn, @form
