@@ -1,0 +1,9 @@
+%h1 Log In
+
+= simple_form_for model, url: "/sessions", as: :session do |f|
+  .row
+    = f.input :email
+  .row
+    = f.input :password
+  .row
+    = f.button :submit, "Sign In", class: :expand
