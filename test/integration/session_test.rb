@@ -4,8 +4,8 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
 
   let (:user) {User::Create.(user: FactoryGirl.attributes_for(:user)).model}
 
-  
-  it "fail_sign_in" do
+
+  it "invalid log in (not existing)" do
     visit "sessions/new"
 
     submit!("","")
@@ -28,12 +28,10 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#session_password"
     page.must_have_button "Sign In"
 
+    # manu, you have to create that user via User::Create, first!
     submit!(user.email, "Test1")
 
     # redirected to jobs_path
     page.must_have_content "All Jobs"
   end
-
-
-
 end
