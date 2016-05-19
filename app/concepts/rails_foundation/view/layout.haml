@@ -10,4 +10,6 @@
   %body
     %header
       = cell "rails_foundation/cell/navigation"
-    = yield
+    %article.page-content
+      %row.columns
+        = yield
