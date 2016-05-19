@@ -39,6 +39,8 @@ Trailblazer::Test::Integration.class_eval do
   end
 
   def submit!(email, password)
+    # puts page.body # manu, this is how you can find out what the test "sees".
+
     within("//form[@id='new_session']") do
       fill_in 'Email',    with: email
       fill_in 'Password', with: password
