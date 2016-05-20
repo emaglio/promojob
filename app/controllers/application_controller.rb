@@ -8,6 +8,17 @@ class ApplicationController < ActionController::Base
   def tyrant
     Tyrant::Session.new(request.env['warden'])
   end
+  helper_method :tyrant
+
+  require_dependency "session/operation/impersonate"
+  before_filter { Session::Impersonate.(params.merge!(tyrant: tyrant)) } # TODO: allow Op.(params, session)
+
+  rescue_from Trailblazer::NotAuthorizedError, with: :user_not_authorized
+
+  def user_not_authorized
+    flash[:message] = "Not authorized, my friend."
+    redirect_to root_path
+  end
   
 
 end
