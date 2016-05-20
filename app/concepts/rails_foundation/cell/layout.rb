@@ -1,28 +1,23 @@
 module RailsFoundation
   module Cell
-    class Layout < ::Cell::Concept
+    class Layout < Trailblazer::Cell
       include ActionView::Helpers::CsrfHelper
       # include ActionController::RequestForgeryProtection
       property :current_user
       property :real_user
       property :signed_in?
 
-      def show
-        render
+    private
+      def tyrant
+        context[:tyrant]
       end
 
-    private
       def links
         render
       end
 
       def welcome_signed_in
-        link_to("#{impersonate_icon} Hi, #{current_user.email}".html_safe, user_path(current_user))
-      end
-
-      def impersonate_icon
-        return unless real_user
-        "<i data-tooltip class=\"fi-sheriff-badge\" title=\"You really are: #{real_user.email}\"></i>"
+        link_to("Hi, #{current_user.email}".html_safe, user_path(current_user))
       end
     end
   end
