@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   resources :users
   resources :jobs
   resources :job_applications
-  resources :sessions
+  
+  resources :sessions do
+    collection do
+      get 'sign_out'
+    end
+  end
+
 end
 
 

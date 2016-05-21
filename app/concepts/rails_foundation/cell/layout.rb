@@ -17,7 +17,7 @@ module RailsFoundation
       end
 
       def welcome_signed_in
-        link_to("Hi, #{current_user.email}".html_safe, user_path(current_user))
+        link_to("Hi, #{current_user.firstname}".html_safe, user_path(current_user))
       end
     end
   end

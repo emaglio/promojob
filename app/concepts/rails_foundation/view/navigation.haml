@@ -18,10 +18,12 @@
       
       - if tyrant.signed_in?
         %li
-          = link_to "Hi, #{tyrant.current_user.email}", user_path(tyrant.current_user)
+          = link_to "Hi, #{tyrant.current_user.firstname}", user_path(tyrant.current_user)
+        %li
+          = link_to "Sign Out", sign_out_sessions_path
       - else
         %li
           = link_to "Create User", new_user_path
         %li
           = link_to "Sign In", new_session_path
-      
+      s

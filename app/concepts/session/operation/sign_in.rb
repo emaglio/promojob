@@ -6,7 +6,7 @@ module Session
     end
 
     contract do
-      # undef :persisted? # TODO: allow with trailblazer/reform.
+      undef :persisted? # TODO: allow with trailblazer/reform.
       attr_reader :user
 
       property :email,    virtual: true
@@ -22,8 +22,13 @@ module Session
         # @op.call
         @user = User.find_by(email: email)
 
-        # DISCUSS: move validation of PW to Op#process?
-        errors.add(:password, "Wrong password.") unless @user and Tyrant::Authenticatable.new(@user).digest?(password)#
+        unless @user
+          errors.add(:email, "User not found")
+        else
+          # DISCUSS: move validation of PW to Op#process?
+          errors.add(:password, "Wrong password.") unless Tyrant::Authenticatable.new(@user).digest?(password)#
+        end
+        
       end
     end
 
@@ -34,19 +39,6 @@ module Session
         @model = contract.user
       end
     end
-
-  class SignedIn < SignIn
-    contract do
-      property :user, deserializer: { writeable: false } do
-      end # TODO: allow to remove.
-      validates :user, presence: :true
-    end
-
-    def process(params)
-      contract.user = params[:current_user]
-      super
-    end
-  end
 
     class Admin < self # TODO: test. this is kinda "Admin" as it allows instant creation and sign up.
       self.contract_class = Class.new(Reform::Form)
@@ -59,7 +51,18 @@ module Session
         end
       end
     end
+  end
 
+  class SignedIn < SignIn
+    contract do
+      property :user, deserializer: { writeable: false } do
+      end # TODO: allow to remove.
+      validates :user, presence: :true
+    end
 
+    def process(params)
+      contract.user = params[:current_user]
+      super
+    end
   end
 end
