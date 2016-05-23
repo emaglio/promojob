@@ -1,11 +1,19 @@
 %h1 Create User
 
 = simple_form_for model do |f|
-  = f.input :firstname
-  = f.input :lastname
-  = f.select :gender, options_for_select(["Male", "Female", "You"])
-  = f.input :email
-  = f.input :phone
-  = f.input :password
-  = f.input :confirm_password
-  = f.submit
+  .row
+    = f.input :firstname
+  .row
+    = f.input :lastname
+  .row
+    = f.select :gender, options_for_select(["Male", "Female", "You"])
+  .row
+    = f.input :email
+  .row
+    = f.input :phone
+  .row
+    = f.input :password
+  .row
+    = f.input :confirm_password
+  .row
+    = f.submit
