@@ -1,10 +1,6 @@
 module Session
 
   class SignIn < Trailblazer::Operation
-    builds -> (params) do
-      SignedIn if params[:current_user]
-    end
-
     contract do
       undef :persisted? # TODO: allow with trailblazer/reform.
       attr_reader :user
@@ -28,7 +24,7 @@ module Session
           # DISCUSS: move validation of PW to Op#process?
           errors.add(:password, "Wrong password.") unless Tyrant::Authenticatable.new(@user).digest?(password)#
         end
-        
+
       end
     end
 
@@ -37,18 +33,6 @@ module Session
       validate(params[:session]) do |contract|
          # Monban.config.sign_in_service.new(contract.user).perform
         @model = contract.user
-      end
-    end
-
-    class Admin < self # TODO: test. this is kinda "Admin" as it allows instant creation and sign up.
-      self.contract_class = Class.new(Reform::Form)
-      contract do # inherit: false would be cool here.
-        property :email
-        property :password, virtual: true
-        property :password_digest
-
-        def password_ok?(*) # TODO: allow removing validations.
-        end
       end
     end
   end

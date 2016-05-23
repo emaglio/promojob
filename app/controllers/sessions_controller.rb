@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-  
+
   def new
     form Session::SignIn
-    render Session::Cell::SignIn, @form
+    render Session::Cell::SignIn, model: @form
   end
 
   def create
@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       return redirect_to jobs_path
     end
 
-    render Session::Cell::SignIn, @form
+    render Session::Cell::SignIn, model: @form
   end
 
   def sign_out
@@ -20,5 +20,4 @@ class SessionsController < ApplicationController
       redirect_to root_path
     end
   end
-
 end

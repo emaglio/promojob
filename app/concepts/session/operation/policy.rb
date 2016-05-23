@@ -1,5 +1,9 @@
 class Session::Policy
   # include Gemgem::Policy
+  def initialize(user, model)
+    @user = user
+    @model = model
+  end
 
   def create?
     true
