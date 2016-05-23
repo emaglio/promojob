@@ -6,7 +6,7 @@ module Session
     end
 
     contract do
-      undef :persisted? # TODO: allow with trailblazer/reform.
+      # undef :persisted? # TODO: allow with trailblazer/reform.
       attr_reader :user
 
       property :email,    virtual: true
