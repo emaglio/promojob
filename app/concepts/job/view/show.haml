@@ -3,11 +3,10 @@
   = company
   = salary
   = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
-  =# link_to "Apply", "/job_applications/?user_id=1&job_id=#{id}", method: :post
 
   = form_tag "/job_applications" do
-    = hidden_field_tag :user_id, 1
+    = hidden_field_tag :user_id, policy.user.id
     = hidden_field_tag :job_id, id
     Message:
     = text_field_tag :message
-    = submit_tag "Apply"
+    = submit_tag "Apply" #TODO flash message "You have applied for that job"

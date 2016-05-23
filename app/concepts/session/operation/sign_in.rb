@@ -5,6 +5,8 @@ module Session
       undef :persisted? # TODO: allow with trailblazer/reform.
       attr_reader :user
 
+      # policy Session::Policy, :create?
+
       property :email,    virtual: true
       property :password, virtual: true
 

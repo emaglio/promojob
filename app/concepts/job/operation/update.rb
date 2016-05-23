@@ -2,7 +2,9 @@ class Job < ActiveRecord::Base
 	class Update < Create #=> Job::Create
 		
 		model Job, :find
-	
-	end
-  
+
+    #only the admin can modify a Job
+    policy Session::Policy, :admin?
+
+	end  
 end

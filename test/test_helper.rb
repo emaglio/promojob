@@ -15,6 +15,10 @@ Minitest::Spec.class_eval do
     User.delete_all
   end
   include FactoryGirl::Syntax::Methods
+
+  def  admin_for
+    User::Create.(attributes_for(:user, email: "info@cj-agency.de"))
+  end
 end
 
 FactoryGirl.find_definitions

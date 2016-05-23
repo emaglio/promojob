@@ -5,9 +5,25 @@ class Session::Policy
     @model = model
   end
 
+  attr_reader :user
+
   def create?
     true
   end
+
+  def admin?
+    @user.email == "info@cj-agency.de" 
+  end
+
+  def apply?
+    #user already apply and job still available
+    JobApplication.where(job_id: @model.id, user_id: @user.id).size == 0 
+  end
+
+
+  # def signed_in?
+  #   tyrant.signed_in?    
+  # end
 
   # the problem here is that we need deciders to differentiate between contexts (e.g. signed_in?)
   # that we actually already know, e.g. Create::SignedIn knows it is signed in.

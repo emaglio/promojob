@@ -12,3 +12,5 @@ Trailblazer::Cell.class_eval do
     context[:policy]
   end
 end
+
+require_dependency "session/policy"

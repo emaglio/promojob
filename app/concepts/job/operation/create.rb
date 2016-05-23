@@ -2,6 +2,9 @@ class Job < ActiveRecord::Base
 	class Create < Trailblazer::Operation
 	    include Model
 	    model Job, :create
+	    
+	    #only the admin can create a job
+	    policy Session::Policy, :admin?
 
 	    contract do
 	    	property :title

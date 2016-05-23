@@ -10,13 +10,13 @@
   .top-bar-section
     %ul
       %li
-        = link_to "Users", users_path
-      %li
         = link_to "Jobs", jobs_path
-      %li
-        = link_to "Create Job", new_job_path
-
-      = policy.admin?
+      
+      - if policy.admin?
+        %li
+          = link_to "Users", users_path
+        %li
+          = link_to "Create Job", new_job_path
 
       - if tyrant.signed_in?
         %li

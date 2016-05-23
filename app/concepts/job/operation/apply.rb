@@ -14,7 +14,7 @@ class Job < ActiveRecord::Base
       property :status
       property :message
       validates :job_id, :user_id, presence: true # maybe no sense
-      validates :user_id, unique: {scope: :job_id}
+      validates :user_id, unique: {scope: :job_id} #already in policy.apply?
     end
 
     def process(params)
