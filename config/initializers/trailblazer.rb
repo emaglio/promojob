@@ -4,4 +4,11 @@ require "trailblazer/operation/dispatch"
 
 Trailblazer::Operation.class_eval do
   include Trailblazer::Operation::Dispatch
+  include Trailblazer::Operation::Policy
+end
+
+Trailblazer::Cell.class_eval do
+  def policy
+    context[:policy]
+  end
 end
