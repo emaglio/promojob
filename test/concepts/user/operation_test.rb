@@ -37,7 +37,7 @@ class UserOperationTest < MiniTest::Spec
     op.errors.to_s.must_equal "{:email=>[\"can't be blank\", \"is invalid\"]}"
     res,op = User::Create.run(user: attributes_for(:user, phone: ""))
     res.must_equal false
-    op.errors.to_s.must_equal "{:phone=>[\"Double check your phone number please\"]}"
+    op.errors.to_s.must_equal "{:phone=>[\"can't be blank\"]}"
     res,op = User::Create.run(user: attributes_for(:user, password: ""))
     res.must_equal false
     op.errors.to_s.must_equal "{:password=>[\"Passwords don't match\", \"can't be blank\", \"must have at least 5 characters\", \"must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter\"]}"

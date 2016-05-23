@@ -6,7 +6,7 @@
   =# link_to "Apply", "/job_applications/?user_id=1&job_id=#{id}", method: :post
 
   = form_tag "/job_applications" do
-    = hidden_field_tag :user_id, current_user.id
+    = hidden_field_tag :user_id, 1
     = hidden_field_tag :job_id, id
     Message:
     = text_field_tag :message

@@ -14,10 +14,8 @@ class User < ActiveRecord::Base
         property :gender
         property :phone
         # property :password
-        validates :firstname, :lastname, :gender , presence: true
+        validates :firstname, :lastname, :gender , :phone, presence: true
         validates :phone, :email, unique: true
-
-        validates :phone, length: {in: 10..10, message:"Double check your phone number please"}
 
         VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
         VALID_PASSWORD_REGEX = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/
