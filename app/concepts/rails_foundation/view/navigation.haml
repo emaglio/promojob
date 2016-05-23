@@ -15,7 +15,9 @@
         = link_to "Jobs", jobs_path
       %li
         = link_to "Create Job", new_job_path
-      
+
+      = policy.admin?
+
       - if tyrant.signed_in?
         %li
           = link_to "Hi, #{tyrant.current_user.firstname}", user_path(tyrant.current_user)
@@ -26,4 +28,4 @@
           = link_to "Create User", new_user_path
         %li
           = link_to "Sign In", new_session_path
-      
+

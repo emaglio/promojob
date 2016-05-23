@@ -5,6 +5,9 @@ class Job < ActiveRecord::Base
     include Model
     model JobApplication, :create
 
+    policy Session::Policy, :apply? # will create Policy instance
+    # policy :apply? # use injected policy object
+
     contract do
       property :job_id
       property :user_id
