@@ -17,6 +17,8 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     #empty
     sign_up!("","","")
     page.must_have_content "Emailcan't be blank"
+    page.must_have_content "Passwordcan't be blank"
+    page.must_have_content "Confirm_passwordcan't be blank" #not sure
 
     #confirm_password false
     sign_up!("my@email.com","Test","Test1")

@@ -52,6 +52,17 @@ Trailblazer::Test::Integration.class_eval do
     click_button "Create User"
   end
 
+  def fill_new_job!(title="NewTitle", requirements="newRequirments", description="newJob")
+    within("//form[@id='new_job']") do
+      fill_in 'Company', with: "MyCompany"
+      fill_in 'Salary', with: "0aud"
+      fill_in 'Title',    with: title
+      fill_in 'Requirements', with: requirements
+      firl_in 'Description', with: description
+    end
+    click_button "Create Job"
+  end
+
   def submit!(email, password)
     # puts page.body
     within("//form[@id='new_session']") do
