@@ -1,12 +1,20 @@
 %h1
+  .row
   = title
+%h2
+  .row
   = company
+%h3  
+  .row
   = salary
+  = " " #not sure about that
   = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
 
   = form_tag "/job_applications" do
     = hidden_field_tag :user_id, policy.user.id
     = hidden_field_tag :job_id, id
     Message:
-    = text_field_tag :message
-    = submit_tag "Apply" #TODO flash message "You have applied for that job"
+    .row
+      = text_field_tag :message
+    .row
+      = submit_tag "Apply" #TODO flash message "You have applied for that job"

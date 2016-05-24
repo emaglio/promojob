@@ -6,13 +6,20 @@
 %h1 Create Job
 
 = simple_form_for model do |f|
-  = f.input :title
-  = f.input :company
-  = f.input :requirements
-  = f.input :description
-  = f.input :salary
-  = f.input :starts_at, input_html: {id: "date"} #tomorrow is the starting day
-  = f.submit
+  .row
+    = f.input :title, placeholder: "Title", label: false
+  .row
+    = f.input :company, placeholder: "Company", label: false
+  .row
+    = f.input :requirements, placeholder: "Requirements", label: false
+  .row
+    = f.input :description, placeholder: "Description", label: false
+  .row
+    = f.input :salary, placeholder: "Salary", label: false
+  .row
+    = f.input :starts_at, input_html: {id: "date"} #tomorrow is the starting day
+  .row
+    = f.submit
 
 :javascript
   var today = new Date();

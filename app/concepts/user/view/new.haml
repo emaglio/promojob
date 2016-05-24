@@ -2,18 +2,18 @@
 
 = simple_form_for model do |f|
   .row
-    = f.input :firstname
+    = f.input :firstname, placeholder: "Firstname", label: false
   .row
-    = f.input :lastname
+    = f.input :lastname, placeholder: "Lastname", label: false
   .row
-    = f.select :gender, options_for_select(["Male", "Female", "You"])
+    = f.select :gender, options_for_select(["Male", "Female", "You"]), placeholder: "Gender", label: false
   .row
-    = f.input :email
+    = f.input :email, placeholder: "Email", label: false
   .row
-    = f.input :phone
+    = f.input :phone, placeholder: "Phone", label: false
   .row
-    = f.input :password
+    = f.input :password, placeholder: "Password", label: false
   .row
-    = f.input :confirm_password
+    = f.input :confirm_password, placeholder: "Confirm Password", label: false
   .row
     = f.submit
