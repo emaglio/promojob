@@ -30,6 +30,7 @@ Cell::TestCase.class_eval do
 end
 
 Trailblazer::Test::Integration.class_eval do
+  
   def sign_in!(email="fred@trb.org", password="123456")
     sign_up!(email, password) #=> Session::SignUp
 
@@ -38,8 +39,17 @@ Trailblazer::Test::Integration.class_eval do
     submit!(email, password)
   end
 
-  def sign_up!(email="fred@trb.org", password="123456")
-    User::Create.(user: {email: email, password: password})
+  def sign_up!(email="fred@trb.org", password="123456", confirm_password="123456")
+    within("//form[@id='new_user']") do
+      fill_in 'Firstname', with: "MyName"
+      fill_in 'Surname', with: "MySurname"
+      fill_in 'Gender', with: "Male"
+      fill_in 'Phone', with: "0192012"
+      fill_in 'Email',    with: email
+      fill_in 'Password', with: password
+      fill_in 'Confirm Password', with: confirm_password
+    end
+    click_button "Create User"
   end
 
   def submit!(email, password)
@@ -50,4 +60,5 @@ Trailblazer::Test::Integration.class_eval do
     end
     click_button "Sign In"
   end
+
 end
