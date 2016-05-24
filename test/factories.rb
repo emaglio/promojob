@@ -19,14 +19,14 @@ FactoryGirl.define  do
     starts_at "01-02-2016 12:12"
   end
 
-  # factory :admin do
-  #   firstname "CJ"
-  #   lastname "Kühn"
-  #   gender "Female"
-  #   email "info@cj-agency.de"
-  #   phone "0123456789"
-  #   password "Test1234"
-  #   confirm_password "Test1234"
-  # end
+  factory :admin do
+    firstname "CJ"
+    lastname "Kühn"
+    gender "Female"
+    email "info@cj-agency.de"
+    phone "0123456789"
+    password "Test1234"
+    confirm_password "Test1234"
+  end
 end
 
