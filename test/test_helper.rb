@@ -32,7 +32,7 @@ end
 Trailblazer::Test::Integration.class_eval do
   
   def sign_in!(email="fred@trb.org", password="123456")
-    sign_up!(email, password) #=> Session::SignUp
+    sign_up!(email, password, passoword) #=> Session::SignUp
 
     visit "/sessions/sign_in_form"
 

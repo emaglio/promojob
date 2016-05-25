@@ -11,13 +11,13 @@
     %ul
       %li
         = link_to "Jobs", jobs_path
-      
+
       - if policy.admin?
         %li
           = link_to "Users", users_path
         %li
-          = link_to "Create Job", new_job_path
-
+          = link_to "Create Job", new_job_path 
+      
       - if tyrant.signed_in?
         %li
           = link_to "Hi, #{tyrant.current_user.firstname}", user_path(tyrant.current_user)

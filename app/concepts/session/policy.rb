@@ -20,6 +20,12 @@ class Session::Policy
     @user.email == "info@cj-agency.de"
   end
 
+  # WRONG = SHOULDN'T CHANGE @user 
+  # def current_user_admin(user)
+  #   @user = user
+  #   return admin?
+  # end
+
   def apply?
     return unless @user
     #user already apply and job still available
@@ -50,4 +56,5 @@ class Session::Policy
   def delete?
     edit?
   end
+
 end

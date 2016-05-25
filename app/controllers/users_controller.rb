@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
 	def new
 		form User::Create
-		render User::Cell::New, @form
+		render User::Cell::New, model: @form
 	end
 
 	def create
@@ -10,13 +10,13 @@ class UsersController < ApplicationController
 			return redirect_to op.model
 		end
 
-		render User::Cell::New, @form
+		render User::Cell::New, model: @form
 	end
 
 	def show
 		present User::Update
 
-		render User::Cell::Show, @model
+		render User::Cell::Show
 	end
 
 	def edit
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 	def index
 		present User::Index
 
-		render User::Cell::Index, @model
+		render User::Cell::Index
 	end
 
 end

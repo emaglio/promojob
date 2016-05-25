@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
       include Model
       model User, :create
 
+      policy Session::Policy, :create?
+
       contract do
       	property :firstname
         property :lastname

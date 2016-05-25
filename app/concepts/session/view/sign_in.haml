@@ -1,10 +1,11 @@
-.row
-%h1 Sign In
+%h1
+  .row
+  Sign In
 
 = simple_form_for model, url: "/sessions", as: :session do |f|
   .row
-    = f.input :email
+    = f.input :email, placeholder: "Email", label: false
   .row
-    = f.input :password
+    = f.input :password, placeholder: "Password", label: false
   .row
     = f.button :submit, "Sign In", class: :expand
