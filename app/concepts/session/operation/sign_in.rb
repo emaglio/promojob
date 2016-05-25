@@ -1,6 +1,9 @@
 module Session
 
   class SignIn < Trailblazer::Operation
+    # FIXME:
+    policy Session::Policy, :true?
+
     contract do
       undef :persisted? # TODO: allow with trailblazer/reform.
       attr_reader :user
