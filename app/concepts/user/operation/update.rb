@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   class Update < Create
 
-    policy Session::Policy, :admin?
-    policy Session::Policy, :current_user?
+    policy Session::Policy, :edit?
 
     model User, :find
   

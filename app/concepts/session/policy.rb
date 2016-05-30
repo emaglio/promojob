@@ -43,12 +43,10 @@ class Session::Policy
     edit?
   end
 
-  def show?
-    true # FIXME: make that "configurable"
-  end
-
   def edit?
-    signed_in? and (admin? or model.users.include?(user))
+    # don't need signed_in? because current_user? will be false if the user is not signed in
+    # signed_in? and (admin? or model.users.include?(user))
+    admin? or current_user?
   end
 
   def delete?

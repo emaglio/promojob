@@ -1,6 +1,8 @@
 class Job < ActiveRecord::Base
   class Index < Trailblazer::Operation
-    policy Session::Policy, :create?
+    
+    #anyone can see the job list
+    policy Session::Policy, :true?
 
     def model!(params)
       Job.all

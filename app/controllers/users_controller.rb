@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
+		#TODO: adding flash message
 		run User::Update do |op|
 			return redirect_to op.model
 		end
@@ -40,8 +41,11 @@ class UsersController < ApplicationController
 		render User::Cell::Index
 	end
 
-	def  delete
-		
+	def destroy
+		#TODO: adding flash message
+		run User::Delete do
+			redirect_to root_path
+		end
 	end
 
 end
