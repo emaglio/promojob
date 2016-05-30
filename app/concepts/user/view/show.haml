@@ -1,5 +1,12 @@
 %h1
-  = firstname
-  = lastname
-  = email
-  = phone
+  .row
+    = firstname
+  .row
+    = lastname
+  .row
+    = email
+  .row
+    = phone
+  .row
+  = link_to "Edit", edit_user_path(model)
+  / = link_to "Delete", delete_user_path(@model)

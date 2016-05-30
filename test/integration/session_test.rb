@@ -7,8 +7,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
 
     submit!("","")
 
-    page.must_have_content "Emailcan't be blank"
-    page.must_have_content "Passwordcan't be blank"
+    page.must_have_content "can't be blank"
     page.must_have_css "#session_email"
     page.must_have_css "#session_password"
     page.must_have_button "Sign In"

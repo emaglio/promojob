@@ -21,12 +21,16 @@ class UsersController < ApplicationController
 
 	def edit
 		form User::Update
+
+		render User::Cell::Edit, model: @form
 	end
 
 	def update
 		run User::Update do |op|
 			return redirect_to op.model
 		end
+
+		render User::Cell::Edit, model: @form
 	end
 	
 
@@ -34,6 +38,10 @@ class UsersController < ApplicationController
 		present User::Index
 
 		render User::Cell::Index
+	end
+
+	def  delete
+		
 	end
 
 end

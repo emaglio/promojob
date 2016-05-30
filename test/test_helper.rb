@@ -42,7 +42,7 @@ Trailblazer::Test::Integration.class_eval do
   def sign_up!(email="fred@trb.org", password="123456", confirm_password="123456")
     within("//form[@id='new_user']") do
       fill_in 'Firstname', with: "MyName"
-      fill_in 'Surname', with: "MySurname"
+      fill_in 'Lastname', with: "MyLastname"
       fill_in 'Gender', with: "Male"
       fill_in 'Phone', with: "0192012"
       fill_in 'Email',    with: email

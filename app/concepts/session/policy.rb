@@ -20,18 +20,16 @@ class Session::Policy
     @user.email == "info@cj-agency.de"
   end
 
-  # WRONG = SHOULDN'T CHANGE @user 
-  # def current_user_admin(user)
-  #   @user = user
-  #   return admin?
-  # end
-
   def apply?
     return unless @user
     #user already apply and job still available
     JobApplication.where(job_id: @model.id, user_id: @user.id).size == 0
   end
 
+  def current_user?
+    return unless @user
+    @user.email == @model.email
+  end
 
   # def signed_in?
   #   tyrant.signed_in?

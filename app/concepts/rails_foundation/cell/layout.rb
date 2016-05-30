@@ -7,7 +7,7 @@ module RailsFoundation
       property :real_user
       property :signed_in?
 
-    private
+    private      
       def tyrant
         context[:tyrant]
       end

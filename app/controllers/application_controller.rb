@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     Tyrant::Session.new(request.env['warden'])
   end
 
+  def process_params!(params)
+    params.merge!(current_user: tyrant.current_user)
+  end
+
   # FIXME: where do we enforce the signed in constrained?
 
   rescue_from Trailblazer::NotAuthorizedError, with: :user_not_authorized
