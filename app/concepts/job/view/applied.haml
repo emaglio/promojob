@@ -6,5 +6,6 @@
 .row
   You've got #{total} jobs.
 
-%ul.mobile-list
-  = cell("job/cell/item", collection: model)
+.row
+  %ul.mobile-list
+    = cell("job/cell/job_application", collection: model)

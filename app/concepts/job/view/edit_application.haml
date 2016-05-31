@@ -1,0 +1,40 @@
+.row
+  %h1 Job:
+
+%h3  
+  .row
+    #{getJob.title}
+  .row
+    #{getJob.company}
+  .row
+    #{getJob.requirements}
+  .row
+    #{getJob.salary}
+  .row
+    #{getJob.starts_at}
+
+.row
+  %h1 User:
+
+%h3
+  .row
+    #{getUser.firstname}
+    #{getUser.lastname}
+  .row
+    #{getUser.gender}
+  .row
+    #{getUser.phone}
+    #{getUser.email}
+
+.row
+  %h2 Message:
+
+%h3
+  .row
+    =message
+
+  /TODO: add the form_tag to Hire or Reject the job_application 
+  / = form_tag "/job_applications" do
+  /   = selection_tag :status, options_for_select(["Applied", "Hired", "Rejected"])
+  /   .row
+  /     = submit_tag "Apply" 

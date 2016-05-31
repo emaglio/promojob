@@ -7,10 +7,10 @@ module Job::Cell
     end
   end
 
-  class Item < Trailblazer::Cell
+  class JobApplication < Trailblazer::Cell
 
     def link
-      link_to model.title, model
+      link_to Job.find(model.job_id).title, edit_job_application_path(model)
     end
   
   end      

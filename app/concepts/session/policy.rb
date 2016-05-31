@@ -27,7 +27,6 @@ class Session::Policy
   end
 
   def current_user?
-    # raise @user.inspect
     return unless @user
     @user.email == @model.email
   end

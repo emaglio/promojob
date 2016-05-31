@@ -3,9 +3,9 @@ class Job < ActiveRecord::Base
     
     policy Session::Policy, :admin?
 
+
     def model!(params)
-      # JobApplication.where(status: "Applied")
-      JobApplication.all
+      JobApplication.where(status: "Applied")
     end
   
   end
