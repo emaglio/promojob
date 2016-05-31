@@ -20,6 +20,7 @@ class Job < ActiveRecord::Base
     def process(params)
       # raise params.inspect
       validate(params)do
+        params[:status]="Applied"
         contract.save
       end
     end

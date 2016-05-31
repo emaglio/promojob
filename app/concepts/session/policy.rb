@@ -27,6 +27,7 @@ class Session::Policy
   end
 
   def current_user?
+    # raise @user.inspect
     return unless @user
     @user.email == @model.email
   end
@@ -48,7 +49,7 @@ class Session::Policy
     # signed_in? and (admin? or model.users.include?(user))
     admin? or current_user?
   end
-
+  
   def delete?
     edit?
   end

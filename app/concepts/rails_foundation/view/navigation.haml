@@ -16,6 +16,8 @@
           = link_to "Users", users_path
         %li
           = link_to "Create Job", new_job_path 
+        %li
+          = link_to "Applied Job", applied_job_applications_path
 
       - if tyrant.signed_in?
         %li

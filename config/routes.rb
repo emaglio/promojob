@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :job_applications do
+    collection do
+      post 'applied'
+    end
+  end
+
 end
 
 

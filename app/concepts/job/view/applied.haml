@@ -1,0 +1,10 @@
+%main{:role => "main"} 
+
+  %h4
+    All Applied Jobs
+
+.row
+  You've got #{total} jobs.
+
+%ul.mobile-list
+  = cell("job/cell/item", collection: model)

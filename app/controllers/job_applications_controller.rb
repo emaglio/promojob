@@ -6,4 +6,10 @@ class JobApplicationsController < ApplicationController
     redirect_to "/jobs"
   end
 
+  def show
+    present Job::Applied
+
+    render Job::Cell::Applied
+  end
+
 end
