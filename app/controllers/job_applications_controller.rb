@@ -12,4 +12,10 @@ class JobApplicationsController < ApplicationController
     render Job::Cell::Applied
   end
 
+  def edit
+    form Job::EditApplication
+
+    render Job::Cell::EditApplication, model: @form
+  end
+
 end
