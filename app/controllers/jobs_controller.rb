@@ -12,7 +12,7 @@ class JobsController < ApplicationController
 
 	def create
 		run Job::Create do |op|
-			return redirect_to op.model
+			return redirect_to "/jobs"
 		end
 
 		render Job::Cell::New, model: @form
