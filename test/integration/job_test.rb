@@ -57,6 +57,10 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     
     page.must_have_content ("MyTitle")
     page.must_have_content ("You've got 1 jobs.")
+    click_link "MyTitle"
+
+    page.must_have_content "MyRequirements"
+    page.must_have_content "MyDescription"
   end
 
 end
