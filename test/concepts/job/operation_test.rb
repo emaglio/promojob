@@ -14,16 +14,9 @@ class JobOperationTest < MiniTest::Spec
 	end
 
 	it "fails" do
-		res, op = Job::Create.run(job: attributes_for(:job))
-		res.must_equal false
-	  res, op = Job::Create.run(job: attributes_for(:job, title: ""))
+	  #no title, description and requirements
+	  res, op = Job::Create.run(job: attributes_for(:job, title: "", requirements: "", description: ""), current_user: admin_for)
 	  res.must_equal false
-	  op.errors.to_s.must_equal "{:title=>[\"can't be blank\"]}"
-	  res, op = Job::Create.run(job: attributes_for(:job, requirements: ""))
-	  res.must_equal false
-	  op.errors.to_s.must_equal "{:requirements=>[\"can't be blank\"]}"
-	  res, op = Job::Create.run(job: attributes_for(:job, description: ""))
-	  res.must_equal false
-	  op.errors.to_s.must_equal "{:description=>[\"can't be blank\"]}"
+	  op.errors.to_s.must_equal "{:title=>[\"can't be blank\"], :requirements=>[\"can't be blank\"], :description=>[\"can't be blank\"]}"
 	end
 end
