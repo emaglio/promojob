@@ -17,8 +17,14 @@ Minitest::Spec.class_eval do
   include FactoryGirl::Syntax::Methods
 
   def  admin_for
-    User::Create.(user: attributes_for(:user, email: "info@cj-agency.de")).model
+    User::Create.(user: attributes_for(:user, email: "info@cj-agency.de", phone: "1")).model
   end
+
+  def user_signedIn(user)
+    visit ("sessions/new")
+    submit!(user.email, "Test2")
+  end
+
 end
 
 FactoryGirl.find_definitions

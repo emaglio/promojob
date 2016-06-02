@@ -56,7 +56,9 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
     
     page.must_have_content ("MyTitle")
-    page.must_have_content ("You've got 1 jobs.")
+    total = Job.all.size
+    # page.must_have_content ("You've got " + str(total) + " jobs.")
+    page.must_have_content (total)
     click_link "MyTitle"
 
     page.must_have_content "MyRequirements"
