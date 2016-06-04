@@ -6,9 +6,10 @@ class JobApplicationTest < MiniTest::Spec
   it "validates correct input" do
     #TODO: need to sign in as user
     job = Job::Create.(job: attributes_for(:job), current_user: admin_for)
-    user = User::Create.(user: attributes_for(:user))
+    user = User::Create::Admin(user: attributes_for(:user))
+
     
-    op = Job::Apply.({ user_id: user_id, job_id: job_id, message: "This is great", status: "Applied" }, current_user: user)
+    op = Job::Apply.({ user_id: user.model.id, job_id: job.model.id, message: "This is great", status: "Applied" })
     op.model.persisted?.must_equal true
     op.model.user_id.must_equal user.id
     op.model.job_id.must_equal job.id

@@ -30,12 +30,17 @@ class User < ActiveRecord::Base
                               message: "must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter"}  
       end
 
-      # def process(params)
-      # 	validate(params[:user]) do
-      # 		contract.save
-      # 	end
-        
-      # end
+    class Admin < self # TODO: test. this is kinda "Admin" as it allows instant creation and sign up.
+      self.contract_class = Class.new(Reform::Form)
+      contract do # inherit: false would be cool here.
+        property :email
+        property :password, virtual: true
+        property :password_digest
+
+        def password_ok?(*) # TODO: allow removing validations.
+        end
+      end
+    end
   
   end
 end
