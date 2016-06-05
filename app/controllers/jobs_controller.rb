@@ -25,6 +25,8 @@ class JobsController < ApplicationController
 
 	def edit
 		form Job::Update
+
+		render Job::Cell::Edit, model: @form
 	end
 
 	def update

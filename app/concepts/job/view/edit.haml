@@ -1,0 +1,39 @@
+%link{:type => "text/css", :rel => "stylesheet", :href => "/foundation-datepicker.css"}
+%link{:href => "//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css", :rel => "stylesheet"}
+%link{:href => "//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css", :rel =>  "stylesheet"}
+%script{:type => "text/javascript", :src => "/foundation-datepicker.js"}
+
+%h1 Edit #{model.title}
+
+= simple_form_for model do |f|
+  .row
+    = f.input :title, placeholder: "Title", label: false
+  .row
+    = f.input :company, placeholder: "Company", label: false
+  .row
+    = f.input :requirements, placeholder: "Requirements", label: false
+  .row
+    = f.input :description, placeholder: "Description", label: false
+  .row
+    = f.input :salary, placeholder: "Salary", label: false
+  .row
+    = f.input :starts_at, input_html: {id: "date"} #tomorrow is the starting day
+  .row
+    = f.submit
+
+:javascript
+  var today = new Date();
+  var tomorrow = new Date();
+  var dd = today.getDate()+1;
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  tomorrow = dd+'-'+mm+'-'+yyyy+' 09:00';
+  
+  $(function(){
+    $('#date').fdatepicker({
+      initialDate: tomorrow,
+      format: 'dd-mm-yyyy hh:ii',
+      disableDblClickSelection: true,
+      pickTime: true
+    });
+  });

@@ -13,16 +13,21 @@
       = description
 .row  
   %h3
-  = salary
-  = " " #not sure about that
-  = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
+  .row
+    = salary
+    = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
 
-  = form_tag "/job_applications" do
-    = hidden_field_tag :user_id, policy.user.id
-    = hidden_field_tag :job_id, id
-    = hidden_field_tag :status, "Applied"
-    Message:
+  - if policy.admin?
     .row
-      = text_field_tag :message
-    .row
-      = submit_tag "Apply" #TODO flash message "You have applied for that job"
+      %h2
+      = link_to "Edit", edit_job_path(model)
+  - else
+    = form_tag "/job_applications" do
+      = hidden_field_tag :user_id, policy.user.id
+      = hidden_field_tag :job_id, id
+      = hidden_field_tag :status, "Applied"     
+      .row
+        Message:
+        = text_field_tag :message
+      .row
+        = submit_tag "Apply" #TODO flash message "You have applied for that job"
