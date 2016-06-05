@@ -17,8 +17,14 @@ Minitest::Spec.class_eval do
   include FactoryGirl::Syntax::Methods
 
   def  admin_for
-    User::Create.(user: attributes_for(:user, email: "info@cj-agency.de")).model
+    User::Create.(user: attributes_for(:user, email: "info@cj-agency.de", phone: "1")).model
   end
+
+  def user_signedIn(user)
+    visit ("sessions/new")
+    submit!(user.email, "Test2")
+  end
+
 end
 
 FactoryGirl.find_definitions
@@ -30,20 +36,12 @@ Cell::TestCase.class_eval do
 end
 
 Trailblazer::Test::Integration.class_eval do
-  
-  def sign_in!(email="fred@trb.org", password="123456")
-    sign_up!(email, password, passoword) #=> Session::SignUp
-
-    visit "/sessions/sign_in_form"
-
-    submit!(email, password)
-  end
 
   def sign_up!(email="fred@trb.org", password="123456", confirm_password="123456")
     within("//form[@id='new_user']") do
       fill_in 'Firstname', with: "MyName"
       fill_in 'Lastname', with: "MyLastname"
-      fill_in 'Gender', with: "Male"
+      # select 'Gender', with: "Male" TODO: fix this
       fill_in 'Phone', with: "0192012"
       fill_in 'Email',    with: email
       fill_in 'Password', with: password
@@ -58,7 +56,7 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Salary', with: "0aud"
       fill_in 'Title',    with: title
       fill_in 'Requirements', with: requirements
-      firl_in 'Description', with: description
+      fill_in 'Description', with: description
     end
     click_button "Create Job"
   end
@@ -70,6 +68,13 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Password', with: password
     end
     click_button "Sign In"
+  end
+
+  def log_in_as_admin
+    User::Create.(user: FactoryGirl.attributes_for(:user, email: "info@cj-agency.de", firstname: "Admin", phone: "0"))
+
+    visit "sessions/new"
+    submit!("info@cj-agency.de", "Test1")
   end
 
 end

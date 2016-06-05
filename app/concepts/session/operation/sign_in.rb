@@ -38,18 +38,6 @@ module Session
         @model = contract.user
       end
     end
-  end
-
-  class SignedIn < SignIn
-    contract do
-      property :user, deserializer: { writeable: false } do
-      end # TODO: allow to remove.
-      validates :user, presence: :true
-    end
-
-    def process(params)
-      contract.user = params[:current_user]
-      super
-    end
+  
   end
 end

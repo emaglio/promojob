@@ -30,12 +30,5 @@ class User < ActiveRecord::Base
                               message: "must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter"}  
       end
 
-      # def process(params)
-      # 	validate(params[:user]) do
-      # 		contract.save
-      # 	end
-        
-      # end
-  
   end
 end

@@ -7,7 +7,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
 
     page.must_have_css "#user_firstname"
     page.must_have_css "#user_lastname"
-    page.must_have_css "#user_gender"
+    # page.must_have_css "#user_gender" TODO: how to test this?
     page.must_have_css "#user_email"
     page.must_have_css "#user_phone"
     page.must_have_css "#user_password"
@@ -16,17 +16,15 @@ class UserIntegrationTest < Trailblazer::Test::Integration
 
     #empty
     sign_up!("","","")
-    page.must_have_content "Emailcan't be blank"
-    page.must_have_content "Passwordcan't be blank"
-    page.must_have_content "Confirm_passwordcan't be blank" #not sure
-
+    page.must_have_content "can't be blank"
+    
     #confirm_password false
     sign_up!("my@email.com","Test","Test1")
-    page.must_have_content "??" #error
+    page.must_have_content "Passwords don't match"
 
     #wrong password format
     sign_up!("my@email.com","test1","test1")
-    page.must_have_content "??" #error
+    page.must_have_content "must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter"
       
   end
 
@@ -35,8 +33,8 @@ class UserIntegrationTest < Trailblazer::Test::Integration
 
     sign_up!("my@email.com","Test1","Test1")
 
-    #how do I test that I have created this user?
-    #check which page is shown after clicking on Create User
+    page.must_have_content "All Jobs"   #TODO: change to Hi, name when we implement that
+                                        #after creating a user i'm signed in as well
 
   end
 
