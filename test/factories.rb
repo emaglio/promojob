@@ -4,6 +4,7 @@ FactoryGirl.define  do
     firstname "Ema"
     lastname "Maglio"
     gender "Male"
+    age "30"
     email "my@email.com"
     phone "0410123456"
     password "Test1"

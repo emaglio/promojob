@@ -8,6 +8,7 @@ class UserOperationTest < MiniTest::Spec
     op.model.firstname.must_equal "Ema"
     op.model.lastname.must_equal "Maglio"
     op.model.gender.must_equal "Male"
+    op.model.age.must_equal 30
     op.model.email.must_equal "my@email.com"
     op.model.phone.must_equal "0410123456"
     assert op.model.auth_meta_data["confirmed_at"]
@@ -71,6 +72,18 @@ class UserOperationTest < MiniTest::Spec
     res,op = User::Create.run(user: attributes_for(:user, email: "test@.com"))
     res.must_equal false
     op.errors.to_s.must_equal "{:email=>[\"is invalid\"]}"
+  end
+
+  it "wrong age" do
+    res,op = User::Create.run(user: attributes_for(:user, age: ""))
+    res.must_equal false
+    op.errors.to_s.must_equal "{:age=>[\"is not a number\"]}"
+    res,op = User::Create.run(user: attributes_for(:user, age: "0"))
+    res.must_equal false
+    op.errors.to_s.must_equal "{:age=>[\"must be greater than 0\"]}"
+    res,op = User::Create.run(user: attributes_for(:user, age: "25.5"))
+    res.must_equal false
+    op.errors.to_s.must_equal "{:age=>[\"must be an integer\"]}"
   end
 
 end

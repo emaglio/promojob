@@ -37,6 +37,7 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Firstname', with: "MyName"
       fill_in 'Lastname', with: "MyLastname"
       # select 'Gender', with: "Male" TODO: fix this
+      fill_in 'Age', with: "30" 
       fill_in 'Phone', with: "0192012"
       fill_in 'Email',    with: email
       fill_in 'Password', with: password

@@ -8,7 +8,7 @@ class UserCellTest < MiniTest::Spec
   include ::Capybara::Assertions
 
   let (:users) { 2.times.collect { |i| User::Create.(
-    user: { firstname: "Manu", lastname: "Maz", gender: "m", phone: "012345678#{i}", email: "bla#{i}@blubb.de", password: "1ABbadasfasdf", confirm_password: "1ABbadasfasdf"}
+    user: { firstname: "Manu", lastname: "Maz", gender: "m", age: "30", phone: "012345678#{i}", email: "bla#{i}@blubb.de", password: "1ABbadasfasdf", confirm_password: "1ABbadasfasdf"}
   ).model } }
 
   it do
