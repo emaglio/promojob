@@ -86,4 +86,30 @@ class UserOperationTest < MiniTest::Spec
     op.errors.to_s.must_equal "{:age=>[\"must be an integer\"]}"
   end
 
+  it "delete user" do
+    user = User::Create.(user: attributes_for(:user, email: "delete@mail.com")).model
+    user.persisted?.must_equal true
+
+    op = User::Delete.({id: user.id, current_user: user})
+    op.model.persisted?.must_equal false
+
+    user = User::Create.(user: attributes_for(:user, email: "delete@mail.com")).model
+    user.persisted?.must_equal true
+
+    op = User::Delete.({id: user.id, current_user: admin_for})
+    op.model.persisted?.must_equal false
+  end
+
+  it "can't delete user if not user or admin" do
+    sneaky_user = User::Create.(user: attributes_for(:user)).model
+    user = User::Create.(user: attributes_for(:user, email: "delete@mail.com", phone: "00")).model
+
+    assert_raises Trailblazer::NotAuthorizedError do
+      User::Delete.(
+        id: user.id,
+        current_user: sneaky_user)
+    end
+
+  end
+
 end

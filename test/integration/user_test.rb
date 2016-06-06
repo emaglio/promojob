@@ -38,4 +38,21 @@ class UserIntegrationTest < Trailblazer::Test::Integration
 
   end
 
+  it "successfully delete user" do
+    log_in_as_user #firstname= Ema email= my@email.com password= Test1
+
+    page.must_have_link "Hi, Ema"
+    click_link "Hi, Ema"
+    page.must_have_link "Edit"
+    page.must_have_link "Delete"
+
+    click_link "Delete"
+    page.must_have_content "All Jobs"
+
+    visit "sessions/new"
+
+    submit!("my@email.com","Test1")
+    page.must_have_content "User not found"
+  end
+
 end
