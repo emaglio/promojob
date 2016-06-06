@@ -25,16 +25,16 @@ class JobOperationTest < MiniTest::Spec
 		job = Job::Create.(job: attributes_for(:job), current_user: admin).model
 
 		assert_raises Trailblazer::NotAuthorizedError do
-      Job::Edit.(
+      Job::Update.(
         id: job.id,
         current_user: user)
     end
 
     # don't understand why this creates an error
-    # job.description.must_equal "Showing hasses"
-    # op = Job::Edit.({id: job.id, description: "Test", current_user: admin})
-    # op.model.persisted?.must_equal true 
-    # op.model.description.must_equal "Test"
+    job.description.must_equal "Showing hasses"
+    op = Job::Update.({id: job.id, description: "Test", current_user: admin})
+    op.model.persisted?.must_equal true 
+    op.model.description.must_equal "Test"
   end
 
 end

@@ -77,7 +77,7 @@ class UserOperationTest < MiniTest::Spec
   it "wrong age" do
     res,op = User::Create.run(user: attributes_for(:user, age: ""))
     res.must_equal false
-    op.errors.to_s.must_equal "{:age=>[\"is not a number\"]}"
+    op.errors.to_s.must_equal "{:age=>[\"can't be blank\", \"is not a number\"]}"
     res,op = User::Create.run(user: attributes_for(:user, age: "0"))
     res.must_equal false
     op.errors.to_s.must_equal "{:age=>[\"must be greater than 0\"]}"
@@ -110,6 +110,18 @@ class UserOperationTest < MiniTest::Spec
         current_user: sneaky_user)
     end
 
+  end
+
+  it "edit user" do
+    user = User::Create.(user: attributes_for(:user)).model
+    user.persisted?.must_equal true
+    user.email.must_equal "my@email.com"
+
+    # don't understand why this creates an error
+    user_edited = User::Update.({id: user.id, email: "edited@mail.com", 
+        password: "Test1", confirm_passowrd: "Test1", current_user: user}).model
+    user_edited.persisted?.must_equal true
+    user_edited.email "edited@mail.com"
   end
 
 end

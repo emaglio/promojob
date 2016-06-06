@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
         property :phone
         property :age
         # property :password
-        validates :firstname, :lastname, :gender , :phone, presence: true
+        validates :firstname, :lastname, :gender, :phone, :age,  presence: true
         validates :phone, :email, unique: true
         validates :age, numericality: { only_integer: true, greater_than: 0}
 
