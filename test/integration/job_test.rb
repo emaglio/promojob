@@ -85,8 +85,9 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     click_link "Edit"
     page.must_have_content "Edit MyTitle"
     page.must_have_button "Update Job"
+    total = Job.all.size
 
-    within("//form[@id='edit_job_1']") do
+    within("//form[@id='edit_job_#{total}']") do
       fill_in 'Description', with: "TestDescription"
       fill_in 'Requirements', with: "TestRequirements"
     end 
@@ -95,7 +96,5 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "TestDescription"
     page.must_have_content "TestRequirements"
   end
-
-
 
 end
