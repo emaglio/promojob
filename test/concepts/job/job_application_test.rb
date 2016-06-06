@@ -6,9 +6,7 @@ class JobApplicationTest < MiniTest::Spec
   let (:user) {User::Create.(user: attributes_for(:user)).model}
   let (:job) {Job::Create.(job: attributes_for(:job), current_user: admin_for).model}
 
-  it "validates correct input" do
-    #TODO: need to sign in as user
-    
+  it "validates correct input" do  
     op = Job::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Applied", current_user: user})
     op.model.persisted?.must_equal true
     op.model.user_id.must_equal user.id
@@ -32,9 +30,6 @@ class JobApplicationTest < MiniTest::Spec
   end
 
   #TODO
-  it "only admin can edit the job" do
-  end
-
   it "only admin can Hire/Reject a job_application" do 
     
   end

@@ -8,10 +8,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.wont_have_content "Create Job"
 
     # general user
-    op = User::Create.(user: FactoryGirl.attributes_for(:user))
-
-    visit "sessions/new"
-    submit!(op.model.email, "Test1")
+    log_in_as_user
 
     visit "jobs/new"
     page.wont_have_content "Create Job"
@@ -64,5 +61,41 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "MyRequirements"
     page.must_have_content "MyDescription"
   end
+
+  it "unsuccessfull job editing" do
+    log_in_as_admin
+    create_job #MyTitle, MyRequirements, MyDescription
+    log_in_as_user
+
+    visit "jobs/1/edit"
+    page.wont_have_content "MyRequirements"
+
+    visit "jobs"
+    click_link "MyTitle"
+    page.wont_have_link "Edit"
+    page.must_have_button "Apply"
+  end
+
+  it "successfully job editing" do
+    log_in_as_admin
+    create_job
+
+    visit "jobs"
+    click_link "MyTitle"
+    click_link "Edit"
+    page.must_have_content "Edit MyTitle"
+    page.must_have_button "Update Job"
+
+    within("//form[@id='edit_job_1']") do
+      fill_in 'Description', with: "TestDescription"
+      fill_in 'Requirements', with: "TestRequirements"
+    end 
+    click_button "Update Job"
+    
+    page.must_have_content "TestDescription"
+    page.must_have_content "TestRequirements"
+  end
+
+
 
 end

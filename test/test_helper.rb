@@ -19,12 +19,7 @@ Minitest::Spec.class_eval do
   def  admin_for
     User::Create.(user: attributes_for(:user, email: "info@cj-agency.de", phone: "1")).model
   end
-
-  def user_signedIn(user)
-    visit ("sessions/new")
-    submit!(user.email, "Test2")
-  end
-
+  
 end
 
 FactoryGirl.find_definitions
@@ -75,6 +70,19 @@ Trailblazer::Test::Integration.class_eval do
 
     visit "sessions/new"
     submit!("info@cj-agency.de", "Test1")
+  end
+
+  def log_in_as_user
+    op = User::Create.(user: FactoryGirl.attributes_for(:user))
+
+    visit "sessions/new"
+    submit!(op.model.email, "Test1")
+  end
+
+  def create_job
+    visit "jobs/new"
+
+    fill_new_job!("MyTitle","MyRequirements","MyDescription")
   end
 
 end

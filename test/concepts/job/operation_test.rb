@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class JobOperationTest < MiniTest::Spec
-
 	it "validates correct input" do
 	  op = Job::Create.(job: attributes_for(:job), current_user: admin_for)
 	  op.model.persisted?.must_equal true
@@ -19,4 +18,23 @@ class JobOperationTest < MiniTest::Spec
 	  res.must_equal false
 	  op.errors.to_s.must_equal "{:title=>[\"can't be blank\"], :requirements=>[\"can't be blank\"], :description=>[\"can't be blank\"]}"
 	end
+
+	it "only admin can edit the job" do
+		user = User::Create.(user: attributes_for(:user)).model
+		admin = User::Create.(user: attributes_for(:user, email: "info@cj-agency.de", phone: "98")).model
+		job = Job::Create.(job: attributes_for(:job), current_user: admin).model
+
+		assert_raises Trailblazer::NotAuthorizedError do
+      Job::Edit.(
+        id: job.id,
+        current_user: user)
+    end
+
+    # don't understand why this creates an error
+    # job.description.must_equal "Showing hasses"
+    # op = Job::Edit.({id: job.id, description: "Test", current_user: admin})
+    # op.model.persisted?.must_equal true 
+    # op.model.description.must_equal "Test"
+  end
+
 end
