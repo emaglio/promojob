@@ -19,7 +19,6 @@ class JobsController < ApplicationController
 	end
 
 	def show
-		flash[:message] = "Here the jobs"
 		present Job::Update
 		render Job::Cell::Show
 	end
@@ -32,6 +31,7 @@ class JobsController < ApplicationController
 
 	def update
 		run Job::Update do |op|
+			flash[:message] = "Job #{op.model.title} has been updated!"
 			return redirect_to op.model
 		end
 	end

@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   def create
     run Session::SignIn do |op|
       tyrant.sign_in!(op.model)
+      flash[:message] = "Welcome!"
       return redirect_to jobs_path
     end
 
