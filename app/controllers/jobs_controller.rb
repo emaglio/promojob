@@ -19,6 +19,7 @@ class JobsController < ApplicationController
 	end
 
 	def show
+		flash[:message] = "Here the jobs"
 		present Job::Update
 		render Job::Cell::Show
 	end
