@@ -35,4 +35,9 @@ class JobsController < ApplicationController
 		end
 	end
 
+	def search
+		run Job::Search
+		
+	end
+
 end

@@ -1,11 +1,52 @@
+%link{:type => "text/css", :rel => "stylesheet", :href => "/foundation-datepicker.css"}
+%link{:href => "//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css", :rel => "stylesheet"}
+%link{:href => "//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css", :rel =>  "stylesheet"}
+%script{:type => "text/javascript", :src => "/foundation-datepicker.js"}
+
+
 %main{:role => "main"} 
 
-  %h4
-    All Jobs
+.row
+  %h3
+    Search Job
+
+= form_tag controller: :jobs, action: :search  do
+  .row
+    Keyword:
+    = text_field_tag :keyboard
+  .row
+    Salary:
+    .row
+    min
+    = number_field_tag :lowSalary
+    max
+    = number_field_tag :highSalary     
+  .row
+    Starting Date:
+    = text_field_tag :startingDate
+  .row
+    = submit_tag "Search"
 
 .row
-  You've got #{total} jobs.
-
+  %h3
+    There are #{total} jobs in total.
 .row
   %ul.mobile-list
     = cell("job/cell/item", collection: model)
+
+:javascript
+  var today = new Date();
+  var tomorrow = new Date();
+  var dd = today.getDate()+1;
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  tomorrow = dd+'-'+mm+'-'+yyyy+' 09:00';
+  
+  $(function(){
+    $('#startingDate').fdatepicker({
+      initialDate: tomorrow,
+      format: 'dd-mm-yyyy hh:ii',
+      disableDblClickSelection: true,
+      pickTime: true
+    });
+  });
