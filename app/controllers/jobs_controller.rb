@@ -37,8 +37,8 @@ class JobsController < ApplicationController
 
 	def search
 		present Job::Search
-
 		render Job::Cell::Index
 	end
+
 
 end

@@ -5,7 +5,8 @@ class Job < ActiveRecord::Base
     policy Session::Policy, :true?
 
     def model!(params)
-      getLowSalary(Job.all, params[:lowSalary])
+      # Job.where("salary > ?", params[:lowSalary])
+      getLowSalary!(Job.all, params[:lowSalary])
     end
 
     def getKeyword(job)
@@ -13,7 +14,7 @@ class Job < ActiveRecord::Base
       job.where("title.include?")
     end
 
-    def getLowSalary(job, lowSalary)
+    def getLowSalary!(job, lowSalary)
       return unless lowSalary.empty?
       job.where("salary > ?", lowSalary)
     end

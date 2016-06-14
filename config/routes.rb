@@ -16,8 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
-  post "jobs/search", controller: :jobs, action: :search
-  
+  post "jobs/searchs", controller: :jobs, action: :search
+      
 
 end
 
