@@ -30,6 +30,7 @@ class JobsController < ApplicationController
 	end
 
 	def update
+		raise
 		run Job::Update do |op|
 			return redirect_to op.model
 		end

@@ -14,6 +14,9 @@ module Job::Cell
 
     def getUser #TODO change to User.where to get the list of users
       User.find(model.user_id)
+      # TODO: adding error message in case the User has not been found
+      # flash[:message] = "User not found, probably the account has been deleted"
+      # redirect_to 'job_applications/applied'
     end
 
   end

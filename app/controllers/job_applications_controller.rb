@@ -18,4 +18,10 @@ class JobApplicationsController < ApplicationController
     render Job::Cell::EditApplication, model: @form
   end
 
+  def update
+    present Job::UpdateApplication 
+    
+    redirect_to "/job_applications/applied"
+  end
+
 end

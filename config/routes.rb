@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :job_applications do
     collection do
       post 'applied'
+      post 'update'
     end
   end
 
