@@ -53,4 +53,7 @@ class Session::Policy
     edit?
   end
 
+  def edit_job?
+    admin? or @user
+  end
 end
