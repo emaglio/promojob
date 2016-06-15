@@ -33,7 +33,7 @@
   .row
     =message
 
-  = form_tag "/job_applications" do
+  = form_tag "/job_applications/update" do
     .row
       = select_tag :status, options_for_select(["Applied", "Hired", "Rejected"])
     .row
