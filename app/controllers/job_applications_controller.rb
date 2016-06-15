@@ -19,7 +19,7 @@ class JobApplicationsController < ApplicationController
   end
 
   def update
-    run Job::Apply 
+    present Job::UpdateApplication 
     
     redirect_to "/job_applications/applied"
   end
