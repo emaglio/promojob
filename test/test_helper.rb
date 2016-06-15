@@ -16,7 +16,9 @@ Minitest::Spec.class_eval do
   end
   include FactoryGirl::Syntax::Methods
 
-  def  admin_for
+  def admin_for
+    admin = User.find_by(email: "info@cj-agency.de")
+    return unless admin 
     User::Create.(user: attributes_for(:user, email: "info@cj-agency.de", phone: "1")).model
   end
   

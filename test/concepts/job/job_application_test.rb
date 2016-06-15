@@ -29,8 +29,23 @@ class JobApplicationTest < MiniTest::Spec
     op.errors.to_s.must_equal "{:user_id=>[\"has already been taken\"]}"
   end
 
-  #TODO
   it "only admin can Hire/Reject a job_application" do 
+    op = Job::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Applied", current_user: user})
+
+    op.model.persisted?.must_equal true
+
+    # assert_raises Trailblazer::NotAuthorizedError do
+    #   Job::UpdateApplication.(
+    #     id: JobApplication.last,
+    #     current_user: user)
+    # end
     
+    op = Job::UpdateApplication.(id: JobApplication.last, status: "Hire", current_user: admin_for)
+    op.model.persisted?.must_equal true
+    op.model.user_id.must_equal user.id
+    op.model.job_id.must_equal jop.id
+    op.model.status.must_equal "Hire"
+
+
   end
 end
