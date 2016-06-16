@@ -87,8 +87,6 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_link "Applied Jobs"
     click_link "Applied Jobs"
 
-    total = JobApplication.all.size
-    page.must_have_content total
     page.must_have_link "MyTitle"
     click_link "MyTitle"
 
