@@ -3,8 +3,7 @@ class Job < ActiveRecord::Base
 		
 		model Job, :find
 
-    #only the admin can modify a Job
-    policy Session::Policy, :edit_job?
+    policy Session::Policy, :apply?
 
 	end  
 end
