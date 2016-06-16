@@ -12,6 +12,10 @@ module Job::Cell
     def link
       link_to Job.find(model.job_id).title, edit_job_application_path(model)
     end
+
+    def delete_link
+      link_to "Delete", job_application_path(model), method: :delete
+    end
   
   end      
 end
