@@ -24,4 +24,10 @@ class JobApplicationsController < ApplicationController
     redirect_to "/job_applications/applied"
   end
 
+  def destroy
+    run Job::DeleteApplication
+
+    redirect_to "/job_applications/applied"
+  end
+
 end
