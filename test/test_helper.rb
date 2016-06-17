@@ -16,7 +16,7 @@ Minitest::Spec.class_eval do
   end
   include FactoryGirl::Syntax::Methods
 
-  def  admin_for
+  def admin_for
     User::Create.(user: attributes_for(:user, email: "info@cj-agency.de", phone: "1")).model
   end
   
@@ -67,8 +67,9 @@ Trailblazer::Test::Integration.class_eval do
   end
 
   def log_in_as_admin
-    User::Create.(user: FactoryGirl.attributes_for(:user, email: "info@cj-agency.de", firstname: "Admin", phone: "0"))
-
+    if User.where(email: "info@cj-agency.de").size == 0
+      User::Create.(user: FactoryGirl.attributes_for(:user, email: "info@cj-agency.de", firstname: "Admin", phone: "0"))
+    end
     visit "sessions/new"
     submit!("info@cj-agency.de", "Test1")
   end

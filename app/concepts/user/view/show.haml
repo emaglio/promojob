@@ -7,7 +7,8 @@
     = email
   .row
     = phone
+%h2
   .row
-    - if not policy.admin?
-      = link_to "Edit", edit_user_path(model)
-    = link_to "Delete", user_path(model), method: :delete
+    - if policy.current_user?
+      = link_to "Edit", edit_user_path(model), :class => 'warning button'
+    = link_to "Delete", user_path(model), method: :delete, :class => 'alert button'

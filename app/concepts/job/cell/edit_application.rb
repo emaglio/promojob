@@ -8,12 +8,12 @@ module Job::Cell
     property :message
 
 
-    def getJob
-      Job.find(model.job_id)
+    def job
+      model.job
     end
 
-    def getUser #TODO change to User.where to get the list of users
-      User.find(model.user_id)
+    def user #TODO change to User.where to get the list of users
+      model.user
     end
 
   end
