@@ -31,7 +31,7 @@ class JobsController < ApplicationController
 
 	def update
 		run Job::Update do |op|
-			flash[:message] = "Job #{op.model.title} has been updated!"
+			flash[:success] = "Job #{op.model.title} has been uphbgghhghdated!"
 			return redirect_to op.model
 		end
 	end
