@@ -77,13 +77,50 @@ class UserOperationTest < MiniTest::Spec
   it "wrong age" do
     res,op = User::Create.run(user: attributes_for(:user, age: ""))
     res.must_equal false
-    op.errors.to_s.must_equal "{:age=>[\"is not a number\"]}"
+    op.errors.to_s.must_equal "{:age=>[\"can't be blank\", \"is not a number\"]}"
     res,op = User::Create.run(user: attributes_for(:user, age: "0"))
     res.must_equal false
     op.errors.to_s.must_equal "{:age=>[\"must be greater than 0\"]}"
     res,op = User::Create.run(user: attributes_for(:user, age: "25.5"))
     res.must_equal false
     op.errors.to_s.must_equal "{:age=>[\"must be an integer\"]}"
+  end
+
+  it "delete user" do
+    user = User::Create.(user: attributes_for(:user, email: "delete@mail.com")).model
+    user.persisted?.must_equal true
+
+    op = User::Delete.({id: user.id, current_user: user})
+    op.model.persisted?.must_equal false
+
+    user = User::Create.(user: attributes_for(:user, email: "delete@mail.com")).model
+    user.persisted?.must_equal true
+
+    op = User::Delete.({id: user.id, current_user: admin_for})
+    op.model.persisted?.must_equal false
+  end
+
+  it "can't delete user if not user or admin" do
+    sneaky_user = User::Create.(user: attributes_for(:user)).model
+    user = User::Create.(user: attributes_for(:user, email: "delete@mail.com", phone: "00")).model
+
+    assert_raises Trailblazer::NotAuthorizedError do
+      User::Delete.(
+        id: user.id,
+        current_user: sneaky_user)
+    end
+
+  end
+
+  it "edit user" do
+    user = User::Create.(user: attributes_for(:user)).model
+    user.persisted?.must_equal true
+    user.email.must_equal "my@email.com"
+
+    user_edited = User::Update.(id: user.id, user: {email: "edited@mail.com", 
+        password: "Test1", confirm_password: "Test1"}, current_user: user).model
+    user_edited.persisted?.must_equal true
+    user_edited.email.must_equal "edited@mail.com"
   end
 
 end

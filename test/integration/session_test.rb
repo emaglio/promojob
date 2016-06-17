@@ -36,6 +36,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
 
     # redirected to jobs_path
     page.must_have_content "All Jobs"
+    page.must_have_content "Welcome #{op.model.firstname}!" #flash
   end
 
   it "success_sign_out" do
@@ -51,6 +52,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
 
     page.wont_have_content "Hi, #{op.model.firstname}"    
     page.must_have_content "Sign In"
+    page.must_have_content "See you!"#flash
   end
 
 end

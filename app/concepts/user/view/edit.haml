@@ -8,6 +8,8 @@
   .row
     = f.select :gender, options_for_select(["Male", "Female", "You"]), placeholder: "Gender", label: false
   .row
+    = f.input :age, placeholder: "Age", label: false
+  .row
     = f.input :email, placeholder: "Email", label: false
   .row
     = f.input :phone, placeholder: "Phone", label: false
@@ -16,4 +18,4 @@
   .row
     = f.input :confirm_password, placeholder: "Confirm Password", label: false
   .row
-    = f.submit
+    = f.submit nil, class: 'success button'

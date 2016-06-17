@@ -1,8 +1,10 @@
 class JobApplicationsController < ApplicationController
 
   def create
-    run Job::Apply
-    
+    run Job::Apply do |op|
+      flash[:notice] = "You have applied for #{Job.find(op.model.job_id).title}"
+    end
+
     redirect_to "/jobs"
   end
 
@@ -16,6 +18,18 @@ class JobApplicationsController < ApplicationController
     form Job::EditApplication
 
     render Job::Cell::EditApplication, model: @form
+  end
+
+  def update
+    present Job::UpdateApplication 
+    flash[:notice] = "Job application updated"    
+    redirect_to "/job_applications/applied"
+  end
+
+  def destroy
+    run Job::DeleteApplication
+    flash[:alert] = "Job application deleted"    
+    redirect_to "/job_applications/applied"
   end
 
 end

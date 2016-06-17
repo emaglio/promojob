@@ -19,7 +19,7 @@
   .row
     = f.input :starts_at, input_html: {id: "date"} #tomorrow is the starting day
   .row
-    = f.submit
+    = f.submit nil, class: 'success button'
 
 :javascript
   var today = new Date();

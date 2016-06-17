@@ -7,7 +7,8 @@ class UsersController < ApplicationController
 
 	def create
 		run User::Create do |op|
-			return redirect_to op.model
+			flash[:notice] = "Hi #{op.model.firstname}"
+			return redirect_to "/jobs"
 		end
 
 		render User::Cell::New, model: @form
@@ -28,6 +29,7 @@ class UsersController < ApplicationController
 	def update
 		#TODO: adding flash message
 		run User::Update do |op|
+			flash[:notice] = "Your profile has been updated"
 			return redirect_to op.model
 		end
 
@@ -44,6 +46,7 @@ class UsersController < ApplicationController
 	def destroy
 		#TODO: adding flash message
 		run User::Delete do
+			flash[:alert] = "User deleted"
 			redirect_to root_path
 		end
 	end

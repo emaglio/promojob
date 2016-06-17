@@ -1,0 +1,7 @@
+.small-5.small-centered.columns
+  - context[:flash].each do |name, msg|
+    - if msg.is_a?(String)
+      %div{:class => "alert-box round #{name.to_s == 'notice' ? 'success' : 'alert'}", "data-alert" => ""}
+        %h3
+          = content_tag :div, msg
+        %a.close{:href => "#"} &times;

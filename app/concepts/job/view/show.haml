@@ -20,7 +20,8 @@
   - if policy.admin?
     .row
       %h2
-      = link_to "Edit", edit_job_path(model)
+      = link_to "Edit", edit_job_path(model), class: 'warning button'
+      = link_to "Delete", job_path(model), method: :delete, class: 'alert button'
   - else
     = form_tag "/job_applications" do
       = hidden_field_tag :user_id, policy.user.id
@@ -30,4 +31,4 @@
         Message:
         = text_field_tag :message
       .row
-        = submit_tag "Apply" #TODO flash message "You have applied for that job"
+        = submit_tag "Apply", class: 'success button' #TODO flash message "You have applied for that job"

@@ -12,6 +12,7 @@ class JobsController < ApplicationController
 
 	def create
 		run Job::Create do |op|
+			flash[:notice] = "The #{op.model.title} has been created"
 			return redirect_to "/jobs"
 		end
 
@@ -19,7 +20,7 @@ class JobsController < ApplicationController
 	end
 
 	def show
-		present Job::Update
+		present Job::Show
 		render Job::Cell::Show
 	end
 
@@ -31,6 +32,7 @@ class JobsController < ApplicationController
 
 	def update
 		run Job::Update do |op|
+			flash[:success] = "Job #{op.model.title} has been updated"
 			return redirect_to op.model
 		end
 	end
@@ -40,5 +42,11 @@ class JobsController < ApplicationController
 		render Job::Cell::Index
 	end
 
+	def destroy
+		run Job::Delete do
+			flash[:alert] = "Job deleted"
+			redirect_to root_path
+		end
+	end
 
 end

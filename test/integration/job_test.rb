@@ -6,13 +6,14 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     #not signed in
     visit "jobs/new"
     page.wont_have_content "Create Job"
+    page.must_have_content "Need to Sign In or create an account!" #flash
 
     # general user
     log_in_as_user
 
     visit "jobs/new"
     page.wont_have_content "Create Job"
-
+    page.must_have_content "Not authorized, my friend." #flash
     click_link "Sign Out"
 
     # admin
@@ -54,8 +55,8 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     
     page.must_have_content ("MyTitle")
     total = Job.all.size
-    # page.must_have_content ("You've got " + str(total) + " jobs.")
     page.must_have_content (total)
+    page.must_have_content "The MyTitle has been created" #flash
     click_link "MyTitle"
 
     page.must_have_content "MyRequirements"
@@ -67,8 +68,10 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     create_job #MyTitle, MyRequirements, MyDescription
     log_in_as_user
 
-    visit "jobs/1/edit"
+    job = Job.last
+    visit "jobs/#{job.id}/edit"
     page.wont_have_content "MyRequirements"
+    page.must_have_content "Not authorized, my friend." #flash
 
     visit "jobs"
     click_link "MyTitle"
@@ -85,9 +88,8 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     click_link "Edit"
     page.must_have_content "Edit MyTitle"
     page.must_have_button "Update Job"
-    total = Job.all.size
 
-    within("//form[@id='edit_job_#{total}']") do
+    within("//form[@id='edit_job_#{Job.last.id}']") do
       fill_in 'Description', with: "TestDescription"
       fill_in 'Requirements', with: "TestRequirements"
     end 
@@ -95,6 +97,19 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     
     page.must_have_content "TestDescription"
     page.must_have_content "TestRequirements"
+    page.must_have_content "Job MyTitle has been updated" #flash
+  end
+
+  it "delete job" do
+    log_in_as_admin
+    create_job
+
+    visit "jobs"
+    click_link "MyTitle"
+    click_link "Delete"
+
+    page.must_have_content "Job deleted" #flash
+    page.wont_have_link "MyTitle"
   end
 
 end
