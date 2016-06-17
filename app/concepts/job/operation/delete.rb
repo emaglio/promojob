@@ -2,8 +2,8 @@ class Job < ActiveRecord::Base
   class Delete < Trailblazer::Operation
 
     include Model
-    policy Session::Policy, :delete?
-    model JobApplication, :find
+    policy Session::Policy, :admin?
+    model Job, :find
 
     def process(params) #TODO: do we need to destroy anything else?
       deleteJobApplication(model)
