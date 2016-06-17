@@ -67,7 +67,8 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     create_job #MyTitle, MyRequirements, MyDescription
     log_in_as_user
 
-    visit "jobs/1/edit"
+    job = Job.last
+    visit "jobs/#{job.id}/edit"
     page.wont_have_content "MyRequirements"
 
     visit "jobs"

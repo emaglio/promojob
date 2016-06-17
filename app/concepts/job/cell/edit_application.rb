@@ -9,11 +9,11 @@ module Job::Cell
 
 
     def job
-      model.job
+      Job.find(model.job_id)
     end
 
     def user #TODO change to User.where to get the list of users
-      model.user
+      User.find(model.user_id)
     end
 
   end
