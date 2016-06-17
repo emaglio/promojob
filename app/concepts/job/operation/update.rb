@@ -3,7 +3,7 @@ class Job < ActiveRecord::Base
 		
 		model Job, :find
 
-    policy Session::Policy, :apply?
+    policy Session::Policy, :admin?
 
 	end  
 end

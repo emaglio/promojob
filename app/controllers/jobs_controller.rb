@@ -19,7 +19,7 @@ class JobsController < ApplicationController
 	end
 
 	def show
-		present Job::Update
+		present Job::Show
 		render Job::Cell::Show
 	end
 

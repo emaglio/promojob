@@ -117,11 +117,10 @@ class UserOperationTest < MiniTest::Spec
     user.persisted?.must_equal true
     user.email.must_equal "my@email.com"
 
-    # don't understand why this creates an error
-    user_edited = User::Update.({id: user.id, email: "edited@mail.com", 
-        password: "Test1", confirm_passowrd: "Test1", current_user: user}).model
+    user_edited = User::Update.(id: user.id, user: {email: "edited@mail.com", 
+        password: "Test1", confirm_password: "Test1"}, current_user: user).model
     user_edited.persisted?.must_equal true
-    user_edited.email "edited@mail.com"
+    user_edited.email.must_equal "edited@mail.com"
   end
 
 end
