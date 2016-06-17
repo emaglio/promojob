@@ -12,6 +12,7 @@ class JobsController < ApplicationController
 
 	def create
 		run Job::Create do |op|
+			flash[:notice] = "The #{op.model.title} has been created"
 			return redirect_to "/jobs"
 		end
 
@@ -31,14 +32,14 @@ class JobsController < ApplicationController
 
 	def update
 		run Job::Update do |op|
-			flash[:success] = "Job #{op.model.title} has been uphbgghhghdated!"
+			flash[:success] = "Job #{op.model.title} has been updated"
 			return redirect_to op.model
 		end
 	end
 
 	def destroy
-		#TODO: adding flash message
 		run Job::Delete do
+			flash[:notice] = "Job and Job Applications related have been deleted"
 			redirect_to root_path
 		end
 	end

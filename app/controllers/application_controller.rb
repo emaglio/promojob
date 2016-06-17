@@ -16,11 +16,14 @@ class ApplicationController < ActionController::Base
   end
 
   # FIXME: where do we enforce the signed in constrained?
-
   rescue_from Trailblazer::NotAuthorizedError, with: :user_not_authorized
 
   def user_not_authorized
-    flash[:message] = "Not authorized, my friend."
+    if tyrant.current_user
+      flash[:message] = "Not authorized, my friend."
+    else
+      flash[:notice] = "Need to Sign In or create an account!"
+    end
     redirect_to root_path
   end
 
