@@ -5,23 +5,12 @@ class Job < ActiveRecord::Base
     policy Session::Policy, :true?
 
     def model!(params)
-      # Job.where("salary > ?", params[:lowSalary])
-      getLowSalary!(Job.all, params[:lowSalary])
+      keyword(params[:keyword])
     end
 
-    def getKeyword(job)
-      return unless keyword.empty? 
-      job.where("title.include?")
-    end
-
-    def getLowSalary!(job, lowSalary)
-      return unless lowSalary.empty?
-      job.where("salary > ?", lowSalary)
-    end
-
-    def getHighSalary(job)
-      return unless highSalary.empty?
-      job.where("salary < ?", highSalary)
+    def keyword(keyword)
+      return Job.all if keyword.empty? 
+      Job.where("title like ? or description like ?", keyword, keyword)
     end
 
   end
