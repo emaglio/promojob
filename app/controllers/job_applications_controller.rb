@@ -2,8 +2,9 @@ class JobApplicationsController < ApplicationController
 
   def create
     run Job::Apply do |op|
-      flash[:notice] = "Applied for #{Job.find(op.model.job_id).title}"
+      flash[:notice] = "You have applied for #{Job.find(op.model.job_id).title}"
     end
+
     redirect_to "/jobs"
   end
 

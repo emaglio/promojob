@@ -76,7 +76,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     page.must_have_link "Delete"
 
     click_link "Delete"
-    page.must_have_content "User and Job Applications related have been deleted" #flash
+    page.must_have_content "User deleted" #flash
     page.must_have_content "All Jobs"
 
     visit "sessions/new"

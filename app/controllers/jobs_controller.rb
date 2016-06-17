@@ -39,7 +39,7 @@ class JobsController < ApplicationController
 
 	def destroy
 		run Job::Delete do
-			flash[:notice] = "Job and Job Applications related have been deleted"
+			flash[:alert] = "Job deleted"
 			redirect_to root_path
 		end
 	end

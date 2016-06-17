@@ -20,6 +20,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_link "MyTitle"
     click_link "MyTitle"
     page.wont_have_button "Apply"
+    page.must_have_content "Need to Sign In or create an account!" #flash
   end
 
   it "Successfull application" do
@@ -37,7 +38,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "MyRequirements"
     page.must_have_button "Apply"
     click_button "Apply"
-    #test flash message
+    page.must_have_content "You have applied for MyTitle" #flash
     page.wont_have_content "MyRequirements"
     page.wont_have_button "Apply"
     page.must_have_link "MyTitle"
@@ -96,6 +97,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     click_button "Update Job application"
 
     page.wont_have_link "MyTitle"
+    page.must_have_content "Job application updated"
   end
 
 end

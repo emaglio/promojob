@@ -16,7 +16,6 @@
 //= require_tree .
 //= require foundation-datetimepicker
 
-
 $(function() {
   $(document).foundation();
 });
