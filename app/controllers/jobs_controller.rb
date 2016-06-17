@@ -35,4 +35,11 @@ class JobsController < ApplicationController
 		end
 	end
 
+	def destroy
+		#TODO: adding flash message
+		run Job::Delete do
+			redirect_to root_path
+		end
+	end
+
 end

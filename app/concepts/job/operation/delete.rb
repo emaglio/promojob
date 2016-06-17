@@ -1,10 +1,9 @@
-class User < ActiveRecord::Base
+class Job < ActiveRecord::Base
   class Delete < Trailblazer::Operation
 
     include Model
-
     policy Session::Policy, :delete?
-    model User, :find
+    model JobApplication, :find
 
     def process(params) #TODO: do we need to destroy anything else?
       deleteJobApplication(model)
@@ -12,7 +11,7 @@ class User < ActiveRecord::Base
     end
 
     def deleteJobApplication(model)
-      JobApplication.where("user_id = ?", model.id).find_each do |job_application|
+      JobApplication.where("job_id = ?", model.id).find_each do |job_application|
        job_application.destroy
       end
     end
