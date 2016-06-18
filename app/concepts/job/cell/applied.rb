@@ -14,7 +14,7 @@ module Job::Cell
     end
 
     def delete_link
-      link_to "Delete", job_application_path(model), method: :delete
+      link_to "Delete", job_application_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
     end
   
   end      

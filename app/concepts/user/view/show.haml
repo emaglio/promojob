@@ -11,4 +11,4 @@
   .row
     - if policy.current_user?
       = link_to "Edit", edit_user_path(model), :class => 'warning button'
-    = link_to "Delete", user_path(model), method: :delete, :class => 'alert button'
+    = link_to "Delete", user_path(model), method: :delete, :class => 'alert button', data: {confirm: "Are you sure?"}
