@@ -35,7 +35,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "Hi, #{op.model.firstname}"
 
     # redirected to jobs_path
-    page.must_have_content "All Jobs"
+    page.must_have_content "Search Job"
     page.must_have_content "Welcome #{op.model.firstname}!" #flash
   end
 

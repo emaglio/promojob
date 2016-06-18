@@ -81,10 +81,10 @@ Trailblazer::Test::Integration.class_eval do
     submit!(op.model.email, "Test1")
   end
 
-  def create_job
+  def create_job(title, description)
     visit "jobs/new"
 
-    fill_new_job!("MyTitle","MyRequirements","MyDescription")
+    fill_new_job!(title,"MyRequirements",description)
   end
 
 end

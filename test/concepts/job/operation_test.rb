@@ -3,6 +3,8 @@ require 'test_helper'
 class JobOperationTest < MiniTest::Spec
   let (:user) {User::Create.(user: attributes_for(:user)).model}
   let (:job) {Job::Create.(job: attributes_for(:job), current_user: admin).model}
+  let (:job2) {Job::Create.(job: attributes_for(:job, title: "Web Dev", description: "NewDecr"), current_user: admin).model}
+  let (:job3) {Job::Create.(job: attributes_for(:job, title: "Cleaner", description: "NewDecr"), current_user: admin).model}
   let (:admin) {admin_for}
 
 	it "validates correct input" do
@@ -49,7 +51,4 @@ class JobOperationTest < MiniTest::Spec
     op.model.persisted?.must_equal false 
     
   end
-
-
-
 end

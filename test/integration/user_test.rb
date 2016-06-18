@@ -33,7 +33,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
 
     sign_up!("my@email.com","Test1","Test1")
 
-    page.must_have_content "All Jobs"   #TODO: change to Hi, name when we implement that
+    page.must_have_content "Search Job"   #TODO: change to Hi, name when we implement that
                                         #after creating a user i'm signed in as well
     page.must_have_content "MyName" #flash    
   end
@@ -77,7 +77,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
 
     click_link "Delete"
     page.must_have_content "User deleted" #flash
-    page.must_have_content "All Jobs"
+    page.must_have_content "Search Job"
 
     visit "sessions/new"
 

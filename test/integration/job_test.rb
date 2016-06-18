@@ -65,7 +65,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
 
   it "unsuccessfull job editing" do
     log_in_as_admin
-    create_job #MyTitle, MyRequirements, MyDescription
+    create_job("MyTitle", "MyDescription")
     log_in_as_user
 
     job = Job.last
@@ -81,7 +81,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
 
   it "successfully job editing" do
     log_in_as_admin
-    create_job
+    create_job("MyTitle", "MyDescription")
 
     visit "jobs"
     click_link "MyTitle"
@@ -102,7 +102,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
 
   it "delete job" do
     log_in_as_admin
-    create_job
+    create_job("MyTitle", "MyDescription")
 
     visit "jobs"
     click_link "MyTitle"
@@ -110,6 +110,47 @@ class JobIntegrationTest < Trailblazer::Test::Integration
 
     page.must_have_content "Job deleted" #flash
     page.wont_have_link "MyTitle"
+  end
+
+  it "search job" do
+    log_in_as_admin
+    create_job("OneTitle", "Description")
+    create_job("SecondTitle", "Description")
+    create_job("ThidTitle", "NewDescription")
+
+
+    log_in_as_user
+    visit "jobs"
+    total = Job.all.size
+
+    page.must_have_content total
+    page.must_have_link "OneTitle"
+    page.must_have_link "SecondTitle"
+    page.must_have_link "ThidTitle"
+    page.must_have_button "Search"
+
+    fill_in 'keyword', with: 'OneTitle'
+    click_button "Search"
+
+    page.must_have_link "OneTitle"
+    page.wont_have_link "SecondTitle"
+    page.wont_have_link "ThidTitle"
+    
+    fill_in 'keyword', with: 'Description'
+    click_button "Search"
+
+    page.must_have_link "OneTitle"
+    page.must_have_link "SecondTitle"
+    page.wont_have_link "ThidTitle"
+    
+    fill_in 'keyword', with: 'NewDescription'
+    click_button "Search"
+
+    page.wont_have_link "OneTitle"
+    page.wont_have_link "SecondTitle"
+    page.must_have_link "ThidTitle"
+    
+
   end
 
 end
