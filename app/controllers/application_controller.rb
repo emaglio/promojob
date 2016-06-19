@@ -17,11 +17,11 @@ class ApplicationController < ActionController::Base
 
   # FIXME: where do we enforce the signed in constrained?
   rescue_from Trailblazer::NotAuthorizedError do |exception|
-    # if exception.query == :apply?
-    #   flash[:message] = "You have already applied for this job"
-    # else
-    user_not_authorized(params)
-    # end
+    if exception.query == :apply?
+      flash[:message] = "You have already applied for this job"
+    else
+      user_not_authorized(params)
+    end
   end
   
   def user_not_authorized(params)
