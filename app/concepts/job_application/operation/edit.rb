@@ -1,7 +1,7 @@
-class Job < ActiveRecord::Base
+class JobApplication < ActiveRecord::Base
 
-  class EditApplication < Apply
-    
+  class Edit < Apply
+
     model JobApplication, :find
 
     policy Session::Policy, :admin?

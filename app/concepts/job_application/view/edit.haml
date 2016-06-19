@@ -33,8 +33,7 @@
   .row
     =message
 
-  = simple_form_for model, :url => {:action => "update"} do |f|
+  = simple_form_for model do |f|
     .row
       = f.select :status, options_for_select(["Hire", "Rejected"]), placeholder: "Status", label: false
       = f.submit nil, class: 'warning button', data: {confirm: "Are you sure?"}
-  

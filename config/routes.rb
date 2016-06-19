@@ -13,19 +13,10 @@ Rails.application.routes.draw do
   resources :job_applications do
     collection do
       post 'applied'
-      post 'update'
     end
   end
 
-  post "jobs/searchs", controller: :jobs, action: :search
+  post "jobs/search", controller: :jobs, action: :search
       
 
 end
-
-
-
-# job_applications
-# job_id
-# user_id
-# state: [applied, rejected, hired]
-# message:

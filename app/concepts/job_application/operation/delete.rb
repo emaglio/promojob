@@ -1,5 +1,5 @@
-class Job < ActiveRecord::Base
-  class DeleteApplication < Trailblazer::Operation
+class JobApplication < ActiveRecord::Base
+  class Delete < Trailblazer::Operation
 
     include Model
     policy Session::Policy, :delete?

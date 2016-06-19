@@ -1,6 +1,6 @@
 require "reform/form/validation/unique_validator"
 
-class Job < ActiveRecord::Base
+class JobApplication < ActiveRecord::Base
   class Apply < Trailblazer::Operation
     include Model
     model JobApplication, :create

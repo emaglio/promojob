@@ -35,6 +35,8 @@ class JobsController < ApplicationController
 			flash[:success] = "Job #{op.model.title} has been updated"
 			return redirect_to op.model
 		end
+
+		render Job::Cell::Edit, model: @form
 	end
 
 	def search

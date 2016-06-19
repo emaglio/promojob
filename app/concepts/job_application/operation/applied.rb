@@ -1,4 +1,4 @@
-class Job < ActiveRecord::Base
+class JobApplication < ActiveRecord::Base
   class Applied < Trailblazer::Operation 
     
     policy Session::Policy, :admin?

@@ -1,4 +1,4 @@
-module Job::Cell
+module JobApplication::Cell
 
   class Applied < Trailblazer::Cell
   private
