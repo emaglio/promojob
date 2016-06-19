@@ -15,22 +15,18 @@ class ApplicationController < ActionController::Base
     params.merge!(current_user: tyrant.current_user)
   end
 
-  # FIXME: where do we enforce the signed in constrained?
   rescue_from Trailblazer::NotAuthorizedError do |exception|
-    if exception.query == :apply?
-      flash[:message] = "You have already applied for this job"
-    else
-      user_not_authorized(params)
-    end
-  end
-  
-  def user_not_authorized(params)
     if tyrant.current_user
-      flash[:message] = "Not authorized, my friend."
+      if exception.query == :apply?
+        flash[:message] = "You have already applied for this job"
+      else
+        flash[:message] = "Not authorized, my friend."
+      end
     else
       flash[:notice] = "Need to Sign In or create an account!"
     end
     redirect_to root_path
   end
+
 
 end

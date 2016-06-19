@@ -60,7 +60,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     click_button "Apply"
     page.must_have_link "MyTitle"
     click_link "MyTitle"
-    #test flash message
+    page.must_have_content "You have already applied for this job" #flash
     page.wont_have_button "Apply"
   end
 
