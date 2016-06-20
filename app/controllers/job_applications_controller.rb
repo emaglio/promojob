@@ -32,4 +32,10 @@ class JobApplicationsController < ApplicationController
     redirect_to "/job_applications/applied"
   end
 
+  def overview
+    present JobApplication::Overview
+
+    render JobApplication::Cell::Overview
+  end
+
 end

@@ -1,0 +1,23 @@
+.row
+  %h1 Job:
+
+%h3  
+  .row
+    #{job.title}
+  .row
+    #{job.company}
+  .row
+    #{job.requirements}
+  .row
+    #{job.salary}
+  .row
+    #{job.starts_at}
+
+.row
+  %h2 Message:
+
+%h3
+  .row
+    =message
+.row
+  = link_to "Delete", job_application_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}

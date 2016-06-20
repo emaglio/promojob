@@ -11,12 +11,15 @@ Rails.application.routes.draw do
   end
 
   resources :job_applications do
+    member do
+      get 'overview'
+    end
     collection do
       post 'applied'
     end
   end
 
+  get 'my/jobs', controller: :my, action: :jobs, as: "my_jobs"
   post "jobs/search", controller: :jobs, action: :search
-      
 
 end

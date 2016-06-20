@@ -31,6 +31,10 @@ class Session::Policy
     @user.email == @model.email
   end
 
+  def my?
+    @user
+  end
+
   # def signed_in?
   #   tyrant.signed_in?
   # end

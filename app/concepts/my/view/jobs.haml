@@ -1,0 +1,16 @@
+%main{:role => "main"} 
+%h4
+  Your Jobs
+
+.row
+  You have applied for:
+  %ul.mobile-list
+    = cell("my/cell/applications", nil, status: "Applied")
+.row
+  You have been hired for:
+  %ul.mobile-list
+    = cell("my/cell/applications", nil, status: "Hired")
+.row
+  You have been rejected for:
+  %ul.mobile-list
+    = cell("my/cell/applications", nil, status: "Reject")
