@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 	def create
 		run User::Create do |op|
 			flash[:notice] = "Hi #{op.model.firstname}"
+			tyrant.sign_in!(op.model)
 			return redirect_to "/jobs"
 		end
 
