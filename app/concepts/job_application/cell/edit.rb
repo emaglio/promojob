@@ -6,15 +6,8 @@ module JobApplication::Cell
     include ActionView::Helpers::FormOptionsHelper
 
     property :message
-
-
-    def job
-      Job.find(model.job_id)
-    end
-
-    def user #TODO change to User.where to get the list of users
-      User.find(model.user_id)
-    end
-
+    property :job
+    property :user
+    
   end
 end
