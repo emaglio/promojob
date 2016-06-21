@@ -12,7 +12,7 @@ class JobApplication < ActiveRecord::Base
     end
 
     def process(params)
-      validate(params)do
+      validate(params[:job_application]) do
         contract.save
       end
     end

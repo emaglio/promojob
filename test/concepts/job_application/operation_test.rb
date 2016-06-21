@@ -10,12 +10,12 @@ class JobApplicationTest < MiniTest::Spec
   let (:admin) {admin_for}
 
   it "validates correct input" do  
-    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Applied", current_user: user})
+    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
     op.model.user_id.must_equal user.id
     op.model.job_id.must_equal job.id
     op.model.message.must_equal "This is great"
-    op.model.status.must_equal "Applied"
+    op.model.status.must_equal "Apply"
   end
 
   it "fails" do # maybe no sense
@@ -33,7 +33,7 @@ class JobApplicationTest < MiniTest::Spec
   end
 
   it "only admin can Hire/Reject a job_application" do
-    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Applied", current_user: user})
+    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
 
     jobApp = JobApplication.last
@@ -53,9 +53,9 @@ class JobApplicationTest < MiniTest::Spec
 
   it "delete jobApp after delete user" do
     #same user applies for the same job 
-    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Applied", current_user: user})
+    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
-    op = JobApplication::Apply.({ user_id: user.id, job_id: job2.id, message: "This is great2", status: "Applied", current_user: user})
+    op = JobApplication::Apply.({ user_id: user.id, job_id: job2.id, message: "This is great2", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
 
     jobApps = JobApplication.where("user_id = ?", user.id)
@@ -69,9 +69,9 @@ class JobApplicationTest < MiniTest::Spec
 
   it "delete jobApp after delete job" do 
     #same job for 2 different users
-    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Applied", current_user: user})
+    op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
-    op = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Applied", current_user: user})
+    op = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
 
     jobApps = JobApplication.where("job_id = ?", job.id)

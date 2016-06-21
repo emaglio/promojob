@@ -17,7 +17,7 @@ class JobApplicationsController < ApplicationController
   def edit
     form JobApplication::Edit
 
-    render JobApplication::Cell::Edit, model: @form
+    render JobApplication::Cell::Edit, model: @model
   end
 
   def update
@@ -25,7 +25,7 @@ class JobApplicationsController < ApplicationController
       flash[:success] = "Job application updated"
       return redirect_to "/job_applications/applied"
     end
-    render JobApplication::Cell::Edit, model: @form
+    render JobApplication::Cell::Edit, model: @model
   end
 
   def destroy

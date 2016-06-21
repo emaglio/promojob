@@ -5,7 +5,7 @@ class JobApplication < ActiveRecord::Base
 
 
     def model!(params)
-      JobApplication.where(status: "Applied")
+      JobApplication.where(status: "Apply")
     end
   
   end

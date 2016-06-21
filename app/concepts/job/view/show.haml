@@ -26,7 +26,7 @@
     = form_tag "/job_applications" do
       = hidden_field_tag :user_id, policy.user.id
       = hidden_field_tag :job_id, id
-      = hidden_field_tag :status, "Applied"     
+      = hidden_field_tag :status, "Apply"     
       .row
         Message:
         = text_field_tag :message
