@@ -21,9 +21,11 @@ class JobApplicationsController < ApplicationController
   end
 
   def update
-    present JobApplication::Update
-    flash[:success] = "Job application updated"
-    redirect_to "/job_applications/applied"
+    run JobApplication::Update do 
+      flash[:success] = "Job application updated"
+      return redirect_to "/job_applications/applied"
+    end
+    render JobApplication::Cell::Edit, model: @form
   end
 
   def destroy

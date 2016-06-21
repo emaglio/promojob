@@ -28,7 +28,6 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		#TODO: adding flash message
 		run User::Update do |op|
 			flash[:notice] = "Your profile has been updated"
 			return redirect_to op.model

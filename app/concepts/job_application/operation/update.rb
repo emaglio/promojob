@@ -2,9 +2,10 @@ class JobApplication < ActiveRecord::Base
 
   class Update < Trailblazer::Operation
     include Model
+
     policy Session::Policy, :admin?
 
-    model JobApplication, :find?
+    model JobApplication, :find
 
     contract do
       property :status
@@ -15,11 +16,6 @@ class JobApplication < ActiveRecord::Base
         contract.save
       end
     end
-    # def model!(params)#TODO: this is working but I don't know if I have used too much rails
-    #   jobApp = JobApplication.find(params[:id])
-    #   jobApp.status = params[:job_application][:status]
-    #   jobApp.save
-    # end
 
   end
 
