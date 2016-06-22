@@ -17,15 +17,17 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     #empty
     sign_up!("","","")
     page.must_have_content "can't be blank"
+    page.current_path.must_equal "/users"
     
     #confirm_password false
     sign_up!("my@email.com","Test","Test1")
     page.must_have_content "Passwords don't match"
+    page.current_path.must_equal "/users"
 
     #wrong password format
     sign_up!("my@email.com","test1","test1")
     page.must_have_content "must have at least: one number between 0 and 9; one Upper Case letter; one Lower Case letter"
-      
+    page.current_path.must_equal "/users"
   end
 
   it "successfully sign_up" do
@@ -34,7 +36,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     sign_up!("my@email.com","Test1","Test1")
 
     page.must_have_content "Search Job"   #TODO: change to Hi, name when we implement that
-                                        #after creating a user i'm signed in as well
+                                            #after creating a user i'm signed in as well
     page.must_have_content "MyName" #flash    
   end
 
@@ -46,6 +48,8 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     page.must_have_link "Edit"
     click_link 'Edit'
 
+    user = User.find_by(email: "my@email.com")
+    page.current_path.must_equal edit_user_path(user)
     page.must_have_css "#user_firstname"
     page.must_have_css "#user_lastname"
     # page.must_have_css "#user_gender" TODO: how to test this?
@@ -54,8 +58,6 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#user_password"
     page.must_have_css "#user_confirm_password"
 
-    user = User.find_by(email: "my@email.com")
-
     within("//form[@id='edit_user_#{user.id}']") do
       fill_in 'Firstname', with: "EmaNew"
       fill_in 'Password', with: "Test1"
@@ -63,6 +65,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     end 
     click_button "Update User"
 
+    page.current_path.must_equal "/users/#{user.id}"
     page.must_have_content "Your profile has been updated" #flash
     page.must_have_content "Hi, EmaNew"
   end
@@ -78,6 +81,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     click_link "Delete"
     page.must_have_content "User deleted" #flash
     page.must_have_content "Search Job"
+    page.current_path.must_equal "/"
 
     visit "sessions/new"
 

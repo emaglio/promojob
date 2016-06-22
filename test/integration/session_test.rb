@@ -18,6 +18,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#session_email"
     page.must_have_css "#session_password"
     page.must_have_button "Sign In"
+    page.current_path.must_equal sessions_path
   end
 
   it "success_sign_in" do
@@ -35,6 +36,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "Hi, #{op.model.firstname}"
 
     # redirected to jobs_path
+    page.current_path.must_equal jobs_path
     page.must_have_content "Search Job"
     page.must_have_content "Welcome #{op.model.firstname}!" #flash
   end

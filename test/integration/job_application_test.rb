@@ -8,7 +8,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     visit "jobs/new"
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
     
-    #admin can't apply only edit a job
+    #admin can't apply but only edit a job
     visit "jobs"
     page.must_have_link "MyTitle"
     click_link "MyTitle"
@@ -38,6 +38,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "MyRequirements"
     page.must_have_button "Apply"
     click_button "Apply"
+    page.current_path.must_equal jobs_path
     page.must_have_content "You have applied for MyTitle" #flash
     page.wont_have_content "MyRequirements"
     page.wont_have_button "Apply"
@@ -87,15 +88,18 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     log_in_as_admin
     page.must_have_link "Applied Jobs"
     click_link "Applied Jobs"
-
+    page.current_path.must_equal applied_job_applications_path
     page.must_have_link "MyTitle"
     click_link "MyTitle"
 
+    jobApp = JobApplication.last
+    page.current_path.must_equal edit_job_application_path(jobApp)
     page.must_have_content "MyTitle"
     page.must_have_content "MyRequirements"
     page.must_have_button "Update Job application"
     click_button "Update Job application"
 
+    page.current_path.must_equal applied_job_applications_path
     page.wont_have_link "MyTitle"
     page.must_have_content "Job application updated"
   end

@@ -7,6 +7,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     visit "jobs/new"
     page.wont_have_content "Create Job"
     page.must_have_content "Need to Sign In or create an account!" #flash
+    page.current_path.must_equal root_path
 
     # general user
     log_in_as_user
@@ -14,15 +15,16 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     visit "jobs/new"
     page.wont_have_content "Create Job"
     page.must_have_content "Not authorized, my friend." #flash
-    click_link "Sign Out"
+    page.current_path.must_equal root_path
+    click_link "Sign Out"   
 
     # admin
     log_in_as_admin
     page.must_have_content "Hi, Admin"
 
     visit "jobs/new"
+    page.current_path.must_equal new_job_path
     page.must_have_css "#job_title"     
-    
   end
 
   it "unsuccessfull job creation" do
@@ -38,10 +40,12 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#job_salary"
     # page.must_have_css "#job_starts_at" TODO: how to test this?
     page.must_have_button "Create Job"
+    page.current_path.must_equal new_job_path
 
     #empty
     fill_new_job!("","","")
     page.must_have_content "can't be blank"
+    page.current_path.must_equal jobs_path
 
   end
 
@@ -53,14 +57,17 @@ class JobIntegrationTest < Trailblazer::Test::Integration
 
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
     
+    page.current_path.must_equal jobs_path
     page.must_have_content ("MyTitle")
     total = Job.all.size
     page.must_have_content (total)
     page.must_have_content "The MyTitle has been created" #flash
     click_link "MyTitle"
 
+
     page.must_have_content "MyRequirements"
     page.must_have_content "MyDescription"
+    page.current_path.must_equal "/jobs/#{Job.last.id}"
   end
 
   it "unsuccessfull job editing" do
