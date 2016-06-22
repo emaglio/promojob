@@ -93,6 +93,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     visit "jobs"
     click_link "MyTitle"
     click_link "Edit"
+    page.current_path.must_equal edit_job_path(Job.last.id)
     page.must_have_content "Edit MyTitle"
     page.must_have_button "Update Job"
 
@@ -102,6 +103,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     end 
     click_button "Update Job"
     
+    page.current_path.must_equal "/jobs/#{Job.last.id}"
     page.must_have_content "TestDescription"
     page.must_have_content "TestRequirements"
     page.must_have_content "Job MyTitle has been updated" #flash
@@ -139,6 +141,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     fill_in 'keyword', with: 'OneTitle'
     click_button "Search"
 
+    page.current_path.must_equal "/jobs/search"   
     page.must_have_link "OneTitle"
     page.wont_have_link "SecondTitle"
     page.wont_have_link "ThidTitle"
