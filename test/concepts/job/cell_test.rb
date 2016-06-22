@@ -1,6 +1,6 @@
 require "test_helper"
 
-class UserCellTest < MiniTest::Spec
+class JobCellTest < MiniTest::Spec
   include Cell::Testing
   controller UsersController
 
@@ -15,7 +15,7 @@ class UserCellTest < MiniTest::Spec
 
   it do
     html = concept("user/cell/index", users).()
-    html.must_have_css("li", count: 2)
+    html.must_have_css("li", count: 3)
     html.must_have_css("li a", "bla0@blubb.de")
     html.must_have_css("li a", "bla1@blubb.de")
   end
