@@ -37,18 +37,17 @@ class JobApplicationTest < MiniTest::Spec
     op.model.persisted?.must_equal true
 
     jobApp = JobApplication.last
-    jobApp.status = "Hire"
     assert_raises Trailblazer::NotAuthorizedError do
       JobApplication::Update.(
         id: jobApp.id,
-        job_application: jobApp,
+        job_application: {status: "Hire"},
         current_user: user)
     end
-    
-    JobApplication::Update.present({id: jobApp.id, job_application: jobApp, current_user: admin})
-    jobApp.user_id.must_equal user.id
-    jobApp.job_id.must_equal job.id
-    jobApp.status.must_equal "Hire"
+
+    op = JobApplication::Update.({id: jobApp.id, job_application: {status: "Hire"}, current_user: admin}).model
+    op.user_id.must_equal user.id
+    op.job_id.must_equal job.id
+    op.status.must_equal "Hire"
   end
 
   it "delete jobApp after delete user" do
