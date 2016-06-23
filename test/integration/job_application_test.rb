@@ -81,12 +81,12 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     click_button "Apply"
 
     #user doesn't have Applied Job menu
-    page.wont_have_link "Applied Jobs"
+    page.wont_have_link "Job Applications"
     click_link "Sign Out"
 
     #admin can hire/reject job_application
     log_in_as_admin
-    page.must_have_link "Applied Jobs"
+    page.must_have_link "Job Applications"
     click_link "Applied Jobs"
     page.current_path.must_equal applied_job_applications_path
     page.must_have_link "MyTitle"
