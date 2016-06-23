@@ -86,9 +86,15 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
 
     #admin can hire/reject job_application
     log_in_as_admin
+
+    #applied to hired
     page.must_have_link "Job Applications"
-    click_link "Applied Jobs"
-    page.current_path.must_equal applied_job_applications_path
+    click_link "Job Applications"
+    page.must_have_content "Applied"
+    page.must_have_content "Hired"
+    page.must_have_content "Rejected"
+    click_link "Applied"
+    page.current_path.must_equal applications_job_applications_path
     page.must_have_link "MyTitle"
     click_link "MyTitle"
 
@@ -99,9 +105,37 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_button "Update Job application"
     click_button "Update Job application"
 
-    page.current_path.must_equal applied_job_applications_path
+    page.current_path.must_equal applications_job_applications_path
     page.wont_have_link "MyTitle"
     page.must_have_content "Job application updated"
+
+    #hired to rejected
+    click_link "Job Applications"
+    click_link "Hired"
+    page.current_path.must_equal applications_job_applications_path
+    page.must_have_link "MyTitle"
+
+    click_link "Job Applications"
+    click_link "Rejected"
+    page.current_path.must_equal applications_job_applications_path
+    page.wont_have_link "MyTitle"
+
+    click_link "Job Applications"
+    click_link "Hired"
+    click_link "MyTitle"
+    select('Reject', :from => 'job_application_status')
+    click_button "Update Job application"
+
+    page.current_path.must_equal applications_job_applications_path
+    page.must_have_content "Job application updated"
+    click_link "Job Applications"
+    click_link "Hired"
+    page.wont_have_link "MyTitle"
+
+    click_link "Job Applications"
+    click_link "Rejected"
+    click_link "MyTitle"
+
   end
 
 end
