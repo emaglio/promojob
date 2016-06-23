@@ -1,11 +1,11 @@
 class JobApplication < ActiveRecord::Base
-  class Applied < Trailblazer::Operation 
+  class Applications < Trailblazer::Operation 
     
     policy Session::Policy, :admin?
 
 
     def model!(params)
-      JobApplication.where(status: "Apply")
+      JobApplication.where(status: params[:status])
     end
   
   end

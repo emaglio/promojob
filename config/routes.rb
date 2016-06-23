@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get 'overview'
     end
     collection do
-      post 'applied'
+      post 'applications'
     end
   end
 

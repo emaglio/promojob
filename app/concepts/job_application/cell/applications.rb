@@ -1,6 +1,6 @@
 module JobApplication::Cell
 
-  class Applied < Trailblazer::Cell
+  class Applications < Trailblazer::Cell
   private
     def total
       model.size

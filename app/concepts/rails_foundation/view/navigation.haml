@@ -17,7 +17,20 @@
         %li
           = link_to "Create Job", new_job_path 
         %li
-          = link_to "Applied Jobs", applied_job_applications_path
+          %ul.dropdwon-menu{"data-dropdown-menu" => true}
+            %li
+              %a{:href => "#"}
+                Job Applications
+              %ul.menu
+                %li
+                  %a{:href => "#"}
+                    = link_to "Applied", applications_job_applications_path(status: "Apply")
+                %li
+                  %a{:href => "#"}
+                    = link_to "Hired", applications_job_applications_path(status: "Hire")
+                %li
+                  %a{:href => "#"}
+                    = link_to "Rejected", applications_job_applications_path(status: "Reject")
 
       - if tyrant.signed_in?
         %li

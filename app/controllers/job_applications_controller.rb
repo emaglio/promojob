@@ -9,9 +9,9 @@ class JobApplicationsController < ApplicationController
   end
 
   def show
-    present JobApplication::Applied
+    present JobApplication::Applications
 
-    render JobApplication::Cell::Applied
+    render JobApplication::Cell::Applications
   end
 
   def edit
@@ -23,7 +23,7 @@ class JobApplicationsController < ApplicationController
   def update
     run JobApplication::Update do 
       flash[:success] = "Job application updated"
-      return redirect_to "/job_applications/applied"
+      return redirect_to applications_job_applications_path(status: "Apply")
     end
     render JobApplication::Cell::Edit, model: @model
   end
