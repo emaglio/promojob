@@ -7,7 +7,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
 
     page.must_have_css "#user_firstname"
     page.must_have_css "#user_lastname"
-    # page.must_have_selector (".user_gender")
+    page.must_have_selector ("#user_gender")
     page.must_have_css "#user_email"
     page.must_have_css "#user_phone"
     page.must_have_css "#user_password"
@@ -52,7 +52,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     page.current_path.must_equal edit_user_path(user)
     page.must_have_css "#user_firstname"
     page.must_have_css "#user_lastname"
-    # page.must_have_selector('user_gender')
+    page.must_have_selector("#user_gender")
     page.must_have_css "#user_email"
     page.must_have_css "#user_phone"
     page.must_have_css "#user_password"
