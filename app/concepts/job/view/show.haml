@@ -15,9 +15,14 @@
   %h3
   .row
     = salary
+  .row
     = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
 
   - if policy.admin?
+    %h2
+      .row
+      Position to fullfill: 
+      = user_count
     .row
       %h2
       = link_to "Edit", edit_job_path(model), class: 'warning button'

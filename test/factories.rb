@@ -16,6 +16,7 @@ FactoryGirl.define  do
     company "Nick's"
     requirements "Beeing cool"
     description "Showing hasses"
+    user_count "1"
     salary "100 $/hour"
     starts_at "01-02-2016 12:12"
   end
