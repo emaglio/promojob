@@ -44,7 +44,7 @@ class Session::Policy
   #
   # Idea: Thing::Policy::Update.()
   def update?
-    edit?
+    admin? and positions_fulfilled?
   end
 
   def edit?
@@ -55,6 +55,13 @@ class Session::Policy
   
   def delete?
     edit?
+  end
+
+  def positions_fulfilled?
+    hired_apps = JobApplication.where("job_id = ? AND status = ?", @model.job_id, "Hire").size
+    positions = Job.find(@model.job_id).user_count
+    raise hired_apps < positions
+    return hired_apps
   end
 
 end
