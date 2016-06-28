@@ -3,7 +3,7 @@ class JobApplication < ActiveRecord::Base
   class Update < Trailblazer::Operation
     include Model
 
-    policy Session::Policy, :update?
+    policy Session::Policy, :admin? and :positions_fulfilled?
 
     model JobApplication, :find
 

@@ -20,7 +20,11 @@ class ApplicationController < ActionController::Base
       if exception.query == :apply?
         flash[:message] = "You have already applied for this job"
       else
-        flash[:message] = "Not authorized, my friend."
+        if exception.query == :positions_fulfilled?
+          flash[:message] = "All the positions for this job have been fulfilled"
+        else
+          flash[:message] = "Not authorized, my friend."
+        end
       end
     else
       flash[:notice] = "Need to Sign In or create an account!"
