@@ -50,6 +50,7 @@ Trailblazer::Test::Integration.class_eval do
     within("//form[@id='new_job']") do
       fill_in 'Company', with: "MyCompany"
       fill_in 'Salary', with: "0aud"
+      fill_in 'Number of Position to fullfill', with: "1"
       fill_in 'Title',    with: title
       fill_in 'Requirements', with: requirements
       fill_in 'Description', with: description
