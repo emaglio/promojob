@@ -22,10 +22,10 @@
   .row
     %h3
       .row
-      Position to fullfill: 
+      Position to fulfill: 
       = user_count
       .row
-      Position fullfilled: 
+      Position fulfilled: 
       = JobApplication.where("job_id = ? AND status = ?", id, "Hire").size
   .row
     %h2
