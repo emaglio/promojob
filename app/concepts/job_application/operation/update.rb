@@ -18,5 +18,4 @@ class JobApplication < ActiveRecord::Base
     end
 
   end
-
 end

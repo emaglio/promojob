@@ -13,22 +13,31 @@
       = description
 .row  
   %h3
-  .row
-    = salary
-    = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
-
-  - if policy.admin?
     .row
-      %h2
-      = link_to "Edit", edit_job_path(model), class: 'warning button'
-      = link_to "Delete", job_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
-  - else
-    = form_tag "/job_applications" do
-      = hidden_field_tag :user_id, policy.user.id
-      = hidden_field_tag :job_id, id
-      = hidden_field_tag :status, "Apply"     
+      = salary
+    .row
+      = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
+
+- if policy.admin?
+  .row
+    %h3
       .row
-        Message:
-        = text_field_tag :message
+      Position to fulfill: 
+      = user_count
       .row
-        = submit_tag "Apply", class: 'success button' #TODO flash message "You have applied for that job"
+      Position fulfilled: 
+      = JobApplication.where("job_id = ? AND status = ?", id, "Hire").size
+  .row
+    %h2
+    = link_to "Edit", edit_job_path(model), class: 'warning button'
+    = link_to "Delete", job_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
+- else
+  = form_tag "/job_applications" do
+    = hidden_field_tag :user_id, policy.user.id
+    = hidden_field_tag :job_id, id
+    = hidden_field_tag :status, "Apply"     
+    .row
+      Message:
+      = text_field_tag :message
+    .row
+      = submit_tag "Apply", class: 'success button' #TODO flash message "You have applied for that job"
