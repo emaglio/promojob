@@ -11,11 +11,4 @@ class JobApplication < ActiveRecord::Base
     end
   
   end
-
-  def updateJobUserCount(id, status)
-    job = Job.find(id)
-    job.user_count += 1
-    job.save
-  end
-
 end

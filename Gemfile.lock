@@ -1,15 +1,4 @@
 GIT
-  remote: git://github.com/apotonick/tyrant.git
-  revision: f9483ae42dea3d8a420032e07d8b529f90b05f33
-  specs:
-    tyrant (0.0.3)
-      bcrypt
-      disposable (>= 0.1.11)
-      reform (~> 2.0)
-      trailblazer (~> 1.0)
-      warden (= 1.2.6)
-
-GIT
   remote: git://github.com/haml/haml.git
   revision: 7c7c16930b7fefd6dd9869a3af73f8d86c673b77
   ref: 7c7c169
@@ -235,6 +224,12 @@ GEM
     trailblazer-rails (0.2.4)
       trailblazer (>= 1.0.4)
       trailblazer-loader (>= 0.0.7)
+    tyrant (0.0.3)
+      bcrypt
+      disposable (>= 0.1.11)
+      reform (~> 2.0)
+      trailblazer (~> 1.0)
+      warden
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.15)
@@ -275,7 +270,7 @@ DEPENDENCIES
   trailblazer
   trailblazer-cells
   trailblazer-rails
-  tyrant!
+  tyrant (= 0.0.3)
   uglifier (>= 1.3.0)
 
 BUNDLED WITH
