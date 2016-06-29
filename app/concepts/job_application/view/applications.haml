@@ -1,13 +1,7 @@
 %main{:role => "main"} 
 .row
   %h4
-    - if current_page?(:action=>"show", :controller=>"job_applications", :status=>"Apply")
-      Applied Jobs
-    - else
-      - if current_page?(:action=>"show", :controller=>"job_applications", :status=>"Hire")
-        Hired Jobs
-      -else
-        Rejected Jobs
+    = header
 
 .row
   You've got #{total} jobs.

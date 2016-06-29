@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
   
-  def render(cell_constant, operation: @operation, model: @operation.model)
+  def render(cell_constant, operation: @operation, model: @operation.model, options: {})
     # return super(html:  cell(cell_constant, model), layout: true) # use this to render the page cell with ActionView's layout.
     super(html: cell(cell_constant, model,
-      layout: RailsFoundation::Cell::Layout,
-      context: { tyrant: tyrant, policy: operation.policy, flash: flash }))
+      { layout: RailsFoundation::Cell::Layout,
+        context: { tyrant: tyrant, policy: operation.policy, flash: flash }
+      }.merge( options))
+    )
   end
 
   def tyrant

@@ -11,7 +11,7 @@ class JobApplicationsController < ApplicationController
   def show
     present JobApplication::Applications
 
-    render JobApplication::Cell::Applications
+    render JobApplication::Cell::Applications, options: {status: @operation.status}
   end
 
   def edit
