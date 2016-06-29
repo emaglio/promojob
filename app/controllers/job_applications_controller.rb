@@ -31,7 +31,7 @@ class JobApplicationsController < ApplicationController
   def destroy
     run JobApplication::Delete
     flash[:alert] = "Job application deleted"    
-    redirect_to "/job_applications/applied"
+    redirect_to applications_job_applications_path(status: "Apply")
   end
 
   def overview

@@ -1,5 +1,5 @@
 class Session::Policy
-  # include Gemgem::Policy
+
   def initialize(user, model)
     @user = user
     @model = model
@@ -55,12 +55,6 @@ class Session::Policy
   
   def delete?
     edit?
-  end
-
-  def positions_fulfilled?
-    hired_apps = JobApplication.where("job_id = ? AND status = ?", @model.job_id, "Hire").size
-    positions = Job.find(@model.job_id).user_count.to_i
-    return hired_apps < positions
   end
 
 end
