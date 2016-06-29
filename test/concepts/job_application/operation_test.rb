@@ -82,4 +82,28 @@ class JobApplicationTest < MiniTest::Spec
     jobApps = JobApplication.where("job_id = ?", job.id)
     jobApps.size.must_equal 0
   end
+
+  # it "all position fulfilled" do
+  #   #2 users applied for the same job that has 1 position to fulfill
+  #   op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
+  #   op.model.persisted?.must_equal true
+  #   op = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Apply", current_user: user})
+  #   op.model.persisted?.must_equal true
+  #   job.user_count.must_equal 1
+
+  #   job_app1 = JobApplication.first
+  #   job_app2 = JobApplication.last
+
+  #   JobApplication::Update.(id: job_app1.id, job_application: {status: "Hire"}, current_user: admin)
+  #   positions_fulfilled = JobApplication.where("job_id = ? AND status = ?", job.id,"Hire").size
+  #   positions_fulfilled.must_equal 1
+
+  #   assert_raises Trailblazer::NotAuthorizedError do
+  #     JobApplication::Update.(
+  #       id: job_app2.id,
+  #       job_application: {status: "Hire"},
+  #       current_user: admin)
+  #   end
+  # end
+
 end

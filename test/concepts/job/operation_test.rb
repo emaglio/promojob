@@ -15,6 +15,7 @@ class JobOperationTest < MiniTest::Spec
 	  op.model.requirements.must_equal "Beeing cool"
 	  op.model.description.must_equal "Showing hasses"
 	  op.model.salary.must_equal "100 $/hour"
+    op.model.user_count.must_equal 1
 	  op.model.starts_at.must_equal DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00") #needed different king of test
 	end
 

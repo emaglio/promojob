@@ -138,4 +138,53 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
 
   end
 
+  it "all positions fulfilled" do
+    #create a job
+    log_in_as_admin
+    create_job("MyTitle","MyDescription")
+    click_link "Sign Out"
+
+    #log in and apply
+    log_in_as_user
+    visit "jobs"
+    page.must_have_link "MyTitle"
+    click_link "MyTitle"
+    page.must_have_button "Apply"
+    click_button "Apply"
+    page.current_path.must_equal "/jobs"
+
+    job_app = JobApplication.last
+
+    #log in as differnt user and apply
+    log_in_as_user("my2@email.com", "00")
+    visit "jobs"
+    page.must_have_link "MyTitle"
+    click_link "MyTitle"
+    page.must_have_button "Apply"
+    click_button "Apply"
+    page.current_path.must_equal "/jobs"
+
+    #trying to hire both users
+    #successfully hired
+    log_in_as_admin
+    click_link "Job Applications"
+    click_link "Applied"
+    find("a[href='/job_applications/#{job_app.id}/edit']").click
+    # click_link "MyTitle"
+    select('Hire', :from => 'job_application_status')
+    click_button "Update Job application"
+    page.must_have_content "Job application updated"
+    page.current_path.must_equal applications_job_applications_path
+
+    #error
+    click_link "Job Applications"
+    click_link "Applied"
+    click_link "MyTitle"
+    select('Hire', :from => 'job_application_status')
+    click_button "Update Job application"
+    page.must_have_content "All the positions for this job have been fulfilled"
+    page.current_path.must_equal root_path
+        
+  end
+
 end

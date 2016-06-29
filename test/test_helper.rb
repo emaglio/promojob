@@ -75,8 +75,8 @@ Trailblazer::Test::Integration.class_eval do
     submit!("info@cj-agency.de", "Test1")
   end
 
-  def log_in_as_user
-    op = User::Create.(user: FactoryGirl.attributes_for(:user))
+  def log_in_as_user(email = "my@email.com", phone = "0410123456")
+    op = User::Create.(user: FactoryGirl.attributes_for(:user, email: email, phone: phone))
 
     visit "sessions/new"
     submit!(op.model.email, "Test1")
