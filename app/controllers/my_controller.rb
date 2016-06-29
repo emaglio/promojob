@@ -6,6 +6,7 @@ class MyController < ApplicationController
   end
 
   def calendar
+    present My::Calendar
     render My::Cell::Calendar, model: nil
   end
 
