@@ -24,16 +24,8 @@
     = f.submit nil, class: 'warning button'
 
 :javascript
-  var today = new Date();
-  var tomorrow = new Date();
-  var dd = today.getDate()+1;
-  var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear();
-  tomorrow = dd+'-'+mm+'-'+yyyy+' 09:00';
-  
   $(function(){
     $('#date').fdatepicker({
-      initialDate: tomorrow,
       format: 'dd-mm-yyyy hh:ii',
       disableDblClickSelection: true,
       pickTime: true
