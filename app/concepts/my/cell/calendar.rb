@@ -27,8 +27,8 @@ module  My::Cell
     end
 
     class Day < Trailblazer::Cell
-      def show 
-        "#{model.strftime("%A, %d.%m.%Y")}\n" 
+      def day 
+        model
       end 
     end
   end

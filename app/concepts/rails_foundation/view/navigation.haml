@@ -30,11 +30,11 @@
 
       - if tyrant.signed_in?
         %li
-          = link_to "Hi, #{tyrant.current_user.firstname}", user_path(tyrant.current_user)
-        %li
           = link_to "My Jobs", my_jobs_path unless policy.admin?
         %li
           = link_to "My Calendar", my_calendar_path(offset: 0)
+        %li
+          = link_to "Hi, #{tyrant.current_user.firstname}", user_path(tyrant.current_user)
         %li
           = link_to "Sign Out", sign_out_sessions_path
       - else

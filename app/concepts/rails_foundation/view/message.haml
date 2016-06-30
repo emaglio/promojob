@@ -1,4 +1,4 @@
-.small-5.small-centered.columns
+.small-5.small-centered.columns.text-center
   - context[:flash].each do |name, msg|
     - if msg.is_a?(String)
       %div{:class => "alert-box round #{name.to_s == 'notice' ? 'success' : 'alert'}", "data-alert" => ""}
