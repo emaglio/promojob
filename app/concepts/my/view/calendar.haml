@@ -1,2 +1,20 @@
-/main structure of the calendar
-/thinking showning a month
+%main{:role => "main"} 
+.row
+  %h4
+    Your Calendar
+
+.small-1.columns
+  = link_to "Previous Week", my_calendar_path(offset: -1), class: 'success button'
+
+.large-10.columns
+  .row
+    = cell("my/cell/week", nil, week: 0 + offset)
+  .row
+    = cell("my/cell/week", nil, week: 1 + offset)
+  .row
+    = cell("my/cell/week", nil, week: 2 + offset)
+  .row
+    = cell("my/cell/week", nil, week: 3 + offset)
+
+.small-1.columns
+  = link_to "Next Week", my_calendar_path(offset: 1), class: 'success button'

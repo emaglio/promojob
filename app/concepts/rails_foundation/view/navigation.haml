@@ -34,7 +34,7 @@
         %li
           = link_to "My Jobs", my_jobs_path unless policy.admin?
         %li
-          = link_to "My Calendar", my_calendar_path
+          = link_to "My Calendar", my_calendar_path(offset: 0)
         %li
           = link_to "Sign Out", sign_out_sessions_path
       - else
