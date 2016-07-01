@@ -8,6 +8,8 @@
 
 .large-10.columns
   .small-block-grid-7
+    = cell("my/cell/week_day", collection: week_days)
+  .small-block-grid-7
     = cell("my/cell/week", nil, week: 0 + offset)
   .small-block-grid-7
     = cell("my/cell/week", nil, week: 1 + offset)
