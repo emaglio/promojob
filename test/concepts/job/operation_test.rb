@@ -3,8 +3,10 @@ require 'test_helper'
 class JobOperationTest < MiniTest::Spec
   let (:user) {User::Create.(user: attributes_for(:user)).model}
   let (:job) {Job::Create.(job: attributes_for(:job), current_user: admin).model}
-  let (:job2) {Job::Create.(job: attributes_for(:job, title: "Web Dev", description: "NewDecr"), current_user: admin).model}
-  let (:job3) {Job::Create.(job: attributes_for(:job, title: "Cleaner", description: "NewDecr"), current_user: admin).model}
+  let (:job2) {Job::Create.(job: attributes_for(:job, title: "Web Dev", description: "NewDecr", 
+                            starts_at: "03-02-2016 10:00"), current_user: admin).model}
+  let (:job3) {Job::Create.(job: attributes_for(:job, title: "Cleaner", description: "NewDecr", 
+                            starts_at: "08-02-2016 11:00"), current_user: admin).model}
   let (:admin) {admin_for}
 
 	it "validates correct input" do
@@ -16,7 +18,7 @@ class JobOperationTest < MiniTest::Spec
 	  op.model.description.must_equal "Showing hasses"
 	  op.model.salary.must_equal "100 $/hour"
     op.model.user_count.must_equal 1
-	  op.model.starts_at.must_equal DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00") #needed different king of test
+	  op.model.starts_at.must_equal DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00")
 	end
 
 	it "fails" do
@@ -50,6 +52,21 @@ class JobOperationTest < MiniTest::Spec
 
     op = Job::Delete.(id: job.id, current_user: admin)
     op.model.persisted?.must_equal false 
+    
+  end
+
+  it "searching in base on the starts_at" do 
+    job.starts_at.must_equal DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00") 
+    job2.starts_at.must_equal DateTime.parse("Mon, 03 Feb 2016 10:00:00 UTC +00:00")
+    job3.starts_at.must_equal DateTime.parse("Mon, 08 Feb 2016 11:00:00 UTC +00:00")
+
+    job = Job.where("starts_at BETWEEN ? AND ?", DateTime.parse("15-01-2016"), DateTime.parse("08-02-2016"))
+
+    # job.size.must_equal 3
+
+    
+
+
     
   end
 end

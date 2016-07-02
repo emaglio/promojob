@@ -9,12 +9,16 @@
 .large-10.columns
   .small-block-grid-7
     = cell("my/cell/week", nil, week: 0 + offset)
+    = cell("my/cell/jobs", nil, week: 1 + offset)
   .small-block-grid-7
     = cell("my/cell/week", nil, week: 1 + offset)
+    = cell("my/cell/jobs", nil, week: 1 + offset)
   .small-block-grid-7
     = cell("my/cell/week", nil, week: 2 + offset)
+    = cell("my/cell/jobs", nil, week: 2 + offset)
   .small-block-grid-7
     = cell("my/cell/week", nil, week: 3 + offset)
+    = cell("my/cell/jobs", nil, week: 3 + offset)
 
 .small-1.columns
   = link_to "Next Week", my_calendar_path(offset: offset+1), class: 'success button'
