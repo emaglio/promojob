@@ -17,6 +17,10 @@ module  My::Cell
       ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     end
 
+    def month #CHANGE THIS
+       DateTime.now.strftime("%B")
+    end
+
     def offset
       options[:offset]
     end
@@ -65,7 +69,9 @@ module  My::Cell
       week[0] = week.last.change(:hour => 0, :min => 0)
       week[6] = week.last.change(:hour => 23, :min => 59)
 
-      job_apps = ::Job.where("starts_at BETWEEN ? AND ?", week.first, week.last)
+      # job_apps = ::Job.where("starts_at BETWEEN ? AND ?", week.first, week.last)
+
+      job_apps = ::Job.all
 
       cell(Job, collection: job_apps)
     end
@@ -73,7 +79,7 @@ module  My::Cell
     class Job < Trailblazer::Cell 
       include Tyrant
       def job
-        raise model.inspect
+        model.title
       end
     end
   end
