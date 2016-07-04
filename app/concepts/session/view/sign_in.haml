@@ -1,11 +1,15 @@
-%h1
-  .row
-  Sign In
+.row
+  %h1
+.row
+  .medium-6.medium-centered.large-4.large-centered.columns
 
-= simple_form_for model, url: "/sessions", as: :session do |f|
-  .row
-    = f.input :email, placeholder: "Email", label: false
-  .row
-    = f.input :password, placeholder: "Password", label: false
-  .row
-    = f.button :submit, "Sign In", class: :expand
+    = simple_form_for model, url: "/sessions", as: :session do |f|
+      .row.column.log-in-form
+        %h3.text-center
+          Sign In with you email account
+        .row
+          = f.input :email, placeholder: "Email", label: false
+        .row
+          = f.input :password, placeholder: "Password", label: false
+        .row
+          = f.button :submit, "Sign In", class: :expand

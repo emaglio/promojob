@@ -12,6 +12,20 @@ module  My::Cell
     def offset
       options[:offset]
     end
+    
+    def week_days
+      ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    end
+
+    def offset
+      options[:offset]
+    end
+  end
+
+  class WeekDay <Trailblazer::Cell
+    def day
+      model
+    end
   end
 
   class Week < Trailblazer::Cell
@@ -21,9 +35,12 @@ module  My::Cell
       monday = today - today.cwday + options[:week]*7
       week = [monday+1]
       6.times do |i| 
-        week << week.last + 1 
-      end 
-      
+        week << (week.last + 1)
+      end
+
+      week[0] = week.last.change(:hour => 0, :min => 0)
+      week[6] = week.last.change(:hour => 23, :min => 59)
+
       cell(Day, collection: week)
     end
 
@@ -32,7 +49,6 @@ module  My::Cell
       def day
         model
       end
-
     end
   end
   
@@ -45,8 +61,11 @@ module  My::Cell
       6.times do |i| 
         week << week.last + 1 
       end
-      
-      job_apps = ::Job.where("starts_at BETWEEN ? AND ?", model, model)
+
+      week[0] = week.last.change(:hour => 0, :min => 0)
+      week[6] = week.last.change(:hour => 23, :min => 59)
+
+      job_apps = ::Job.where("starts_at BETWEEN ? AND ?", week.first, week.last)
 
       cell(Job, collection: job_apps)
     end
