@@ -13,6 +13,7 @@ module Session
 
       validates :email, :password, presence: true
       validate :password_ok?
+      validate :block?
 
     private
       def password_ok?
@@ -27,7 +28,14 @@ module Session
           # DISCUSS: move validation of PW to Op#process?
           errors.add(:password, "Wrong password.") unless Tyrant::Authenticatable.new(@user).digest?(password)#
         end
+      end
 
+      def block?
+        return if email.blank? or password.blank?
+
+        @user = User.find_by(email: email)
+
+        errors.add(:email, "You have been blocked") if @user.block == true
       end
     end
 

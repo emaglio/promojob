@@ -51,4 +51,16 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def block
+		run User::Block do |op|
+			if op.model.block
+				label = "blocked"
+			else
+				label = "unblocked"
+			end
+			flash[:alert] = "#{op.model.firstname} has been #{label}"
+			redirect_to users_path
+		end
+	end
+
 end

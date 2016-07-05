@@ -17,5 +17,6 @@
     = f.input :password, placeholder: "Password", label: false
   .row
     = f.input :confirm_password, placeholder: "Confirm Password", label: false
+    / = f.hidden_field :block, false
   .row
     = f.submit nil, class: 'success button'

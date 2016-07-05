@@ -21,5 +21,11 @@ Rails.application.routes.draw do
 
   get 'my/jobs', controller: :my, action: :jobs, as: "my_jobs"
   post "jobs/search", controller: :jobs, action: :search
+  post 'users/block', controller: :users, action: :block
 
+  resources :users do
+    member do
+      post 'block'
+    end
+  end
 end

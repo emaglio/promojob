@@ -4,5 +4,6 @@ module User::Cell
     property :lastname
     property :email
     property :phone
+    property :block
   end
 end

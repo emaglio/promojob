@@ -57,4 +57,8 @@ class Session::Policy
     edit?
   end
 
+  def log_in?
+    @user.block != true
+  end
+
 end
