@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class UserOperationTest < MiniTest::Spec
-
+  
+  let(:admin) {admin_for}
+  
   it "validates correct input" do
     op = User::Create.(user: attributes_for(:user))
     op.model.persisted?.must_equal true
@@ -121,6 +123,28 @@ class UserOperationTest < MiniTest::Spec
         password: "Test1", confirm_password: "Test1"}, current_user: user).model
     user_edited.persisted?.must_equal true
     user_edited.email.must_equal "edited@mail.com"
+  end
+
+  it "only admin block user" do
+    user = User::Create.(user: attributes_for(:user)).model
+    user.persisted?.must_equal true
+    user.email.must_equal "my@email.com"
+
+    assert_raises Trailblazer::NotAuthorizedError do
+      User::Block.(
+        id: user.id,
+        block: true,
+        current_user: user)
+    end
+
+    user_blocked = User::Block.(id: user.id, block: true, current_user: admin).model
+    user_blocked.persisted?.must_equal true
+    user_blocked.block.must_equal true
+
+    user_un_blocked = User::Block.(id: user.id, block: false, current_user: admin).model
+    user_un_blocked.persisted?.must_equal true
+    user_un_blocked.block.must_equal false
+    
   end
 
 end

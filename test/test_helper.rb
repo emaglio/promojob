@@ -76,10 +76,13 @@ Trailblazer::Test::Integration.class_eval do
   end
 
   def log_in_as_user(email = "my@email.com", phone = "0410123456")
-    op = User::Create.(user: FactoryGirl.attributes_for(:user, email: email, phone: phone))
+    user = User.find_by(email: email) 
+    unless user
+      user = User::Create.(user: FactoryGirl.attributes_for(:user, email: email, phone: phone)).model
+    end
 
     visit "sessions/new"
-    submit!(op.model.email, "Test1")
+    submit!(user.email, "Test1")
   end
 
   def create_job(title, description)

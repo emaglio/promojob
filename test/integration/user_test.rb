@@ -89,4 +89,37 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "User not found"
   end
 
+  it "only admin block user" do
+    log_in_as_user
+    click_link "Hi, Ema"
+    page.wont_have_link "Block"
+    click_link "Sign Out"
+
+    log_in_as_admin
+    click_link "Users"
+    page.must_have_link "my@email.com"
+    click_link "my@email.com"
+    page.must_have_button "Block"
+    click_button "Block"
+    page.must_have_content "Ema has been blocked"
+    page.current_path.must_equal users_path
+    click_link "Sign Out"
+
+    log_in_as_user
+    page.must_have_content "You have been blocked"
+
+    log_in_as_admin
+    click_link "Users"
+    page.must_have_link "my@email.com"
+    click_link "my@email.com"
+    page.must_have_button "Un-Block"
+    click_button "Un-Block"
+    page.must_have_content "Ema has been unblocked"
+    page.current_path.must_equal users_path
+    click_link "Sign Out"
+    
+    log_in_as_user
+    page.must_have_content "Welcome Ema!"
+  end
+
 end

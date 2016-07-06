@@ -34,8 +34,9 @@ module Session
         return if email.blank? or password.blank?
 
         @user = User.find_by(email: email)
-
-        errors.add(:email, "You have been blocked") if @user.block == true
+        if @user
+          errors.add(:email, "You have been blocked") if @user.block == true
+        end
       end
     end
 

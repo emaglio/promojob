@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
         property :gender
         property :phone
         property :age
+        property :block
         # property :password
         validates :firstname, :lastname, :gender, :phone, :age,  presence: true
         validates :phone, :email, unique: true
