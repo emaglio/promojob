@@ -36,7 +36,7 @@ Trailblazer::Test::Integration.class_eval do
     within("//form[@id='new_user']") do
       fill_in 'Firstname', with: "MyName"
       fill_in 'Lastname', with: "MyLastname"
-      # select 'Gender', with: "Male" TODO: fix this
+      select('Male', :from => 'user_gender')
       fill_in 'Age', with: "30" 
       fill_in 'Phone', with: "0192012"
       fill_in 'Email',    with: email
@@ -51,10 +51,12 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Company', with: "MyCompany"
       fill_in 'Salary', with: "0aud"
       fill_in 'Number of Position to fulfill', with: "1"
+      fill_in 'Job duration', with: '1'
       fill_in 'Title',    with: title
       fill_in 'Requirements', with: requirements
       fill_in 'Description', with: description
     end
+    page.execute_script("$('#date').val('12/12/2016')")
     click_button "Create Job"
   end
 
