@@ -7,6 +7,22 @@ module  My::Cell
       context[:tyrant]
     end
   end
+
+  module MyWeek
+    def my_week
+      today = DateTime.now
+      monday = today - today.cwday + options[:week]*7
+      monday = monday.change(:hour => 0, :min => 0)
+      week = [monday+1]
+      6.times do |i| 
+        week << (week.last + 1) 
+      end
+
+      week[6] = week.last.change(:hour => 23, :min => 59)
+
+      return week
+    end
+  end
   
   class Calendar < Trailblazer::Cell
     def offset
@@ -17,8 +33,18 @@ module  My::Cell
       ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     end
 
-    def month #CHANGE THIS
-       DateTime.now.strftime("%B")
+    def month #showing month of the first week + last week
+      today = DateTime.now
+      monday = today - today.cwday+1
+      first_day = monday + offset*7
+      last_day = monday + offset*7 + 28 - 1
+      first_month = first_day.strftime("%B")
+      last_month = last_day.strftime("%B")
+      if first_month != last_month
+        return first_month + " - " + last_month
+      else
+        return first_month
+      end
     end
 
     def offset
@@ -33,19 +59,9 @@ module  My::Cell
   end
 
   class Week < Trailblazer::Cell
-
+    include MyWeek
     def show
-      today = DateTime.now
-      monday = today - today.cwday + options[:week]*7
-      week = [monday+1]
-      6.times do |i| 
-        week << (week.last + 1)
-      end
-
-      week[0] = week.last.change(:hour => 0, :min => 0)
-      week[6] = week.last.change(:hour => 23, :min => 59)
-
-      cell(Day, collection: week)
+      cell(Day, collection: my_week)
     end
 
     class Day < Trailblazer::Cell
@@ -57,21 +73,12 @@ module  My::Cell
   end
   
   class Jobs < Trailblazer::Cell
+    include MyWeek
 
     def show
-      today = DateTime.now
-      monday = today - today.cwday + options[:week]*7
-      week = [monday+1]
-      6.times do |i| 
-        week << week.last + 1 
-      end
+      job_apps = ::Job.where("starts_at BETWEEN ? AND ?", my_week.first, my_week.last)
 
-      week[0] = week.last.change(:hour => 0, :min => 0)
-      week[6] = week.last.change(:hour => 23, :min => 59)
-
-      # job_apps = ::Job.where("starts_at BETWEEN ? AND ?", week.first, week.last)
-
-      job_apps = ::Job.all
+      # job_apps = ::Job.all
 
       cell(Job, collection: job_apps)
     end
