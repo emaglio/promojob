@@ -78,15 +78,13 @@ module  My::Cell
     def show
       job_apps = ::Job.where("starts_at BETWEEN ? AND ?", my_week.first, my_week.last)
 
-      # job_apps = ::Job.all
-
       cell(Job, collection: job_apps)
     end
 
     class Job < Trailblazer::Cell 
       include Tyrant
       def job
-        model.title
+        model
       end
     end
   end
