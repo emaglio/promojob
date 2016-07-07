@@ -5,27 +5,13 @@
 
 .day{
   border: 2px solid #cacaca;
+  border-color: gray;
   padding: 1rem;
   border-radius: 6px; 
 }
 
-.hire{
-  border: 2px solid #cacaca;
+.job{
+  border: 1px solid #cacaca;
   padding: 1rem;
   border-radius: 6px; 
-  background-color: green;
-}
-
-.apply{
-  border: 2px solid #cacaca;
-  padding: 1rem;
-  border-radius: 6px; 
-  background-color: yellow;
-}
-
-.reject{
-  border: 2px solid #cacaca;
-  padding: 1rem;
-  border-radius: 6px; 
-  background-color: red;
 }

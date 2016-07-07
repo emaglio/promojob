@@ -30,7 +30,7 @@ module  My::Cell
 
     def for_user(jobs)
       jobs.collect do |j|
-        applications = ::JobApplication.find_by("user_id = ? AND job_id =?", tyrant.current_user.id, j.id)
+        applications = ::JobApplication.where("user_id = ? AND job_id =?", tyrant.current_user.id, j.id).first
         job_statuses = JobStatus.new(j, "#{applications.status}")
       end
     end
@@ -44,14 +44,8 @@ module  My::Cell
       last = monday
       (monday..sunday).each do |day| 
         jobs = ::Job.where("DATE(starts_at) <= ? AND DATE(ends_at) >= ?", day.strftime("%F"), day.strftime("%F"))
-        
-        if policy.admin?
-          job_statuses = for_admin(jobs)
-        else
-          job_statuses = for_user(jobs)
-        end
 
-        week << Day.new(last, job_statuses) 
+        week << Day.new(last, policy.admin? ? for_admin(jobs) : for_user(jobs) ) 
         last += 1
       end
 

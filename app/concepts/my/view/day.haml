@@ -4,5 +4,8 @@
       = day
     .row
       - job_statuses.each do |job|
-        .row
-          = link_to job.job.title, edit_job_path(job.job.id), class: job.string
+        .row.job.text-center
+          = link_to job.job.title, job_path(job.job.id)
+          %i.fa.fa-times
+          %i.fa.fa-check-circle-o
+          %i.fa.fa-clock-o
