@@ -8,17 +8,52 @@ module  My::Cell
     end
   end
 
-  module MyWeek
-    def my_week
-      today = DateTime.now
-      monday = today - today.cwday + options[:week]*7
-      monday = monday.change(:hour => 0, :min => 0)
-      week = [monday+1]
-      6.times do |i| 
-        week << (week.last + 1) 
-      end
+  module Policy
+    def policy
+      context[:policy]
+    end
+  end
 
-      week[6] = week.last.change(:hour => 23, :min => 59)
+  module MyWeek
+    include Tyrant
+    include Policy
+
+    Day = Struct.new(:date, :job_statuses)
+    JobStatus = Struct.new(:job, :string)
+
+    def for_admin(jobs)
+      jobs.collect do |j|
+        applications = j.job_applications # job
+        job_statuses = JobStatus.new(j, "#{applications.size} / #{j.user_count}")
+      end
+    end
+
+    def for_user(jobs)
+      jobs.collect do |j|
+        applications = ::JobApplication.find_by("user_id = ? AND job_id =?", tyrant.current_user.id, j.id)
+        job_statuses = JobStatus.new(j, "#{applications.status}")
+      end
+    end
+
+    def my_week
+      today = options[:starts_at]
+      monday = today - today.cwday + options[:week]*7
+      monday = monday.change(:hour => 0, :min => 0)+1
+      sunday = monday + 6
+      week = []
+      last = monday
+      (monday..sunday).each do |day| 
+        jobs = ::Job.where("DATE(starts_at) <= ? AND DATE(ends_at) >= ?", day.strftime("%F"), day.strftime("%F"))
+        
+        if policy.admin?
+          job_statuses = for_admin(jobs)
+        else
+          job_statuses = for_user(jobs)
+        end
+
+        week << Day.new(last, job_statuses) 
+        last += 1
+      end
 
       return week
     end
@@ -34,7 +69,7 @@ module  My::Cell
     end
 
     def month #showing month of the first week + last week
-      today = DateTime.now
+      today = options[:starts_at]
       monday = today - today.cwday+1
       first_day = monday + offset*7
       last_day = monday + offset*7 + 28 - 1
@@ -67,25 +102,15 @@ module  My::Cell
     class Day < Trailblazer::Cell
       
       def day
-        model
+        model.date.strftime("%d")
       end
-    end
-  end
-  
-  class Jobs < Trailblazer::Cell
-    include MyWeek
 
-    def show
-      job_apps = ::Job.where("starts_at BETWEEN ? AND ?", my_week.first, my_week.last)
-
-      cell(Job, collection: job_apps)
-    end
-
-    class Job < Trailblazer::Cell 
-      include Tyrant
-      def job
-        model
+      def job_statuses
+        model.job_statuses.collect do |job|
+          job
+        end
       end
+
     end
   end
 end

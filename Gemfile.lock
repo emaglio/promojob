@@ -124,6 +124,8 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
+    minitest-bang (1.0.4)
+      minitest (>= 4.7.5)
     minitest-capybara (0.8.2)
       capybara (~> 2.2)
       minitest (~> 5.0)
@@ -256,6 +258,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   memory_test_fix
+  minitest-bang
   minitest-line
   minitest-rails-capybara
   quiet_assets

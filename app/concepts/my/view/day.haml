@@ -1,3 +1,8 @@
 %li
   .day.text-center
-    = day.strftime("%d")
+    .row
+      = day
+    .row
+      - job_statuses.each do |job|
+        .row
+          = link_to job.job.title, edit_job_path(job.job.id), class: job.string

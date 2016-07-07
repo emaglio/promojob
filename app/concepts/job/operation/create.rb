@@ -14,11 +14,10 @@ class Job < ActiveRecord::Base
 	    	property :salary
 	    	property :starts_at
 	    	property :user_count
-	    	property :duration
+	    	property :ends_at
 
 	    	validates :title, :requirements, :description , presence: true
 	    	validates :user_count, numericality: { only_integer: true, greater_than: 0}
-	    	validates :duration, numericality: { only_integer: true, greater_than: 0}
 	    end
 
 	    def process(params)

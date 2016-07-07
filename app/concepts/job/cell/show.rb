@@ -10,6 +10,7 @@ module Job::Cell
     property :user_count
     property :salary
     property :starts_at
+    property :ends_at
   end
 
 end

@@ -24,6 +24,7 @@ group :test do
   gem "sqlite3"
   gem "minitest-rails-capybara"
   gem "minitest-line"
+  gem "minitest-bang"
 end
 
 gem "trailblazer-rails"

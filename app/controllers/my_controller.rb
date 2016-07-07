@@ -7,7 +7,7 @@ class MyController < ApplicationController
 
   def calendar
     present My::Calendar
-    render My::Cell::Calendar, model: nil, options: {offset: @operation.offset}
+    render My::Cell::Calendar, model: nil, options: {offset: @operation.offset, starts_at: DateTime.now}
   end
 
 end
