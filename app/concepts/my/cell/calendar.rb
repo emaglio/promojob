@@ -30,8 +30,8 @@ module  My::Cell
 
     def for_user(jobs)
       jobs.collect do |j|
-        application = ::JobApplication.where("user_id = ? AND job_id =?", tyrant.current_user.id, j.id)
-        job_statuses = JobStatus.new(j, "#{application.status}")
+        application = ::JobApplication.where("user_id = ? AND job_id =?", tyrant.current_user.id, j.id).first
+        job_statuses = JobStatus.new(j, "#{application.status}") unless application
       end
     end
 
@@ -100,6 +100,7 @@ module  My::Cell
       end
 
       def job_statuses
+        raise model.inspect
         model.job_statuses.collect do |job|
           job
         end
