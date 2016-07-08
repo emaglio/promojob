@@ -15,3 +15,11 @@
   padding: 1rem;
   border-radius: 6px; 
 }
+
+.fa-times{
+  color: red;
+}
+
+.fa-check-circle-o{
+  color: green;
+}
