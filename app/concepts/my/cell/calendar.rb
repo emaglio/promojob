@@ -30,8 +30,8 @@ module  My::Cell
 
     def for_user(jobs)
       jobs.collect do |j|
-        applications = ::JobApplication.where("user_id = ? AND job_id =?", tyrant.current_user.id, j.id).first
-        job_statuses = JobStatus.new(j, "#{applications.status}")
+        application = ::JobApplication.where("user_id = ? AND job_id =?", tyrant.current_user.id, j.id)
+        job_statuses = JobStatus.new(j, "#{application.status}")
       end
     end
 
@@ -103,6 +103,16 @@ module  My::Cell
         model.job_statuses.collect do |job|
           job
         end
+      end
+
+      def decoration(job)
+        statuses = {
+        "Apply" => ".fa.fa-clock-o",
+        "Hire" => ".fa.fa-check-circle-o",
+        "Reject" => ".fa.fa-times"
+        }
+
+        statuses[job.string]
       end
 
     end

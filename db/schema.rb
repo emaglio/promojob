@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20160707012433) do
     t.text     "auth_meta_data"
     t.integer  "age"
     t.text     "image_meta_data"
-    t.boolean  "block"
   end
 
 end

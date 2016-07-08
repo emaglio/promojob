@@ -6,6 +6,7 @@
       - job_statuses.each do |job|
         .row.job.text-center
           = link_to job.job.title, job_path(job.job.id)
-          %i.fa.fa-times
-          %i.fa.fa-check-circle-o
-          %i.fa.fa-clock-o
+          - if policy.admin? 
+            = job.string
+          - else
+            %i{:class => decoration(job)}
