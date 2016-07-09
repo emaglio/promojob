@@ -19,7 +19,7 @@ module  My::Cell
     include Policy
 
     Day = Struct.new(:date, :job_statuses)
-    JobStatus = Struct.new(:job, :string)
+    JobStatus = Struct.new(:job, :application)
 
     def for_admin(jobs)
       jobs.collect do |j|
@@ -30,8 +30,8 @@ module  My::Cell
 
     def for_user(jobs)
       jobs.collect do |j|
-        application = ::JobApplication.where("user_id = ? AND job_id =?", tyrant.current_user.id, j.id)
-        job_statuses = JobStatus.new(j, "#{application.status}")
+        application = ::JobApplication.where("user_id = ? AND job_id =?", tyrant.current_user.id, j.id).first
+        job_statuses = JobStatus.new(j, application)
       end
     end
 
@@ -99,6 +99,11 @@ module  My::Cell
         model.date.strftime("%d")
       end
 
+      def today
+        now = DateTime.now
+        model.date.strftime("%F") == now.strftime("%F") ? "today" : "day"
+      end
+
       def job_statuses
         model.job_statuses.collect do |job|
           job
@@ -107,12 +112,11 @@ module  My::Cell
 
       def decoration(job)
         statuses = {
-        "Apply" => ".fa.fa-clock-o",
-        "Hire" => ".fa.fa-check-circle-o",
-        "Reject" => ".fa.fa-times"
+        "Apply" => "fa fa-clock-o",
+        "Hire" => "fa fa-check-circle-o",
+        "Reject" => "fa fa-times"
         }
-
-        statuses[job.string]
+        statuses[job.application.status]
       end
 
     end

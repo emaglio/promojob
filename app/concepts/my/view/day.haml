@@ -1,12 +1,13 @@
 %li
-  .day.text-center
-    .row
+  .div{:class => today}
+    .row.text-center
       = day
     .row
       - job_statuses.each do |job|
         .row.job.text-center
-          = link_to job.job.title, job_path(job.job.id)
           - if policy.admin? 
+            = link_to job.job.title, job_path(job.job.id)
             = job.string
           - else
+            = link_to job.job.title, overview_job_application_path(job.application.id)
             %i{:class => decoration(job)}
