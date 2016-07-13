@@ -16,7 +16,6 @@
 
     var Datepicker = function(element, options) {
         var that = this;
-
         this.element = $(element);
         this.autoShow = (options.autoShow == undefined ? true : options.autoShow);
         this.appendTo = options.appendTo || 'body';

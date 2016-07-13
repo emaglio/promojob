@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
   
-  def render(cell_constant, operation: @operation, model: @operation.model)
+  def render(cell_constant, operation: @operation, model: @operation.model, options: {})
     # return super(html:  cell(cell_constant, model), layout: true) # use this to render the page cell with ActionView's layout.
     super(html: cell(cell_constant, model,
-      layout: RailsFoundation::Cell::Layout,
-      context: { tyrant: tyrant, policy: operation.policy, flash: flash }))
+      { layout: RailsFoundation::Cell::Layout,
+        context: { tyrant: tyrant, policy: operation.policy, flash: flash }
+      }.merge( options))
+    )
   end
 
   def tyrant
@@ -16,7 +18,20 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Trailblazer::NotAuthorizedError do |exception|
+    
+    # messages = {
+    #     :apply? => flash[:message] = "You have already applied for this job",
+    #     nil => flash[:message] = "All the positions for this job have been fulfilled",
+    #     :admin? => flash[:message] = "Not authorized, my friend.",
+    #     :edit? => flash[:message] = "Not authorized, my friend.",
+    #     :my? => flash[:message] = "Not authorized, my friend.", 
+    #     :delete? => flash[:message] = "Not authorized, my friend."
+    # }
+
+    # messages[exception.query]
+
     if tyrant.current_user
+
       if exception.query == :apply?
         flash[:message] = "You have already applied for this job"
       else

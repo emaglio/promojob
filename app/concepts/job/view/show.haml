@@ -11,12 +11,15 @@
       = requirements
     .row
       = description
+
 .row  
   %h3
     .row
       = salary
     .row
-      = starts_at #change format here strftime(%d/%m/%y: %H:%M:%S %Z)?
+      = starts_at.strftime("%A - %d/%m/%Y at %H:%M")
+    .row
+      = ends_at.strftime("%A - %d/%m/%Y at %H:%M")
 
 - if policy.admin?
   .row

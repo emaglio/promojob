@@ -1,0 +1,33 @@
+.log-in-form {
+  border: 2px solid #cacaca;
+  padding: 1rem;
+  border-radius: 6px; }
+
+.day{
+  border: 1px solid #cacaca;
+  border-color: gray;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.today{
+  border: 1px solid #cacaca;
+  padding: 1rem;
+  border-radius: 6px;
+  border-color: gray;
+  background-color: rgb(153,255,255);
+}
+
+.job{
+  border: 1px solid #cacaca;
+  padding: 1rem;
+  border-radius: 6px; 
+}
+
+.fa-times{
+  color: red;
+}
+
+.fa-check-circle-o{
+  color: green;
+}

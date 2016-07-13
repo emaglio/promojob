@@ -1,7 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-
+require 'capybara/rails'
 require "minitest/autorun"
 require "trailblazer/rails/test/integration"
 
@@ -24,6 +24,8 @@ end
 
 FactoryGirl.find_definitions
 
+Capybara.javascript_driver = :webkit
+
 
 Cell::TestCase.class_eval do
   include Capybara::DSL
@@ -31,12 +33,13 @@ Cell::TestCase.class_eval do
 end
 
 Trailblazer::Test::Integration.class_eval do
+  include Capybara::Webkit
 
   def sign_up!(email="fred@trb.org", password="123456", confirm_password="123456")
     within("//form[@id='new_user']") do
       fill_in 'Firstname', with: "MyName"
       fill_in 'Lastname', with: "MyLastname"
-      # select 'Gender', with: "Male" TODO: fix this
+      select('Male', :from => 'user_gender')
       fill_in 'Age', with: "30" 
       fill_in 'Phone', with: "0192012"
       fill_in 'Email',    with: email
@@ -55,10 +58,12 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Requirements', with: requirements
       fill_in 'Description', with: description
     end
+    page.execute_script("$('#job_starts_at').val('12/12/2016')")
+    page.execute_script("$('#job_ends_at').val('13/12/2016')")
     click_button "Create Job"
   end
 
-  def submit!(email, password)
+    def submit!(email, password)
     # puts page.body
     within("//form[@id='new_session']") do
       fill_in 'Email',    with: email

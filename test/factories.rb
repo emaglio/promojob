@@ -19,6 +19,7 @@ FactoryGirl.define  do
     user_count "1"
     salary "100 $/hour"
     starts_at "01-02-2016 12:12"
+    ends_at "02-02-2016 12:12"
   end
 
 end

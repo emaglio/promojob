@@ -61,7 +61,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content ("MyTitle")
     total = Job.all.size
     page.must_have_content (total)
-    page.must_have_content "The MyTitle has been created" #flash
+    page.must_have_content "MyTitle job has been created" #flash
     click_link "MyTitle"
 
 
@@ -113,7 +113,6 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     log_in_as_admin
     create_job("MyTitle", "MyDescription")
 
-    visit "jobs"
     click_link "MyTitle"
     click_link "Delete"
 

@@ -2,6 +2,16 @@ module JobApplication::Cell
 
   class Applications < Trailblazer::Cell
   private
+    def header
+      statuses = {
+        "Apply" => "Applied Jobs",
+        "Hire" => "Hired Jobs",
+        "Reject" => "Rejected Jobs"
+      }
+
+      statuses[options[:status]]
+    end
+    
     def total
       model.size
     end

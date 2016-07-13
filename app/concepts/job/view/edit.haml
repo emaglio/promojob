@@ -19,21 +19,15 @@
   .row
     = f.input :salary, placeholder: "Salary", label: false
   .row
-    = f.input :starts_at, input_html: {id: "date"} #tomorrow is the starting day
+    = f.input :starts_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
+  .row
+    = f.input :ends_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
   .row
     = f.submit nil, class: 'warning button'
 
 :javascript
-  var today = new Date();
-  var tomorrow = new Date();
-  var dd = today.getDate()+1;
-  var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear();
-  tomorrow = dd+'-'+mm+'-'+yyyy+' 09:00';
-  
   $(function(){
-    $('#date').fdatepicker({
-      initialDate: tomorrow,
+    $('.DatePicker').fdatepicker({
       format: 'dd-mm-yyyy hh:ii',
       disableDblClickSelection: true,
       pickTime: true
