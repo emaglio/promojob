@@ -105,6 +105,7 @@ module  My::Cell
       end
 
       def job_statuses
+        raise model.inspect
         model.job_statuses.collect do |job|
           job
         end
