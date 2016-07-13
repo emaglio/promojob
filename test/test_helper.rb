@@ -24,6 +24,8 @@ end
 
 FactoryGirl.find_definitions
 
+Capybara.javascript_driver = :webkit
+
 
 Cell::TestCase.class_eval do
   include Capybara::DSL
@@ -31,6 +33,7 @@ Cell::TestCase.class_eval do
 end
 
 Trailblazer::Test::Integration.class_eval do
+  include Capybara::Webkit
 
   def sign_up!(email="fred@trb.org", password="123456", confirm_password="123456")
     within("//form[@id='new_user']") do
@@ -55,7 +58,8 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Requirements', with: requirements
       fill_in 'Description', with: description
     end
-    page.execute_script("$('#date').val('12/12/2016')")
+    page.execute_script("$('#job_starts_at').val('12/12/2016')")
+    page.execute_script("$('#job_ends_at').val('13/12/2016')")
     click_button "Create Job"
   end
 

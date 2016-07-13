@@ -25,6 +25,7 @@ class CalendarCellTest < MiniTest::Spec
                             user_count: "2", 
                             starts_at: "10-02-2016 10:00", 
                             ends_at: "11-02-2016 10:00" ), current_user: admin).model}
+  
   it "admin calendar" do #TODO: add test for the decoration
     html = concept("my/cell/calendar", nil, offset: 0, starts_at: DateTime.parse("03-02-2016"),
                   context: {policy: Session::Policy.new(admin, nil)}).()

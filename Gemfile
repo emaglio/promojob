@@ -25,6 +25,7 @@ group :test do
   gem "minitest-rails-capybara"
   gem "minitest-line"
   gem "minitest-bang"
+  gem "capybara-webkit"
 end
 
 gem "trailblazer-rails"
