@@ -52,7 +52,7 @@ class JobApplicationTest < MiniTest::Spec
   end
 
   it "delete jobApp after delete user" do
-    #same user applies for the same job 
+    #user apply for 2 different jobs
     op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
     op = JobApplication::Apply.({ user_id: user.id, job_id: job2.id, message: "This is great2", status: "Apply", current_user: user})
@@ -105,5 +105,27 @@ class JobApplicationTest < MiniTest::Spec
   #       current_user: admin)
   #   end
   # end
+
+  it "only admin and current_user can delete an application" do
+    #2 users apply for same job
+    job_app1 = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user}).model
+    job_app1.persisted?.must_equal true
+    job_app2 = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Apply", current_user: user}).model
+    job_app2.persisted?.must_equal true
+
+    assert_raises Trailblazer::NotAuthorizedError do
+      JobApplication::Delete.(
+        id: job_app1.id,
+        current_user: user2)
+    end
+    
+    JobApplication.where("job_id = ?", job.id).size.must_equal 2
+
+    JobApplication::Delete.(id: job_app1.id, current_user: user)
+    JobApplication.where("job_id = ?", job.id).size.must_equal 1
+
+    JobApplication::Delete.(id: job_app2.id, current_user: user2)
+    JobApplication.where("job_id = ?", job.id).size.must_equal 0
+  end
 
 end

@@ -5,6 +5,7 @@ class Session::Policy
     @model = model
   end
 
+
   attr_reader :user
 
   def true?
@@ -35,24 +36,23 @@ class Session::Policy
     @user
   end
 
-  # def signed_in?
-  #   tyrant.signed_in?
-  # end
-
-  # the problem here is that we need deciders to differentiate between contexts (e.g. signed_in?)
-  # that we actually already know, e.g. Create::SignedIn knows it is signed in.
-  #
-  # Idea: Thing::Policy::Update.()
   def update?
     edit?
   end
 
   def edit?
-    # don't need signed_in? because current_user? will be false if the user is not signed in
-    # signed_in? and (admin? or model.users.include?(user))
     admin? or current_user?
   end
-  
+
+  def current_user_application?
+    return unless @user
+    @user.email == @model.user.email
+  end
+
+  def delete_application?
+    admin? or current_user_application?
+  end
+
   def delete?
     edit?
   end
