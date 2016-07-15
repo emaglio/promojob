@@ -9,6 +9,7 @@ FactoryGirl.define  do
     phone "0410123456"
     password "Test1"
     confirm_password "Test1"
+    block false
   end
 
   factory :job do
