@@ -11,7 +11,7 @@ class JobApplicationsController < ApplicationController
   def show
     present JobApplication::Applications
 
-    render JobApplication::Cell::Applications
+    render JobApplication::Cell::Applications, options: {status: @operation.status}
   end
 
   def edit
@@ -31,7 +31,7 @@ class JobApplicationsController < ApplicationController
   def destroy
     run JobApplication::Delete
     flash[:alert] = "Job application deleted"    
-    redirect_to applications_job_applications_path(status: "Apply")
+    redirect_to root_path
   end
 
   def overview

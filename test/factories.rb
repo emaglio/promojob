@@ -9,6 +9,7 @@ FactoryGirl.define  do
     phone "0410123456"
     password "Test1"
     confirm_password "Test1"
+    block false
   end
 
   factory :job do
@@ -19,6 +20,7 @@ FactoryGirl.define  do
     user_count "1"
     salary "100 $/hour"
     starts_at "01-02-2016 12:12"
+    ends_at "02-02-2016 12:12"
   end
 
 end

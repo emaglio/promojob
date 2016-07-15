@@ -6,9 +6,11 @@ module Job::Cell
     property :company
     property :requirements
     property :description
+    property :duration
     property :user_count
     property :salary
     property :starts_at
+    property :ends_at
   end
 
 end

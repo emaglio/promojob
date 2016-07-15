@@ -5,8 +5,9 @@ class JobApplication < ActiveRecord::Base
 
 
     def model!(params)
-      JobApplication.where(status: params[:status])
+      JobApplication.where(status: @status = params[:status])
     end
   
+    attr_reader :status
   end
 end

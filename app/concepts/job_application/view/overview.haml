@@ -19,5 +19,9 @@
 %h3
   .row
     =message
+%h3
+  .row
+    Status:
+    = status
 .row
   = link_to "Delete", job_application_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}

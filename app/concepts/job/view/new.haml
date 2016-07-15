@@ -19,7 +19,9 @@
   .row
     = f.input :salary, placeholder: "Salary", label: false
   .row
-    = f.input :starts_at, input_html: {id: "date"} #tomorrow is the starting day
+    = f.input :starts_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
+  .row
+    = f.input :ends_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
   .row
     = f.submit nil, class: 'success button'
 
@@ -32,7 +34,7 @@
   tomorrow = dd+'-'+mm+'-'+yyyy+' 09:00';
   
   $(function(){
-    $('#date').fdatepicker({
+    $('.DatePicker').fdatepicker({
       initialDate: tomorrow,
       format: 'dd-mm-yyyy hh:ii',
       disableDblClickSelection: true,

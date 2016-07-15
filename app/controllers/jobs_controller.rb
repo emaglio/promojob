@@ -12,7 +12,7 @@ class JobsController < ApplicationController
 
 	def create
 		run Job::Create do |op|
-			flash[:notice] = "The #{op.model.title} has been created"
+			flash[:notice] = "#{op.model.title} job has been created"
 			return redirect_to "/jobs"
 		end
 

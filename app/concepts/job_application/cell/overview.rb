@@ -3,5 +3,6 @@ module JobApplication::Cell
     property :job
     
     property :message
+    property :status
   end
 end

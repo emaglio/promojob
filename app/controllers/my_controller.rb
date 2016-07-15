@@ -5,4 +5,9 @@ class MyController < ApplicationController
     render My::Cell::Jobs, model: nil
   end
 
+  def calendar
+    present My::Calendar
+    render My::Cell::Calendar, model: nil, options: {offset: @operation.offset, starts_at: DateTime.now}
+  end
+
 end

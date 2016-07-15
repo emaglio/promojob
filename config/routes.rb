@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   get 'my/jobs', controller: :my, action: :jobs, as: "my_jobs"
+  get 'my/calendar', controller: :my, action: :calendar, as: "my_calendar"
   post "jobs/search", controller: :jobs, action: :search
   post 'users/block', controller: :users, action: :block
 
