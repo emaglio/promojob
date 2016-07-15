@@ -31,3 +31,16 @@
 .fa-check-circle-o{
   color: green;
 }
+
+.top-bar .name {
+  color: white;
+}
+
+.top-bar-section {
+  float: right;
+}
+
+.maybe {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+}

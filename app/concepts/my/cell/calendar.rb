@@ -75,10 +75,6 @@ module  My::Cell
         return first_month
       end
     end
-
-    def offset
-      options[:offset]
-    end
   end
 
   class WeekDay <Trailblazer::Cell

@@ -8,7 +8,6 @@ module Job::Cell
 
   class Item < Trailblazer::Cell
     #property :phone
-
     def link
       link_to model.title, model
     end

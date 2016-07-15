@@ -1,20 +1,25 @@
 .row
   %h1
     .row
+      Title:
       = title
 
 .row
   %h2
     .row
+      Company:
       = company
     .row
+      Position:
       = requirements
     .row
+      Description:
       = description
 
 .row  
-  %h3
+  %h3.maybe
     .row
+      Salary:
       = salary
     .row
       = starts_at.strftime("%A - %d/%m/%Y at %H:%M")
@@ -25,22 +30,31 @@
   .row
     %h3
       .row
-      Position to fulfill: 
-      = user_count
+        Position to fill: 
+        = user_count
       .row
-      Position fulfilled: 
-      = JobApplication.where("job_id = ? AND status = ?", id, "Hire").size
+        Position fulfilled: 
+        = JobApplication.where("job_id = ? AND status = ?", id, "Hire").size
   .row
     %h2
-    = link_to "Edit", edit_job_path(model), class: 'warning button'
-    = link_to "Delete", job_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
+      .row
+        = link_to "Edit", edit_job_path(model), class: 'warning button'
+        = link_to "Delete", job_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
 - else
-  = form_tag "/job_applications" do
-    = hidden_field_tag :user_id, policy.user.id
-    = hidden_field_tag :job_id, id
-    = hidden_field_tag :status, "Apply"     
+  .row
+    = form_tag "/job_applications" do
+      = hidden_field_tag :user_id, policy.user.id
+      = hidden_field_tag :job_id, id
+      = hidden_field_tag :status, "Apply"     
     .row
       Message:
       = text_field_tag :message
     .row
       = submit_tag "Apply", class: 'success button'
+
+- if policy.admin?
+  .row
+    %h2
+      List of the applicants:
+      %ul.mobile-list
+        = cell("job/cell/applicants", collection: users)
