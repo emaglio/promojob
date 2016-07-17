@@ -110,9 +110,9 @@ module  My::Cell
         statuses = {
         "Apply" => "fa fa-clock-o",
         "Hire" => "fa fa-check-circle-o",
-        "Reject" => "fa fa-times"
+        "Reject" => "fa fa-times",
         }
-        statuses[job.application.status]
+        statuses[job.application.status] unless job.application == nil
       end
 
     end
