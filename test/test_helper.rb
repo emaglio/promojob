@@ -4,15 +4,16 @@ require 'rails/test_help'
 
 require "minitest/autorun"
 require "trailblazer/rails/test/integration"
+require 'capybara-webkit'
 
 Rails.backtrace_cleaner.remove_silencers!
 
 Minitest::Spec.class_eval do
   after :each do
     # DatabaseCleaner.clean
-    # Thing.delete_all
-    # Comment.delete_all
-    User.delete_all
+    # ::Job.delete_all
+    # ::JobApplication.delete_all
+    ::User.delete_all
   end
   include FactoryGirl::Syntax::Methods
 
@@ -65,7 +66,7 @@ Trailblazer::Test::Integration.class_eval do
 
   def submit!(email, password)
     # puts page.body
-    within("//form[@id='new_session']") do
+    within(:xpath, "//form[@id='new_session']") do
       fill_in 'Email',    with: email
       fill_in 'Password', with: password
     end
@@ -73,15 +74,15 @@ Trailblazer::Test::Integration.class_eval do
   end
 
   def log_in_as_admin
-    if User.where(email: "info@cj-agency.de").size == 0
-      User::Create.(user: FactoryGirl.attributes_for(:user, email: "info@cj-agency.de", firstname: "Admin", phone: "0"))
+    if ::User.where(email: "info@cj-agency.de").size == 0
+      ::User::Create.(user: FactoryGirl.attributes_for(:user, email: "info@cj-agency.de", firstname: "Admin", phone: "0"))
     end
     visit "sessions/new"
     submit!("info@cj-agency.de", "Test1")
   end
 
   def log_in_as_user(email = "my@email.com", phone = "0410123456")
-    op = User::Create.(user: FactoryGirl.attributes_for(:user, email: email, phone: phone))
+    op = ::User::Create.(user: FactoryGirl.attributes_for(:user, email: email, phone: phone))
 
     visit "sessions/new"
     submit!(op.model.email, "Test1")

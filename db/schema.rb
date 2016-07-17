@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20160707012433) do
     t.datetime "updated_at"
     t.text     "auth_meta_data"
     t.integer  "age"
-    t.text     "image_meta_data"
   end
 
 end
