@@ -2,28 +2,30 @@
 %link{:href => "//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css", :rel => "stylesheet"}
 %link{:href => "//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css", :rel =>  "stylesheet"}
 %script{:type => "text/javascript", :src => "/foundation-datepicker.js"}
+.row
+  %h1 Create Job
 
-%h1 Create Job
-
-= simple_form_for model do |f|
-  .row
-    = f.input :title, placeholder: "Title", label: false
-  .row
-    = f.input :company, placeholder: "Company", label: false
-  .row
-    = f.input :requirements, placeholder: "Requirements", label: false
-  .row
-    = f.input :description, placeholder: "Description", label: false
-  .row
-    = f.input :user_count, placeholder: "Number of Position to fulfill", label: false
-  .row
-    = f.input :salary, placeholder: "Salary", label: false
-  .row
-    = f.input :starts_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
-  .row
-    = f.input :ends_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
-  .row
-    = f.submit nil, class: 'success button'
+.row.job
+  = simple_form_for model do |f|
+    .row
+      = f.input :title, placeholder: "Title", label: false
+    .row
+      = f.input :company, placeholder: "Company", label: false
+    .row
+      = f.input :requirements, placeholder: "Requirements", label: false
+    .row
+      = f.input :description, placeholder: "Description", label: false
+    .row
+      = f.input :user_count, placeholder: "Number of Position to fulfill", label: false
+    .row
+      = f.input :salary, placeholder: "Salary", label: false
+    .row
+      .small-6.columns
+        = f.input :starts_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
+      .small-6.columns
+        = f.input :ends_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
+    .row.small-5.small-centered.columns.text-center
+      = f.submit nil, class: 'success button'
 
 :javascript
   var today = new Date();

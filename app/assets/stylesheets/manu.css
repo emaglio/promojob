@@ -44,3 +44,16 @@
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
 }
+
+.job {
+  border: 1px solid #cacaca;
+  border-color: gray;
+  padding: 1rem;
+  border-radius: 6px;
+  
+  a {
+    font-style: italic; 
+    color: black;
+
+  }
+}
