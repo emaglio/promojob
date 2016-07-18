@@ -7,23 +7,24 @@
 
 .row.job
   = simple_form_for model do |f|
-    .row
+    .row.text-center
       = f.input :title, placeholder: "Title", label: false
     .row
       = f.input :company, placeholder: "Company", label: false
     .row
-      = f.input :requirements, placeholder: "Requirements", label: false
+      = f.input :description, placeholder: "Job Description", label: false, :as => :text, :input_html => {:rows => 10}
     .row
-      = f.input :description, placeholder: "Description", label: false
-    .row
-      = f.input :user_count, placeholder: "Number of Position to fulfill", label: false
-    .row
-      = f.input :salary, placeholder: "Salary", label: false
+      .small-6.columns
+        = f.input :user_count, placeholder: "Number of Position to fulfill", label: false
+      .small-6.columns
+        = f.input :salary, placeholder: "Salary", label: false
     .row
       .small-6.columns
         = f.input :starts_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
       .small-6.columns
         = f.input :ends_at, input_html: {class: "DatePicker"} #tomorrow is the starting day
+    .row
+      = f.input :requirements, placeholder: "Applicant Requirements", label: false, :as => :text, :input_html => {:rows => 10}
     .row.small-5.small-centered.columns.text-center
       = f.submit nil, class: 'success button'
 

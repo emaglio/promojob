@@ -45,6 +45,8 @@ class Session::Policy
   end
 
   def current_user_application?
+    puts @model.user.inspect
+    puts @user.inspect
     return unless @user
     @user.email == @model.user.email
   end

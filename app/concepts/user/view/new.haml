@@ -1,23 +1,28 @@
 .row
   %h1 Create User
 
-= simple_form_for model do |f|
-  .row
-    = f.input :firstname, placeholder: "Firstname", label: false
-  .row
-    = f.input :lastname, placeholder: "Lastname", label: false
-  .row
-    = f.select :gender, options_for_select(["Male", "Female", "You"]), placeholder: "Gender", label: false
-  .row
-    = f.input :age, placeholder: "Age", label: false
-  .row
-    = f.input :email, placeholder: "Email", label: false
-  .row
-    = f.input :phone, placeholder: "Phone", label: false
-  .row
-    = f.input :password, placeholder: "Password", label: false
-  .row
-    = f.input :confirm_password, placeholder: "Confirm Password", label: false
-    = f.input :block, :as => :hidden, :value => false
-  .row
-    = f.submit nil, class: 'success button'
+.row.user
+  = simple_form_for model do |f|
+    .row
+      .small-6.columns
+        = f.input :firstname, placeholder: "Firstname", label: false
+      .small-6.columns
+        = f.input :lastname, placeholder: "Lastname", label: false
+    .row
+      .small-6.columns
+        = f.select :gender, options_for_select(["Male", "Female", "You"]), placeholder: "Gender", label: false
+      .small-6.columns
+        = f.input :age, placeholder: "Age", label: false
+    .row
+      .small-6.columns
+        = f.input :email, placeholder: "Email", label: false
+      .small-6.columns
+        = f.input :phone, placeholder: "Phone", label: false
+    .row
+      .small-6.columns
+        = f.input :password, placeholder: "Password", label: false
+      .small-6.columns
+        = f.input :confirm_password, placeholder: "Confirm Password", label: false
+      = f.input :block, :as => :hidden, :value => false
+    .row.small-5.small-centered.columns.text-center
+      = f.submit nil, class: 'success button'

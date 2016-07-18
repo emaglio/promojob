@@ -1,4 +1,5 @@
 .log-in-form {
+  margin-top: 20px;
   border: 2px solid #cacaca;
   padding: 1rem;
   border-radius: 6px; }
@@ -40,20 +41,39 @@
   float: right;
 }
 
-.maybe {
-  font-family: "Times New Roman", Times, serif;
-  font-style: italic;
-}
-
-.job {
+.job, .user{
+  margin-top: 20px;
+  margin-bottom: 10px;
   border: 1px solid #cacaca;
   border-color: gray;
   padding: 1rem;
   border-radius: 6px;
   
-  a {
-    font-style: italic; 
-    color: black;
+}
 
-  }
+.my-label {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-style: italic; 
+  color: black;
+  font-size: 15px;
+}
+
+.my-text{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-style: normal; 
+  color: black;
+  font-size: 18px;
+}
+
+.title{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  font-style: italic; 
+  font-weight: bold;
+  color: black;
+  font-size: 34px;
 }

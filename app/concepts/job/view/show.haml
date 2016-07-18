@@ -1,60 +1,69 @@
-.row
-  %h1
-    .row
-      Title:
+.row.job
+  .row
+    .title
       = title
 
-.row
-  %h2
-    .row
-      Company:
-      = company
-    .row
-      Position:
-      = requirements
-    .row
-      Description:
+  .row
+    -unless company == nil
+      .my-label
+        Company: 
+      .my-text
+        = company
+    .my-label
+      Job description:
+    .my-text
       = description
-
-.row  
-  %h3.maybe
-    .row
-      Salary:
-      = salary
-    .row
-      = starts_at.strftime("%A - %d/%m/%Y at %H:%M")
-    .row
-      = ends_at.strftime("%A - %d/%m/%Y at %H:%M")
-
-- if policy.admin?
   .row
-    %h3
-      .row
+    -unless salary == nil  
+      .my-label
+        Salary:
+      .my-text
+        = salary
+    .row
+      .small-6.columns
+        .my-label
+          Starts at:
+        .my-text
+          = starts_at.strftime("%A - %d/%m/%Y at %H:%M")
+      .small-6.columns
+        .my-label
+          Ends at:
+        .my-text
+          = ends_at.strftime("%A - %d/%m/%Y at %H:%M")
+    .my-label
+      Requirments:
+    .my-text
+      = requirements
+
+  - if policy.admin?
+    .small-6.columns
+      .my-label
         Position to fill: 
+      .my-text
         = user_count
-      .row
+    .small-6.columns
+      .my-label
         Position fulfilled: 
+      .my-text
         = JobApplication.where("job_id = ? AND status = ?", id, "Hire").size
-  .row
-    %h2
-      .row
-        = link_to "Edit", edit_job_path(model), class: 'warning button'
-        = link_to "Delete", job_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
-- else
-  .row
+    .row.small-5.small-centered.columns.text-center
+      = link_to "Edit", edit_job_path(model), class: 'warning button'
+      = link_to "Delete", job_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
+  - else
     = form_tag "/job_applications" do
       = hidden_field_tag :user_id, policy.user.id
       = hidden_field_tag :job_id, id
       = hidden_field_tag :status, "Apply"     
     .row
-      Message:
-      = text_field_tag :message
-    .row
+      .my-label
+        Message:
+      .my-text
+        = text_area_tag :message
+    .row.small-5.small-centered.columns.text-center
       = submit_tag "Apply", class: 'success button'
 
-- if policy.admin?
-  .row
-    %h2
+  - if policy.admin?
+    .my-label
       List of the applicants:
       %ul.mobile-list
         = cell("job/cell/applicants", collection: users)

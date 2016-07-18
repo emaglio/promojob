@@ -1,43 +1,83 @@
-.row
+.row.job
   %h1 Job:
-
-%h3  
-  .row
+  .title
     #{job.title}
-  .row
-    #{job.company}
-  .row
+
+  -unless job.company == nil
+    .my-label
+      Company: 
+    .my-text
+      #{job.company}
+  .my-label
+    Job description:
+  .my-text
+    #{job.description}
+
+  -unless job.salary == nil  
+    .my-label
+      Salary:
+    .my-text
+      #{job.salary}
+
+  .small-6.columns
+    .my-label
+      Starts at:
+    .my-text
+      #{job.starts_at.strftime("%A, %d.%m.%Y at %H:%M")}
+  .small-6.columns
+    .my-label
+      Ends at:
+    .my-text
+      #{job.ends_at.strftime("%A, %d.%m.%Y at %H:%M")}
+
+  .small-6.columns
+    .my-label
+      Position to fill: 
+    .my-text
+      #{job.user_count}
+  .small-6.columns
+    .my-label
+      Position fulfilled: 
+    .my-text
+      = JobApplication.where("job_id = ? AND status = ?", job.id, "Hire").size
+  .my-label
+    Requirments:
+  .my-text
     #{job.requirements}
-  .row
-    Position to fulfill:
-    #{job.user_count}
-  .row
-    #{job.salary}
-  .row
-    #{job.starts_at.strftime("%A, %d.%m.%Y at %H:%M")}
 
-.row
+.row.user
   %h1 User:
-
-%h3
-  .row
+  .title
     #{user.firstname}
     #{user.lastname}
-  .row
-    #{user.gender}
-  .row
-    #{user.phone}
-    #{user.email}
-
-.row
-  %h2 Message:
-
-%h3
-  .row
+  .small-6.columns
+    .my-label
+      Gender:
+    .my-text
+      #{user.gender}
+  .small-6.columns
+    .my-label
+      Age:
+    .my-text
+      #{user.age}
+  .small-6.columns
+    .my-label
+      Phone:
+    .my-text
+      #{user.phone}
+  .small-6.columns
+    .my-label
+      Email:
+    .my-text
+      #{user.email}
+  .my-label
+    Message:
+  .my-text
     =message
-  
-  = simple_form_for model do |f|
-    .row
-      = f.select :status, options_for_select(["Hire", "Reject"]), placeholder: "Status", label: false
-      / = f.hidden_field :id, model.id
-      = f.submit nil, class: 'warning button', data: {confirm: "Are you sure?"}
+
+= simple_form_for model do |f|
+  .row.small-1.small-centered.columns.text-center
+    = f.select :status, options_for_select(["Hire", "Reject"]), placeholder: "Status", label: false
+    / = f.hidden_field :id, model.id
+  .row.small-5.small-centered.columns.text-center
+    = f.submit nil, class: 'warning button', data: {confirm: "Are you sure?"}
