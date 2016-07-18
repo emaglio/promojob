@@ -7,8 +7,7 @@ module User::Cell
   end
 
   class Item < Trailblazer::Cell
-    property :phone
-
+    property :firstname
     def link
       link_to model.email, model
     end

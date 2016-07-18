@@ -1,22 +1,39 @@
-%h1
-  .row
+.row.user
+  .title
     = firstname
-  .row
     = lastname
-  .row
-    = email
-  .row
-    = phone
+  .small-6.columns
+    .my-label
+      Gender:
+    .my-text
+      = gender
+  .small-6.columns
+    .my-label
+      Age:
+    .my-text
+      = age
+  .small-6.columns
+    .my-label
+      Phone:
+    .my-text
+      = phone
+  .small-6.columns
+    .my-label
+      Email:
+    .my-text
+      = email
 %h2
   .row
-    - if policy.current_user?
-      = link_to "Edit", edit_user_path(model), :class => 'warning button'
-    = link_to "Delete", user_path(model), method: :delete, :class => 'alert button', data: {confirm: "Are you sure?"}
-
-    = form_tag controller: :users, action: :block  do
-      - if policy.admin? and ( block == false or block == nil)
-        = hidden_field_tag :block, true
-        = submit_tag "Block", class: 'alert button', data: {confirm: "Are you sure?"}
-      - if policy.admin? and block == true
-        = hidden_field_tag :block, false
-        = submit_tag "Un-Block", class: 'alert button', data: {confirm: "Are you sure?"}
+    .small-6.columns
+      - if policy.current_user?
+        = link_to "Edit", edit_user_path(model), :class => 'warning button'
+      = link_to "Delete", user_path(model), method: :delete, :class => 'alert button', data: {confirm: "Are you sure?"}
+    .small-6.columns
+      - unless email == "info@cj-agency.de"
+        = form_tag controller: :users, action: :block  do
+          - if policy.admin? and ( block == false or block == nil)
+            = hidden_field_tag :block, true
+            = submit_tag "Block", class: 'alert button', data: {confirm: "Are you sure?"}
+          - if policy.admin? and block == true
+            = hidden_field_tag :block, false
+            = submit_tag "Un-Block", class: 'alert button', data: {confirm: "Are you sure?"}
