@@ -57,7 +57,6 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     visit "jobs/new"
 
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
-    update_starts_ends
     
     page.current_path.must_equal jobs_path
     page.must_have_content ("MyTitle")

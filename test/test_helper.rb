@@ -57,14 +57,14 @@ Trailblazer::Test::Integration.class_eval do
     # page.execute_script("$('#job_starts_at').val('12/12/2016')")
     # page.execute_script("$('#job_ends_at').val('13/12/2016')")
     click_button "Create Job"
-  end
 
-  def update_starts_ends
-    admin = ::User.find_by(:email => "info@cj-agency.de")
-    job = ::Job.last
-    ::Job::Update.(id: job.id, job: { starts_at: DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00"),
-                                      ends_at: DateTime.parse("Mon, 02 Feb 2016 12:12:00 UTC +00:00") 
-                                      }, current_user: admin)
+    unless title == ""
+      admin = ::User.find_by(:email => "info@cj-agency.de")
+      job = ::Job.last
+      op = ::Job::Update.(id: job.id, job: { starts_at: DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00"),
+                                        ends_at: DateTime.parse("Mon, 02 Feb 2016 12:12:00 UTC +00:00") 
+                                        }, current_user: admin)
+    end
   end
 
   def submit!(email, password)

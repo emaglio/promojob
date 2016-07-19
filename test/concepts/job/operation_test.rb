@@ -56,18 +56,4 @@ class JobOperationTest < MiniTest::Spec
     
   end
 
-  it "searching in base on the starts_at" do 
-    job.starts_at.must_equal DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00") 
-    job2.starts_at.must_equal DateTime.parse("Mon, 03 Feb 2016 10:00:00 UTC +00:00")
-    job3.starts_at.must_equal DateTime.parse("Mon, 08 Feb 2016 11:00:00 UTC +00:00")
-
-    job = Job.where("starts_at BETWEEN ? AND ?", DateTime.parse("15-01-2016"), DateTime.parse("08-02-2016"))
-
-    # job.size.must_equal 3
-
-    
-
-
-    
-  end
 end
