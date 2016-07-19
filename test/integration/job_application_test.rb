@@ -2,7 +2,7 @@ require 'test_helper'
 
 class JobApplicationIntegrationTest < Trailblazer::Test::Integration
 
-  it "Unsuccessfull application", :js => true, :driver => :webkit do
+  it "Unsuccessfull application" do
     #create a job
     log_in_as_admin
     visit "jobs/new"
@@ -23,7 +23,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "Need to Sign In or create an account!" #flash
   end
 
-  it "Successfull application", :js => true, :driver => :webkit do
+  it "Successfull application" do
     #create a job
     log_in_as_admin
     visit "jobs/new"
@@ -45,7 +45,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_link "MyTitle"
   end
 
-  it "can't apply twice for the same job", :js => true, :driver => :webkit do
+  it "can't apply twice for the same job" do
      #create a job
     log_in_as_admin
     visit "jobs/new"
@@ -65,7 +65,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.wont_have_button "Apply"
   end
 
-  it "only admin can hire/reject JobApplication", :js => true, :driver => :webkit do
+  it "only admin can hire/reject JobApplication" do
     #create a job
     log_in_as_admin
     visit "jobs/new"
@@ -138,7 +138,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
 
   end
 
-  it "all positions fulfilled", :js => true, :driver => :webkit do
+  it "all positions fulfilled" do
     #create a job
     log_in_as_admin
     create_job("MyTitle","MyDescription")

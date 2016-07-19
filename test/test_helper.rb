@@ -10,9 +10,9 @@ Rails.backtrace_cleaner.remove_silencers!
 Minitest::Spec.class_eval do
   after :each do
     # DatabaseCleaner.clean
-    # Thing.delete_all
-    # Comment.delete_all
-    User.delete_all
+    # ::Job.delete_all
+    # ::JobApplication.delete_all
+    ::User.delete_all
   end
   include FactoryGirl::Syntax::Methods
 
@@ -24,16 +24,12 @@ end
 
 FactoryGirl.find_definitions
 
-Capybara.javascript_driver = :webkit
-
-
 Cell::TestCase.class_eval do
   include Capybara::DSL
   include Capybara::Assertions
 end
 
 Trailblazer::Test::Integration.class_eval do
-  include Capybara::Webkit
 
   def sign_up!(email="fred@trb.org", password="123456", confirm_password="123456")
     within("//form[@id='new_user']") do
@@ -58,14 +54,22 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Requirements', with: requirements
       fill_in 'Description', with: description
     end
-    page.execute_script("$('#job_starts_at').val('12/12/2016')")
-    page.execute_script("$('#job_ends_at').val('13/12/2016')")
+    # page.execute_script("$('#job_starts_at').val('12/12/2016')")
+    # page.execute_script("$('#job_ends_at').val('13/12/2016')")
     click_button "Create Job"
+
+    unless title == ""
+      admin = ::User.find_by(:email => "info@cj-agency.de")
+      job = ::Job.last
+      op = ::Job::Update.(id: job.id, job: { starts_at: DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00"),
+                                        ends_at: DateTime.parse("Mon, 02 Feb 2016 12:12:00 UTC +00:00") 
+                                        }, current_user: admin)
+    end
   end
 
   def submit!(email, password)
     # puts page.body
-    within("//form[@id='new_session']") do
+    within(:xpath, "//form[@id='new_session']") do
       fill_in 'Email',    with: email
       fill_in 'Password', with: password
     end
@@ -73,8 +77,8 @@ Trailblazer::Test::Integration.class_eval do
   end
 
   def log_in_as_admin
-    if User.where(email: "info@cj-agency.de").size == 0
-      User::Create.(user: FactoryGirl.attributes_for(:user, email: "info@cj-agency.de", firstname: "Admin", phone: "0"))
+    if ::User.where(email: "info@cj-agency.de").size == 0
+      ::User::Create.(user: FactoryGirl.attributes_for(:user, email: "info@cj-agency.de", firstname: "Admin", phone: "0"))
     end
     visit "sessions/new"
     submit!("info@cj-agency.de", "Test1")
