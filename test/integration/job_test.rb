@@ -27,7 +27,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#job_title"     
   end
 
-  it "unsuccessfull job creation", :js => true, :driver => :webkit do
+  it "unsuccessfull job creation" do
     log_in_as_admin
     page.must_have_content "Hi, Admin"
 
@@ -39,7 +39,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#job_description"
     page.must_have_css "#job_salary"
     page.must_have_css "#job_starts_at"
-    page.must_have_css "#ends_at"
+    page.must_have_css "#job_ends_at"
     page.must_have_button "Create Job"
     page.current_path.must_equal new_job_path
 
@@ -57,6 +57,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     visit "jobs/new"
 
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
+    update_starts_ends
     
     page.current_path.must_equal jobs_path
     page.must_have_content ("MyTitle")

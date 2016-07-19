@@ -4,7 +4,6 @@ require 'rails/test_help'
 
 require "minitest/autorun"
 require "trailblazer/rails/test/integration"
-require 'capybara-webkit'
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -25,16 +24,12 @@ end
 
 FactoryGirl.find_definitions
 
-Capybara.javascript_driver = :webkit
-
-
 Cell::TestCase.class_eval do
   include Capybara::DSL
   include Capybara::Assertions
 end
 
 Trailblazer::Test::Integration.class_eval do
-  include Capybara::Webkit
 
   def sign_up!(email="fred@trb.org", password="123456", confirm_password="123456")
     within("//form[@id='new_user']") do
@@ -59,9 +54,17 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Requirements', with: requirements
       fill_in 'Description', with: description
     end
-    page.execute_script("$('#job_starts_at').val('12/12/2016')")
-    page.execute_script("$('#job_ends_at').val('13/12/2016')")
+    # page.execute_script("$('#job_starts_at').val('12/12/2016')")
+    # page.execute_script("$('#job_ends_at').val('13/12/2016')")
     click_button "Create Job"
+  end
+
+  def update_starts_ends
+    admin = ::User.find_by(:email => "info@cj-agency.de")
+    job = ::Job.last
+    ::Job::Update.(id: job.id, job: { starts_at: DateTime.parse("Mon, 01 Feb 2016 12:12:00 UTC +00:00"),
+                                      ends_at: DateTime.parse("Mon, 02 Feb 2016 12:12:00 UTC +00:00") 
+                                      }, current_user: admin)
   end
 
   def submit!(email, password)
