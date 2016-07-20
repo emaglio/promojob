@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
     # messages[exception.query]
 
     if tyrant.current_user
-      puts exception.inspect
       if exception.query == :apply?
         flash[:notice] = "You have already applied for this job"
         application = JobApplication.find_by("job_id = ? AND user_id = ?", exception.record.id, tyrant.current_user.id)

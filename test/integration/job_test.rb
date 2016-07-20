@@ -27,7 +27,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#job_title"     
   end
 
-  it "unsuccessfull job creation", :js => true do
+  it "unsuccessfull job creation" do
     log_in_as_admin
     page.must_have_content "Hi, Admin"
 

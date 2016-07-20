@@ -25,7 +25,6 @@ group :test do
   gem "minitest-rails-capybara"
   gem "minitest-line"
   gem "minitest-bang"
-  gem "capybara-webkit"
 end
 
 gem "trailblazer-rails"
@@ -45,3 +44,6 @@ gem "factory_girl"
 gem 'foundation-datetimepicker-rails'
 
 gem "tyrant", "0.0.3"
+
+gem 'paperdragon'
+gem 'file_validators', '~> 1.2'

@@ -71,7 +71,7 @@ class JobApplicationTest < MiniTest::Spec
     #same job for 2 different users
     op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
     op.model.persisted?.must_equal true
-    op = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Apply", current_user: user})
+    op = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Apply", current_user: user2})
     op.model.persisted?.must_equal true
 
     jobApps = JobApplication.where("job_id = ?", job.id)
@@ -83,28 +83,26 @@ class JobApplicationTest < MiniTest::Spec
     jobApps.size.must_equal 0
   end
 
-  # it "all position fulfilled" do
-  #   #2 users applied for the same job that has 1 position to fulfill
-  #   op = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user})
-  #   op.model.persisted?.must_equal true
-  #   op = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Apply", current_user: user})
-  #   op.model.persisted?.must_equal true
-  #   job.user_count.must_equal 1
+  it "all position fulfilled" do
+    #2 users applied for the same job that has 1 position to fulfill
+    job_app1 = JobApplication::Apply.({ user_id: user.id, job_id: job.id, message: "This is great", status: "Apply", current_user: user}).model
+    job_app1.persisted?.must_equal true
+    job_app2 = JobApplication::Apply.({ user_id: user2.id, job_id: job.id, message: "This is great2", status: "Apply", current_user: user2}).model
+    job_app2.persisted?.must_equal true
+    job.user_count.must_equal 1
 
-  #   job_app1 = JobApplication.first
-  #   job_app2 = JobApplication.last
+    op = JobApplication::Update.(id: job_app1.id, job_application: {status: "Hire"}, current_user: admin)
+    op.model.status.must_equal "Hire"
+    positions_fulfilled = JobApplication.where("job_id = ? AND status = ?", job.id,"Hire")
+    positions_fulfilled.size.must_equal 1
 
-  #   JobApplication::Update.(id: job_app1.id, job_application: {status: "Hire"}, current_user: admin)
-  #   positions_fulfilled = JobApplication.where("job_id = ? AND status = ?", job.id,"Hire").size
-  #   positions_fulfilled.must_equal 1
-
-  #   assert_raises Trailblazer::NotAuthorizedError do
-  #     JobApplication::Update.(
-  #       id: job_app2.id,
-  #       job_application: {status: "Hire"},
-  #       current_user: admin)
-  #   end
-  # end
+    assert_raises Trailblazer::NotAuthorizedError do
+      JobApplication::Update.(
+        id: job_app2.id,
+        job_application: {status: "Hire"},
+        current_user: admin)
+    end
+  end
 
   it "only admin and current_user can delete an application" do
     #2 users apply for same job

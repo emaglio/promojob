@@ -23,6 +23,8 @@
         = f.input :password, placeholder: "Password", label: false
       .small-6.columns
         = f.input :confirm_password, placeholder: "Confirm Password", label: false
+    .row
+      = f.input :profile_image, :as => :file
       = f.input :block, :as => :hidden, :value => false
     .row.small-5.small-centered.columns.text-center
       = f.submit nil, class: 'success button'
