@@ -147,4 +147,19 @@ class UserOperationTest < MiniTest::Spec
     
   end
 
+  # valid file upload.
+  it "valid upload" do
+    user = User::Create.(user: attributes_for(:user,
+      profile_image: File.open("test/images/profile.jpeg"))).model
+
+    Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal true
+  end
+
+  it "wrong file type" do
+    res, op = User::Create.run(user: attributes_for(:user,
+      profile_image: File.open("test/files/wrong_file.docx")))
+    res.must_equal false
+    op.errors.to_s.must_equal "{:profile_image=>[\"Invalid format, file shoidl be one of: *./jpeg, *./jpg, *./png and *./pdf\"]}"
+    Paperdragon::Attachment.new(op.model.image_meta_data).exists?.must_equal false
+  end
 end

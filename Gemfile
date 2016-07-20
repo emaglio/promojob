@@ -44,3 +44,6 @@ gem "factory_girl"
 gem 'foundation-datetimepicker-rails'
 
 gem "tyrant", "0.0.3"
+
+gem 'paperdragon'
+gem 'file_validators', '~> 1.2'

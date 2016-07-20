@@ -19,4 +19,6 @@
     = f.input :confirm_password, placeholder: "Confirm Password", label: false
     = f.input :block, :as => :hidden, :value => false
   .row
+    = f.input :profile_image, :as => :file
+  .row
     = f.submit nil, class: 'success button'
