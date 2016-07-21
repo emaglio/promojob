@@ -65,18 +65,19 @@ class User < ActiveRecord::Base
       end
     end
 
-    def update!
-      auth = Tyrant::Authenticatable.new(contract.model)
-      auth.digest!(contract.password) # contract.auth_meta_data.password_digest = ..
-      auth.confirmed!
-      auth.sync
-    end
-
-    def upload_image!(contract)
-      contract.image!(contract.profile_image) do |v|
-        v.process!(:original)
-        v.process!(:thumb) { |job| job.thumb!("120x120#") }
+    private
+      def update!
+        auth = Tyrant::Authenticatable.new(contract.model)
+        auth.digest!(contract.password) # contract.auth_meta_data.password_digest = ..
+        auth.confirmed!
+        auth.sync
       end
-    end
+
+      def upload_image!(contract)
+        contract.image!(contract.profile_image) do |v|
+          v.process!(:original)
+          v.process!(:thumb) { |job| job.thumb!("120x120#") }
+        end
+      end
   end
 end

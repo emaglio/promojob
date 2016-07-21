@@ -20,7 +20,11 @@ class User < ActiveRecord::Base
     end
 
     def delete_images!
-      Thing::ImageProcessor.new(model.image_meta_data).image! { |v| v.delete! } unless model.image_meta_data == nill
+      unless model.image_meta_data == nil
+        model.image(model.image_meta_data) do |v|
+          v.delete!
+        end
+      end
     end
   
   end
