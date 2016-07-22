@@ -93,13 +93,13 @@ class UserOperationTest < MiniTest::Spec
     user.persisted?.must_equal true
 
     op = User::Delete.({id: user.id, current_user: user})
-    op.model.persisted?.must_equal false
+    op.model.destroyed?.must_equal true
 
     user = User::Create.(user: attributes_for(:user, email: "delete@mail.com")).model
     user.persisted?.must_equal true
 
     op = User::Delete.({id: user.id, current_user: admin_for})
-    op.model.persisted?.must_equal false
+    op.model.destroyed?.must_equal true
   end
 
   it "can't delete user if not user or admin" do
@@ -153,6 +153,7 @@ class UserOperationTest < MiniTest::Spec
       profile_image: File.open("test/images/profile.jpeg"))).model
 
     Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal true
+    user = User::Delete.({id: user.id, current_user: user}).model
   end
 
   it "wrong file type" do
@@ -161,5 +162,15 @@ class UserOperationTest < MiniTest::Spec
     res.must_equal false
     op.errors.to_s.must_equal "{:profile_image=>[\"Invalid format, file shoidl be one of: *./jpeg, *./jpg, *./png and *./pdf\"]}"
     Paperdragon::Attachment.new(op.model.image_meta_data).exists?.must_equal false
+  end
+
+  it "delete user and image" do
+    user = User::Create.(user: attributes_for(:user,
+      profile_image: File.open("test/images/profile.jpeg"))).model
+    Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal true
+
+    user = User::Delete.({id: user.id, current_user: user}).model
+    user.destroyed?.must_equal true
+    Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal false
   end
 end

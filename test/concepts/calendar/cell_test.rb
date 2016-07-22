@@ -59,7 +59,7 @@ class CalendarCellTest < MiniTest::Spec
   it "user calendar" do 
     puts user.inspect
     html = concept("my/cell/calendar", nil, offset: 0, starts_at: DateTime.parse("03-02-2016"),
-                  context: {policy: Session::Policy.new(user, nil)}).()  
+                  context: {policy: Session::Policy.new(user, nil), current_user: user}).()  
     puts html
     html.all("li")[9].must_have_css(".row", text: "03")
     html.all("li")[9].find_link("AppSpec")
