@@ -15,6 +15,7 @@
 //= require foundation
 //= require_tree .
 //= require foundation-datetimepicker
+//= require lightbox
 
 $(function() {
   $(document).foundation();

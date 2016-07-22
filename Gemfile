@@ -47,3 +47,4 @@ gem "tyrant", "0.0.3"
 
 gem 'paperdragon'
 gem 'file_validators', '~> 1.2'
+gem 'lightbox2-rails'

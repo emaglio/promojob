@@ -14,7 +14,9 @@ module User::Cell
     property :image_meta_data
 
     def thumb
-      image_tag image[:thumb].url, class: :th if image.exists?
+      if image.exists?
+        image_tag image[:thumb].url
+      end
     end
 
   end

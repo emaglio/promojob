@@ -9,7 +9,7 @@ class CalendarCellTest < MiniTest::Spec
   include ::Capybara::Assertions
 
   let(:admin) {admin_for}
-  let(:user ) {User::Create.(user: attributes_for(:user)).model}
+  let!(:user ) {User::Create.(user: attributes_for(:user)).model}
   let! (:job) {Job::Create.(job: attributes_for(:job, 
                           starts_at: "03-02-2016 10:00",
                           ends_at: "05-02-2016 18:00"), current_user: admin).model}
@@ -60,7 +60,7 @@ class CalendarCellTest < MiniTest::Spec
   it "user calendar" do
     html = concept("my/cell/calendar", nil, offset: 0, starts_at: DateTime.parse("03-02-2016"),
                   context: {policy: Session::Policy.new(user, nil), 
-                            tyrant:  Tyrant::Session.new(user)}).()  
+                            tyrant:  ::Tyrant::Session.new(user)}).()  
 
     html.all("li")[9].must_have_css(".row", text: "03")
     html.all("li")[9].find_link("AppSpec")
