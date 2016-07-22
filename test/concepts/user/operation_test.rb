@@ -153,6 +153,7 @@ class UserOperationTest < MiniTest::Spec
       profile_image: File.open("test/images/profile.jpeg"))).model
 
     Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal true
+    user = User::Delete.({id: user.id, current_user: user}).model
   end
 
   it "wrong file type" do
