@@ -1,4 +1,5 @@
 require "test_helper"
+require "tyrant/railtie"
 
 class CalendarCellTest < MiniTest::Spec
   include Cell::Testing
@@ -29,9 +30,9 @@ class CalendarCellTest < MiniTest::Spec
   let!(:job_app) {JobApplication::Apply.({ user_id: user.id, job_id: job.id, current_user: user})}
   
   it "admin calendar" do
-    puts admin.inspect
     html = concept("my/cell/calendar", nil, offset: 0, starts_at: DateTime.parse("03-02-2016"),
                   context: {policy: Session::Policy.new(admin, nil)}).()  
+
     html.all("li")[9].must_have_css(".row", text: "03")
     html.all("li")[9].find_link("AppSpec")
     html.all("li")[9].must_have_css(".row.job", text: "0 / 1")
@@ -50,17 +51,17 @@ class CalendarCellTest < MiniTest::Spec
     html.all("li")[12].must_have_css(".row.job", text: "0 / 2")
     html.all("li")[16].must_have_css(".row", text: "10")
     html.all("li")[16].find_link("Buyer")
-    html.all("li")[11].must_have_css(".row.job", text: "0 / 2")
+    html.all("li")[16].must_have_css(".row.job", text: "0 / 2")
     html.all("li")[17].must_have_css(".row", text: "11")
     html.all("li")[17].find_link("Buyer")
-    html.all("li")[11].must_have_css(".row.job", text: "0 / 2")
+    html.all("li")[17].must_have_css(".row.job", text: "0 / 2")
   end
 
-  it "user calendar" do 
-    puts user.inspect
+  it "user calendar" do
     html = concept("my/cell/calendar", nil, offset: 0, starts_at: DateTime.parse("03-02-2016"),
-                  context: {policy: Session::Policy.new(user, nil), current_user: user}).()  
-    puts html
+                  context: {policy: Session::Policy.new(user, nil), 
+                            tyrant:  Tyrant::Session.new(user)}).()  
+
     html.all("li")[9].must_have_css(".row", text: "03")
     html.all("li")[9].find_link("AppSpec")
     html.all("li")[9].must_have_css(".row.job", text: "0 / 1")
@@ -79,9 +80,9 @@ class CalendarCellTest < MiniTest::Spec
     html.all("li")[12].must_have_css(".row.job", text: "0 / 2")
     html.all("li")[16].must_have_css(".row", text: "10")
     html.all("li")[16].find_link("Buyer")
-    html.all("li")[11].must_have_css(".row.job", text: "0 / 2")
+    html.all("li")[16].must_have_css(".row.job", text: "0 / 2")
     html.all("li")[17].must_have_css(".row", text: "11")
     html.all("li")[17].find_link("Buyer")
-    html.all("li")[11].must_have_css(".row.job", text: "0 / 2")
+    html.all("li")[17].must_have_css(".row.job", text: "0 / 2")
   end
 end

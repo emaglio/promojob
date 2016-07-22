@@ -1,27 +1,41 @@
-.row
+.row.job
   %h1 Job:
-
-%h3  
-  .row
+  .title
     #{job.title}
-  .row
-    #{job.company}
-  .row
-    #{job.requirements}
-  .row
-    #{job.salary}
-  .row
-    #{job.starts_at}
 
-.row
-  %h2 Message:
+  -unless job.company == nil
+    .my-label
+      Company: 
+    .my-text
+      #{job.company}
+  .my-label
+    Job description:
+  .my-text
+    #{job.description}
 
-%h3
-  .row
+  -unless job.salary == nil  
+    .my-label
+      Salary:
+    .my-text
+      #{job.salary}
+
+  .small-6.columns
+    .my-label
+      Starts at:
+    .my-text
+      #{job.starts_at.strftime("%A, %d.%m.%Y at %H:%M")}
+  .small-6.columns
+    .my-label
+      Ends at:
+    .my-text
+      #{job.ends_at.strftime("%A, %d.%m.%Y at %H:%M")}
+  .my-label
+    Message:
+  .my-text
     =message
-%h3
-  .row
+  .my-label
     Status:
+  .my-text
     = status
-.row
-  = link_to "Delete", job_application_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}
+  .row.small-1.small-centered.columns.text-center
+    = link_to "Delete", job_application_path(model), method: :delete, class: 'alert button', data: {confirm: "Are you sure?"}

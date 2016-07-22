@@ -2,7 +2,6 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
-require 'capybara-webkit'
 require "minitest/autorun"
 require "trailblazer/rails/test/integration"
 
@@ -52,11 +51,9 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Salary', with: "0aud"
       fill_in 'Number of Position to fulfill', with: "1"
       fill_in 'Title',    with: title
-      fill_in 'Requirements', with: requirements
+      fill_in 'Application Requirements', with: requirements
       fill_in 'Description', with: description
     end
-    # page.execute_script("$('#job_starts_at').val('12/12/2016')")
-    # page.execute_script("$('#job_ends_at').val('13/12/2016')")
     click_button "Create Job"
 
     unless title == ""
