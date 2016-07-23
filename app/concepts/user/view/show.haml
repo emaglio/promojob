@@ -1,6 +1,8 @@
 .row.user
   .row.title
-    #{thumb}
+    / = link_to (image_tag(image[:thumb].url)), class: 'profile_file', :'data-lightbox' => 'image[:origianl].url'
+    %a{href: image[:original].url, data: { lightbox: "image", title: "Profile image" } }
+      %img{src: image[:thumb].url, class: "profile_image"}
     = firstname
     = lastname
   .small-6.columns

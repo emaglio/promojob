@@ -15,7 +15,7 @@ module User::Cell
 
     def thumb
       if image.exists?
-        image_tag image[:thumb].url
+        # link_to image_tag image[:thumb], image[:original].url, :data => {:'data-lightbox' => "profile_image"}
       end
     end
 

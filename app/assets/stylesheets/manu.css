@@ -85,6 +85,10 @@
   margin-right: 10px;
 }
 
-.select{
-  
+.profile_image{
+  border-radius: 4px;
+}
+
+a:focus {
+  outline: thin dotted; 
 }

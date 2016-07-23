@@ -3063,3 +3063,6 @@ D, [2016-07-23T10:44:12.249125 #21191] DEBUG -- : DRAGONFLY: shell command: 'ide
 D, [2016-07-23T10:44:15.581710 #21191] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/home/emamaglio/projects/promoJob/test/images/profile.jpeg'
 D, [2016-07-23T10:44:15.596220 #21191] DEBUG -- : DRAGONFLY: shell command: 'convert' '/home/emamaglio/projects/promoJob/test/images/profile.jpeg' '-resize' '120x120^^' '-gravity' 'Center' '-crop' '120x120+0+0' '+repage' '/tmp/dragonfly20160723-21191-nwg1h5.jpeg'
 D, [2016-07-23T10:44:15.630984 #21191] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/dragonfly20160723-21191-nwg1h5.jpeg'
+D, [2016-07-23T10:51:08.793543 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/RackMultipart20160723-19154-vgfq80.jpeg'
+D, [2016-07-23T10:51:08.811173 #19154] DEBUG -- : DRAGONFLY: shell command: 'convert' '/tmp/RackMultipart20160723-19154-vgfq80.jpeg' '-resize' '120x120^^' '-gravity' 'Center' '-crop' '120x120+0+0' '+repage' '/tmp/dragonfly20160723-19154-1lm7jn1.jpeg'
+D, [2016-07-23T10:51:08.840484 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/dragonfly20160723-19154-1lm7jn1.jpeg'
