@@ -51,8 +51,8 @@ Trailblazer::Test::Integration.class_eval do
       fill_in 'Salary', with: "0aud"
       fill_in 'Number of Position to fulfill', with: "1"
       fill_in 'Title',    with: title
-      fill_in 'Application Requirements', with: requirements
-      fill_in 'Description', with: description
+      fill_in 'Applicant Requirements', with: requirements
+      fill_in 'Job Description', with: description
     end
     click_button "Create Job"
 

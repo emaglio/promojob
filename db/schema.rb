@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707012433) do
+ActiveRecord::Schema.define(version: 20160723002116) do
 
   create_table "job_applications", force: :cascade do |t|
     t.integer  "job_id"
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20160707012433) do
     t.datetime "updated_at"
     t.text     "auth_meta_data"
     t.integer  "age"
-    t.text     "image_meta_data"
     t.boolean  "block"
+    t.text     "image_meta_data"
   end
 
 end

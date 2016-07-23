@@ -99,8 +99,8 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.must_have_button "Update Job"
 
     within("//form[@id='edit_job_#{Job.last.id}']") do
-      fill_in 'Description', with: "TestDescription"
-      fill_in 'Requirements', with: "TestRequirements"
+      fill_in 'Job Description', with: "TestDescription"
+      fill_in 'Applicant Requirements', with: "TestRequirements"
     end 
     click_button "Update Job"
     

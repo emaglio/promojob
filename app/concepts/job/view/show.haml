@@ -54,13 +54,13 @@
       = hidden_field_tag :user_id, policy.user.id
       = hidden_field_tag :job_id, id
       = hidden_field_tag :status, "Apply"     
-    .row
-      .my-label
-        Message:
-      .my-text
-        = text_area_tag :message
-    .row.small-5.small-centered.columns.text-center
-      = submit_tag "Apply", class: 'success button'
+      .row
+        .my-label
+          Message:
+        .my-text
+          = text_area_tag :message
+      .row.small-5.small-centered.columns.text-center
+        = submit_tag "Apply", class: 'success button'
 
   - if policy.admin?
     .my-label
