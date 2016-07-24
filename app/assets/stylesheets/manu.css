@@ -86,9 +86,11 @@
 }
 
 .profile_image{
-  border-radius: 4px;
+  margin-left: 10px;
+  margin-right: 10px; 
 }
 
-a:focus {
-  outline: thin dotted; 
+.profile_image:hover {
+  border: 4px;
+  border-color: blue;
 }

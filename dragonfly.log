@@ -3131,3 +3131,14 @@ D, [2016-07-24T11:33:18.938917 #23482] DEBUG -- : DRAGONFLY: shell command: 'ide
 D, [2016-07-24T11:33:18.956043 #23482] DEBUG -- : DRAGONFLY: shell command: 'convert' '/home/emamaglio/projects/promoJob/test/images/profile.jpeg' '-resize' '120x120^^' '-gravity' 'Center' '-crop' '120x120+0+0' '+repage' '/tmp/dragonfly20160724-23482-a4ksji.jpeg'
 D, [2016-07-24T11:33:18.993258 #23482] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/dragonfly20160724-23482-a4ksji.jpeg'
 D, [2016-07-24T11:33:19.000203 #23482] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/home/emamaglio/projects/promoJob/test/files/cv.pdf'
+D, [2016-07-24T17:57:42.419655 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/RackMultipart20160724-19154-i19d3w.jpeg'
+D, [2016-07-24T17:57:42.432535 #19154] DEBUG -- : DRAGONFLY: shell command: 'convert' '/tmp/RackMultipart20160724-19154-i19d3w.jpeg' '-resize' '120x120^^' '-gravity' 'Center' '-crop' '120x120+0+0' '+repage' '/tmp/dragonfly20160724-19154-1krvq1s.jpeg'
+D, [2016-07-24T17:57:42.459445 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/dragonfly20160724-19154-1krvq1s.jpeg'
+D, [2016-07-24T18:01:54.011911 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/RackMultipart20160724-19154-1wet4na.jpeg'
+D, [2016-07-24T18:01:54.034500 #19154] DEBUG -- : DRAGONFLY: shell command: 'convert' '/tmp/RackMultipart20160724-19154-1wet4na.jpeg' '-resize' '120x120^^' '-gravity' 'Center' '-crop' '120x120+0+0' '+repage' '/tmp/dragonfly20160724-19154-1joke52.jpeg'
+D, [2016-07-24T18:01:54.064655 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/dragonfly20160724-19154-1joke52.jpeg'
+W, [2016-07-24T18:02:48.203031 #19154]  WARN -- : DRAGONFLY: Dragonfly::FileDataStore destroy error: No such file or directory @ unlink_internal - public/images/original-profile.jpeg
+D, [2016-07-24T18:02:48.203300 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/RackMultipart20160724-19154-172wbi5.jpeg'
+D, [2016-07-24T18:02:48.225498 #19154] DEBUG -- : DRAGONFLY: shell command: 'convert' '/tmp/RackMultipart20160724-19154-172wbi5.jpeg' '-resize' '120x120^^' '-gravity' 'Center' '-crop' '120x120+0+0' '+repage' '/tmp/dragonfly20160724-19154-1niyhmk.jpeg'
+W, [2016-07-24T18:02:48.273299 #19154]  WARN -- : DRAGONFLY: Dragonfly::FileDataStore destroy error: No such file or directory @ unlink_internal - public/images/thumb-profile.jpeg
+D, [2016-07-24T18:02:48.273575 #19154] DEBUG -- : DRAGONFLY: shell command: 'identify' '-ping' '-format' '%m %w %h' '/tmp/dragonfly20160724-19154-1niyhmk.jpeg'

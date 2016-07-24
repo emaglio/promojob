@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
       end
     end
 
+    # adding something to delete the previous file before upload new one?
     private
       def update!
         auth = Tyrant::Authenticatable.new(contract.model)
