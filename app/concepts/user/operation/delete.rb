@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
     def process(params) #TODO: do we need to destroy anything else?
       deleteJobApplication!
       delete_images!
+      delete_cv!
       model.destroy
     end
 
@@ -22,6 +23,14 @@ class User < ActiveRecord::Base
     def delete_images!
       unless model.image_meta_data == nil
         model.image(model.image_meta_data) do |v|
+          v.delete!
+        end
+      end
+    end
+
+    def delete_cv!
+      unless model.file_meta_data == nil
+        model.file(model.file_meta_data) do |v|
           v.delete!
         end
       end

@@ -12,12 +12,12 @@ module User::Cell
     extend Paperdragon::Model::Reader
     processable_reader :image
     property :image_meta_data
+    processable_reader :file
+    property :file_meta_data
 
-    def thumb
-      if image.exists?
-        # link_to image_tag image[:thumb], image[:original].url, :data => {:'data-lightbox' => "profile_image"}
-      end
+
+    def link_cv
+      link_to "View CV", file[:original].url, data: { lightbox: "image", title: "CV" } if file.exists?
     end
-
   end
 end

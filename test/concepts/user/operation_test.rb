@@ -150,27 +150,42 @@ class UserOperationTest < MiniTest::Spec
   # valid file upload.
   it "valid upload" do
     user = User::Create.(user: attributes_for(:user,
-      profile_image: File.open("test/images/profile.jpeg"))).model
+      profile_image: File.open("test/images/profile.jpeg"),
+      cv: File.open("test/files/cv.pdf"))).model
 
     Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal true
+    Paperdragon::Attachment.new(user.file_meta_data).exists?.must_equal true
     user = User::Delete.({id: user.id, current_user: user}).model
   end
 
   it "wrong file type" do
     res, op = User::Create.run(user: attributes_for(:user,
-      profile_image: File.open("test/files/wrong_file.docx")))
+      profile_image: File.open("test/files/wrong_file.docx"),
+      cv: File.open("test/files/wrong_file.docx")))
     res.must_equal false
-    op.errors.to_s.must_equal "{:profile_image=>[\"Invalid format, file shoidl be one of: *./jpeg, *./jpg, *./png and *./pdf\"]}"
+    op.errors.to_s.must_equal "{:profile_image=>[\"Invalid format, file should be one of: *./jpeg, *./jpg and *./png\"], :cv=>[\"Invalid format, file can be one only a PDF\"]}"
     Paperdragon::Attachment.new(op.model.image_meta_data).exists?.must_equal false
+    Paperdragon::Attachment.new(op.model.file_meta_data).exists?.must_equal false
+  end
+
+  it "file too big" do 
+    res, op = User::Create.run(user: attributes_for(:user,
+              cv: File.open("test/files/DLCO cal.pdf")))
+    res.must_equal false
+    op.errors.to_s.must_equal "{:cv=>[\"File too big, it must be less that 1 MB.\"]}"
+    Paperdragon::Attachment.new(op.model.file_meta_data).exists?.must_equal false
   end
 
   it "delete user and image" do
     user = User::Create.(user: attributes_for(:user,
-      profile_image: File.open("test/images/profile.jpeg"))).model
+      profile_image: File.open("test/images/profile.jpeg"),
+      cv: File.open("test/files/cv.pdf"))).model
     Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal true
+    Paperdragon::Attachment.new(user.file_meta_data).exists?.must_equal true
 
     user = User::Delete.({id: user.id, current_user: user}).model
     user.destroyed?.must_equal true
     Paperdragon::Attachment.new(user.image_meta_data).exists?.must_equal false
+    Paperdragon::Attachment.new(user.file_meta_data).exists?.must_equal false
   end
 end

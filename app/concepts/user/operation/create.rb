@@ -20,15 +20,22 @@ class User < ActiveRecord::Base
       property :password, virtual: true
       property :confirm_password, virtual: true
       property :profile_image, virtual: true
+      property :cv, virtual: true
 
       extend Paperdragon::Model::Writer
       processable_writer :image
+      processable_writer :file
       property :image_meta_data
-      validates :profile_image,  file_size: { less_than: 1.megabyte,
+      property :file_meta_data
+      validates :profile_image, file_size: { less_than: 1.megabyte,
                                               message: "File too big, it must be less that 1 MB."},
-        file_content_type: { allow: ['image/jpeg', 'image/png', 'image/jpg', 'image/pdf'], 
-                             message: "Invalid format, file shoidl be one of: *./jpeg, *./jpg, *./png and *./pdf"}
+        file_content_type: { allow: ['image/jpeg', 'image/png', 'image/jpg'], 
+                             message: "Invalid format, file should be one of: *./jpeg, *./jpg and *./png"}
 
+      validates :cv, file_size: { less_than: 1.megabyte,
+                                              message: "File too big, it must be less that 1 MB."},
+        file_content_type: { allow: ['application/pdf'], 
+                             message: "Invalid format, file can be one only a PDF"}
 
 
       validates :firstname, :lastname, :gender, :phone, :age, :email, :password,  presence: true
@@ -61,6 +68,7 @@ class User < ActiveRecord::Base
       validate(params[:user]) do |contract|
         update!
         upload_image!(contract) unless contract.profile_image == nil
+        upload_cv!(contract) unless contract.cv == nil
         contract.save # save User with email.
       end
     end
@@ -77,6 +85,12 @@ class User < ActiveRecord::Base
         contract.image!(contract.profile_image) do |v|
           v.process!(:original)
           v.process!(:thumb) { |job| job.thumb!("120x120#") }
+        end
+      end
+
+      def upload_cv!(contract)
+        contract.file!(contract.cv) do |v|
+          v.process!(:original)
         end
       end
   end
