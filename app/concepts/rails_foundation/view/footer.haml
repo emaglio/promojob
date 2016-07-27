@@ -1,1 +1,55 @@
-Footer TODO
+.footer
+  .row.small-12.medium-6.large-5.columns
+    %p
+      .logo
+        %i{:class => "fi-shield"}
+        PromoJob
+    %p
+      .footer-links
+        = link_to "Job Search", jobs_path
+        - if policy.admin?
+          = link_to "Users", users_path
+          = link_to "Create Job", new_job_path 
+        - if tyrant.signed_in?
+          = link_to "My Jobs", my_jobs_path unless policy.admin?
+          = link_to "My Calendar", my_calendar_path(offset: 0)
+          = link_to "Sign Out", sign_out_sessions_path
+        - else
+          = link_to "Create User", new_user_path
+          = link_to "Sign In", new_session_path
+    %p
+      .copywrite
+        Copywrite not copywrite © 2016
+
+  .row.small-12.medium-6.large-4.columns
+    %ul
+      .contact
+        %li
+          %i{:class => "fa-map-pin"}
+          .i
+            Address
+        %li
+          %i{:class => "fi-telefhone"}
+          .i
+            +658 1093 19283
+        %li
+          %i{:class => "fi-mail"}
+          .i
+            promojob@promojob.com
+
+  .row.small-12.medium-12.large-3.columns
+    %p
+      .about
+        About PromoJob
+    %p
+      .about.subheader
+        With PromoJob you will be able to find your perfet job but only if you are enough cool! 
+    %p
+      %ul  
+        .inline-list.social
+          %a{href: "#"}
+            %i{class: "fa facebook"}
+          %a{href: "#"}
+            %i{class: "fi-social-twitter"}
+          %a{href: "#"}
+            %i{class: "fi-social-linkedin"}   

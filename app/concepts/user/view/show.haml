@@ -1,7 +1,10 @@
+%link{:rel => "stylesheet", :href => "/lightbox.css"}
+%script{:src => "/lightbox.js"}
+
 .row.user
   .row.title
     - if image.exists? 
-      %a{href: image[:original].url, data: { lightbox: "image", title: "Profile image" } }
+      %a{href: image[:original].url, data: { lightbox: "image", title: "Profile image" }}
         %img{src: image[:thumb].url, class: "profile_image"}
     = firstname
     = lastname
