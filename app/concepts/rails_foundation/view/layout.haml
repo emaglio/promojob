@@ -10,8 +10,9 @@
   %body
     %header
       = cell "rails_foundation/cell/navigation", OpenStruct.new(real_user: params[:real_user], current_user: params[:current_user], "signed_in?" => tyrant.signed_in?)
-    %article.page-content
+    %content 
       %row.columns
         = cell "rails_foundation/cell/message"
         = yield
-        = cell "rails_foundation/cell/footer"
+    %footer
+      = cell "rails_foundation/cell/footer"

@@ -1,3 +1,10 @@
+.columns {
+  min-height: 70%;
+  min-height: -webkit-calc(100% - 218xpx);
+  min-height: -moz-calc(100% - 218px);
+  min-height: calc(100% - 218px);
+}
+
 .log-in-form {
   margin-top: 20px;
   border: 2px solid #cacaca;
