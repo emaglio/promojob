@@ -1,8 +1,5 @@
-.columns {
-  min-height: 70%;
-  min-height: -webkit-calc(100% - 218xpx);
-  min-height: -moz-calc(100% - 218px);
-  min-height: calc(100% - 218px);
+.page-content {
+  min-height: 100%;
 }
 
 .log-in-form {
@@ -95,4 +92,12 @@
 .profile_image{
   margin-left: 10px;
   margin-right: 10px; 
+}
+
+.month .text{
+  visibility: hidden;
+}
+
+.month:hover .text{
+  visibility: visible;
 }

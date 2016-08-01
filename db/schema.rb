@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20160724003111) do
     t.datetime "updated_at"
     t.text     "auth_meta_data"
     t.integer  "age"
-    t.boolean  "block"
     t.text     "image_meta_data"
+    t.boolean  "block"
     t.text     "file_meta_data"
   end
 
