@@ -13,7 +13,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     page.must_have_link "MyTitle"
     click_link "MyTitle"
     page.wont_have_button "Apply"
-    click_link "Sign Out"
+    first('.top-bar').click_link("Sign Out")
 
     #no logged in
     visit "jobs"
@@ -28,7 +28,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     log_in_as_admin
     visit "jobs/new"
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
-    click_link "Sign Out"
+    first('.top-bar').click_link("Sign Out")
 
     #log in and apply
     log_in_as_user
@@ -50,7 +50,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     log_in_as_admin
     visit "jobs/new"
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
-    click_link "Sign Out"
+    first('.top-bar').click_link("Sign Out")
 
     #log in and apply once
     log_in_as_user
@@ -70,7 +70,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     log_in_as_admin
     visit "jobs/new"
     fill_new_job!("MyTitle","MyRequirements","MyDescription")
-    click_link "Sign Out"
+    first('.top-bar').click_link("Sign Out")
 
     #log in and apply
     log_in_as_user
@@ -82,7 +82,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
 
     #user doesn't have Applied Job menu
     page.wont_have_link "Job Applications"
-    click_link "Sign Out"
+    first('.top-bar').click_link("Sign Out")
 
     #admin can hire/reject job_application
     log_in_as_admin
@@ -142,7 +142,7 @@ class JobApplicationIntegrationTest < Trailblazer::Test::Integration
     #create a job
     log_in_as_admin
     create_job("MyTitle","MyDescription")
-    click_link "Sign Out"
+    first('.top-bar').click_link("Sign Out")
 
     #log in and apply
     log_in_as_user

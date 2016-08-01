@@ -10,9 +10,9 @@ Rails.backtrace_cleaner.remove_silencers!
 Minitest::Spec.class_eval do
   after :each do
     # DatabaseCleaner.clean
-    # ::Job.delete_all
-    # ::JobApplication.delete_all
+    ::JobApplication.delete_all
     ::User.delete_all
+    ::Job.delete_all
   end
   include FactoryGirl::Syntax::Methods
 

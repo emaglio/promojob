@@ -16,7 +16,7 @@ class JobIntegrationTest < Trailblazer::Test::Integration
     page.wont_have_content "Create Job"
     page.must_have_content "Not authorized, my friend." #flash
     page.current_path.must_equal root_path
-    click_link "Sign Out"   
+    first('.top-bar').click_link("Sign Out")   
 
     # admin
     log_in_as_admin

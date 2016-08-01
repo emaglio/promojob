@@ -50,7 +50,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
 
     page.must_have_content "Hi, #{op.model.firstname}"
 
-    click_link "Sign Out"
+    first('.top-bar').click_link("Sign Out")
 
     page.wont_have_content "Hi, #{op.model.firstname}"    
     page.must_have_content "Sign In"
