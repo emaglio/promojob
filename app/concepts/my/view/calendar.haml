@@ -1,14 +1,14 @@
 %main{:role => "main"} 
 .row.text-center
   %h4
-    .small-5.columns
+    .small-4.columns
       .month
         = link_to "", my_calendar_path(offset: offset-4), class: "fa fa-chevron-left"
         %p{class: "text"}
           Previous Month
-    .small-2.columns
+    .small-4.columns
       #{month}
-    .small-5.columns
+    .small-4.columns
       .month
         = link_to "", my_calendar_path(offset: offset+4), class: "fa fa-chevron-right"
         %p{class: "text"}

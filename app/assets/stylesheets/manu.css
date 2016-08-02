@@ -1,5 +1,8 @@
-.page-content {
-  min-height: 100%;
+.page-content{
+  min-height: 70%;
+  min-height: -webkit-calc(100% - 218px);
+  min-height: -moz-calc(100% - 218px);
+  min-height: calc(100% - 218px);
 }
 
 .log-in-form {
