@@ -33,17 +33,7 @@ class JobApplication < ActiveRecord::Base
       Pony.mail({ to: "emanuele.magliozzi@gmail.com",
                   subject: "Test PromoJob",
                   body: "",
-                  from: "emanuele.magliozzi@gmail.com",
-                  # sender:  "Nick Sutterer",
-                  via: :smtp, 
-                  via_options: {address: "smtp.gmail.com", 
-                                port: "587",
-                                domain: 'localhost:3000', 
-                                enable_starttls_auto: true, 
-                                # ssl: true, 
-                                user_name: "emanuele.magliozzi@gmail.com", 
-                                password: "password", 
-                                authentication: :login} 
+                  html_body: haml(cell "email/cell/test")
                 })
     end
 
