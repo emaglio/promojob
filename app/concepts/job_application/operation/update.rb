@@ -1,3 +1,5 @@
+require 'pony'
+
 class JobApplication < ActiveRecord::Base
 
   class Update < Trailblazer::Operation
@@ -16,6 +18,7 @@ class JobApplication < ActiveRecord::Base
       validate(params[:job_application]) do
         positions_fulfilled(params[:job_application]) 
         contract.save
+        notify_user(params)
       end
     end
 
@@ -23,7 +26,25 @@ class JobApplication < ActiveRecord::Base
       return unless params[:status] == "Hire"
       hired_apps = JobApplication.where("job_id = ? AND status = ?", @model.job_id, "Hire").size
       positions = Job.find(@model.job_id).user_count.to_i
-      raise Trailblazer::NotAuthorizedError if hired_apps >= positions
+      raise Trailblazer::NotAuthorizedError if hired_apps >= positions #raise custom error
+    end
+
+    def notify_user(params)
+      Pony.mail({ to: "emanuele.magliozzi@gmail.com",
+                  subject: "Test PromoJob",
+                  body: "",
+                  from: "emanuele.magliozzi@gmail.com",
+                  # sender:  "Nick Sutterer",
+                  via: :smtp, 
+                  via_options: {address: "smtp.gmail.com", 
+                                port: "587",
+                                domain: 'localhost:3000', 
+                                enable_starttls_auto: true, 
+                                # ssl: true, 
+                                user_name: "emanuele.magliozzi@gmail.com", 
+                                password: "password", 
+                                authentication: :login} 
+                })
     end
 
   end
