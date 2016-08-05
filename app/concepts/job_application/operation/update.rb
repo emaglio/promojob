@@ -33,14 +33,14 @@ class JobApplication < ActiveRecord::Base
       job = job_app.job
 
       body = {
-        "Hire" => "You have been hired for the #{job.title}. See you at #{job.starts_at.strftime("%A - %d/%m/%Y at %H:%M")}",
-        "Reject" => "Sorry but you have been reject for the #{job.title}"
+        "Hire" => "You have been hired for for role of #{job.title}. See you at #{job.starts_at.strftime("%A - %d/%m/%Y at %H:%M")}",
+        "Reject" => "Sorry but you have been reject for role of #{job.title}"
       }
 
-      Pony.mail({ to: "emanuele.magliozzi@gmail.com", #user.email,
+      Pony.mail({ to: "emanuelem@cosmed.it", #user.email,
                   subject: "Application for the role of #{job.title}",
                   body: body[job_app.status],
-                  html_body: ::Email::Cell::Test.new().()
+                  html_body: ::Mailer::Cell::Email.new(params).()
                 })
     end
 
