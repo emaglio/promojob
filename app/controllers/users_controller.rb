@@ -44,7 +44,6 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		#TODO: adding flash message
 		run User::Delete do
 			flash[:alert] = "User deleted"
 			redirect_to root_path

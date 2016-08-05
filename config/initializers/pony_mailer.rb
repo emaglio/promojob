@@ -1,3 +1,5 @@
+require 'pony'
+
 Pony.options = {
   from: "emanuele.magliozzi@gmail.com",
   via: :smtp, 

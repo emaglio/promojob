@@ -1,5 +1,3 @@
-require 'pony'
-
 class JobApplication < ActiveRecord::Base
 
   class Update < Trailblazer::Operation
@@ -30,10 +28,19 @@ class JobApplication < ActiveRecord::Base
     end
 
     def notify_user(params)
-      Pony.mail({ to: "emanuele.magliozzi@gmail.com",
-                  subject: "Test PromoJob",
-                  body: "",
-                  html_body: haml(cell "email/cell/test")
+      job_app = ::JobApplication.find(params[:id])
+      user = job_app.user
+      job = job_app.job
+
+      body = {
+        "Hire" => "You have been hired for the #{job.title}. See you at #{job.starts_at.strftime("%A - %d/%m/%Y at %H:%M")}",
+        "Reject" => "Sorry but you have been reject for the #{job.title}"
+      }
+
+      Pony.mail({ to: "emanuele.magliozzi@gmail.com", #user.email,
+                  subject: "Application for the role of #{job.title}",
+                  body: body[job_app.status],
+                  html_body: ::Email::Cell::Test.new().()
                 })
     end
 

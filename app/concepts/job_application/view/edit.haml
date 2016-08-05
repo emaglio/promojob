@@ -47,7 +47,10 @@
 
 .row.user
   %h1 User:
-  .title
+  .row.title
+    - if user.image.exists? 
+      %a{href: user.image[:original].url, data: { lightbox: "image", title: "Profile image" }}
+        %img{src: user.image[:thumb].url, class: "profile_image"}
     #{user.firstname}
     #{user.lastname}
   .small-6.columns
@@ -74,6 +77,7 @@
     Message:
   .my-text
     =message
+  #{link_cv}
 
 = simple_form_for model do |f|
   .row.small-1.small-centered.columns.text-center
