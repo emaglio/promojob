@@ -22,11 +22,11 @@
               Job Applications
             %ul.dropdown
               %li
-                = link_to "Applied", applications_job_applications_path(status: "Apply")
+                = link_to "Applied (#{num_apply})", applications_job_applications_path(status: "Apply")
               %li
-                = link_to "Hired", applications_job_applications_path(status: "Hire")
+                = link_to "Hired (#{num_hire})", applications_job_applications_path(status: "Hire")
               %li
-                = link_to "Rejected", applications_job_applications_path(status: "Reject")
+                = link_to "Rejected (#{num_reject})", applications_job_applications_path(status: "Reject")
 
       - if tyrant.signed_in?
         %li
