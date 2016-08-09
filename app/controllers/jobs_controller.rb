@@ -3,6 +3,7 @@ class JobsController < ApplicationController
 	def index
 		present	Job::Index
 		render Job::Cell::Index
+    # render Mailer::Cell::Email
 	end
 
 	def new

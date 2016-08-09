@@ -16,7 +16,7 @@ class JobApplication < ActiveRecord::Base
       validate(params[:job_application]) do
         positions_fulfilled(params[:job_application]) 
         contract.save
-        # notify_user(params)
+        notify_user(params)
       end
     end
 
