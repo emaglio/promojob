@@ -11,7 +11,7 @@
   .my-label
     Job description:
   .my-text
-    #{job.description}
+    = simple_format(job.description, :class => 'my-text')
 
   -unless job.salary == nil  
     .my-label
@@ -41,9 +41,9 @@
     .my-text
       = JobApplication.where("job_id = ? AND status = ?", job.id, "Hire").size
   .my-label
-    Requirments:
+    Applicant Requirements:
   .my-text
-    #{job.requirements}
+    = simple_format(job.requirements, :class => 'my-text')
 
 .row.user
   %h1 User:

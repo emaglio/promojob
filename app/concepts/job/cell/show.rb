@@ -23,6 +23,14 @@ module Job::Cell
       end
       return users_array
     end
+
+    def label
+      if users.size == 0 
+        return "No applicants for this job"
+      else
+        return "List of applicants:"
+      end
+    end
   end
 
   class Applicants <Trailblazer::Cell

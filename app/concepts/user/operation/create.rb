@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
         upload_image!(contract) unless contract.profile_image == nil
         upload_cv!(contract) unless contract.cv == nil
         contract.save # save User with email.
-        notify_user(params)
+        # notify_user(params)
       end
     end
 

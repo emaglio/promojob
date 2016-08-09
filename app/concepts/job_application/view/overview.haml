@@ -11,7 +11,11 @@
   .my-label
     Job description:
   .my-text
-    #{job.description}
+    = simple_format(job.description, :class => 'my-text')
+  .my-label
+    Applicant Requirements:
+  .my-text
+    = simple_format(job.requirements, :class => 'my-text')
 
   -unless job.salary == nil  
     .my-label

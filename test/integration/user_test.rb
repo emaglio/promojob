@@ -109,7 +109,7 @@ class UserIntegrationTest < Trailblazer::Test::Integration
     page.must_have_content "You have been blocked"
 
     log_in_as_admin
-    click_link "Users"
+    first('.top-bar').click_link("Users")
     page.must_have_link "my@email.com"
     click_link "my@email.com"
     page.must_have_button "Un-Block"

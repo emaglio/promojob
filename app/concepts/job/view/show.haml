@@ -12,7 +12,7 @@
     .my-label
       Job description:
     .my-text
-      = description
+      = simple_format(description, :class => 'my-text')
   .row
     -unless salary == nil  
       .my-label
@@ -33,7 +33,7 @@
     .my-label
       Requirments:
     .my-text
-      = requirements
+      = simple_format(requirements,  :class => 'my-text')
 
   - if policy.admin?
     .small-6.columns
@@ -64,6 +64,6 @@
 
   - if policy.admin?
     .my-label
-      List of the applicants:
+      #{label}
       %ul.mobile-list
         = cell("job/cell/applicants", collection: users)
