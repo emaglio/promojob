@@ -40,7 +40,7 @@ class JobApplication < ActiveRecord::Base
       Pony.mail({ to: "emanuelem@cosmed.it", #user.email,
                   subject: "Application for the role of #{job.title}",
                   body: body[job_app.status],
-                  html_body: ::Mailer::Cell::Email.new(params).()
+                  html_body: ::Mailer::Cell::JobAppUpdate.new(params).()
                 })
     end
 
