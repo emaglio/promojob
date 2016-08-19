@@ -15,8 +15,8 @@ class JobApplication < ActiveRecord::Base
     def process(params)
       validate(params[:job_application]) do
         positions_fulfilled(params[:job_application]) 
+        # notify_user(params)
         contract.save
-        notify_user(params)
       end
     end
 
@@ -37,7 +37,7 @@ class JobApplication < ActiveRecord::Base
         "Reject" => "Sorry but you have been reject for role of #{job.title}"
       }
 
-      Pony.mail({ to: "emanuelem@cosmed.it", #user.email,
+      Pony.mail({ to: user.email,
                   subject: "Application for the role of #{job.title}",
                   body: body[job_app.status],
                   html_body: ::Mailer::Cell::JobAppUpdate.new(params).()

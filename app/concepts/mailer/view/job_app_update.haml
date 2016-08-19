@@ -12,7 +12,7 @@
       %tr
         %td{class: "float-center", align: "center", valign: "top"}
           %center{"data-parsed" => ""}
-            = cell('mailer/cell/header')
+            / = cell('mailer/cell/header')
             %tbody
               - if hired?
                 %tr
@@ -21,8 +21,13 @@
                 %tr
                   %td
                     I'm glad to inform you that you have been selected for the role of #{job.title}.
-
-
+                %tr
+                  %td
+                    We will see you on 
+                    = job.starts_at.strftime("%A - %d/%m/%Y at %H:%M")
+                %tr
+                  %td
+                    See you then
               - else
                 %tr
                   %td
@@ -33,6 +38,4 @@
                 %tr
                   %td
                     Have a great day
-
-              %footer
-                = cell('mailer/cell/footer')
+    = cell('mailer/cell/footer')

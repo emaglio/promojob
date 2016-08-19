@@ -22,7 +22,7 @@ class JobApplicationsController < ApplicationController
 
   def update
     run JobApplication::Update do 
-      flash[:success] = "Job application updated"
+      flash[:notice] = "Job application updated"
       return redirect_to applications_job_applications_path(status: "Apply")
     end
     render JobApplication::Cell::Edit, model: @model

@@ -49,5 +49,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def notification
+    false
+  end
+
 
 end

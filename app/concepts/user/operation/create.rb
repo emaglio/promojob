@@ -69,8 +69,8 @@ class User < ActiveRecord::Base
         update!
         upload_image!(contract) unless contract.profile_image == nil
         upload_cv!(contract) unless contract.cv == nil
-        contract.save # save User with email.
         # notify_user(params)
+        contract.save # save User with email.
       end
     end
 
@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
       end
 
       def notify_user(params)
-        Pony.mail({ to: "emanuelem@cosmed.it", #user.email,
+        Pony.mail({ to: params[:user][:email],
                     subject: "Welcome in PromoJob",
                     body: "Welcome in PromoJob. Click here to get your new job.",
                     html_body: ::Mailer::Cell::Welcome.new(params).()

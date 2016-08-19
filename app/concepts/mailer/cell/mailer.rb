@@ -14,26 +14,30 @@ module Mailer::Cell
       job_app = ::JobApplication.find(model[:id])
       return job = ::Job.find(job_app.job_id)
     end
+
+    def job_app
+      return job_app = ::JobApplication.find(model[:id])
+    end
   end
 
   class Welcome < Trailblazer::Cell
-
-  end
-
-  class Main < Trailblazer::Cell
-    
-  end
-
-  class Header < Trailblazer::Cell
-    
-  end
-
-  class Body < Trailblazer::Cell
-    
+    def user_firstname
+      model[:user][:firstname]
+    end
   end
 
   class Footer < Trailblazer::Cell
 
+  end
+
+  class Apply < Trailblazer::Cell
+    def user
+      return user = ::User.find(model[:user_id])
+    end    
+
+    def job
+      return job = ::Job.find(model[:job_id])
+    end
   end
 
 

@@ -1,7 +1,7 @@
 require 'pony'
 
 Pony.options = {
-  from: "emanuele.magliozzi@gmail.com",
+  from: "info@cj-agency.de",
   via: :smtp, 
   via_options: {address: "smtp.gmail.com", 
                 port: "587",

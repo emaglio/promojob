@@ -1,43 +1,28 @@
-%table
-  .footer
-    .row.small-12.medium-6.large-5.columns
-      %p
-        .logo
-          %i{:class => "fa fa-briefcase"}
-          PromoJob
-      %p
-        .copywrite
-          Copywrite not copywrite © 2016
-
-    .row.small-12.medium-6.large-4.columns
-      %ul
-        .contact
-          %li
-            %i{:class => "fa fa-map-marker"}
-            .i
-              Address
-          %li
-            %i{:class => "fa fa-phone"}
-            .i
-              +658 1093 19283
-          %li
-            %i{:class => "fa fa-envelope-o"}
-            .i
-              promojob@promojob.com
-
-    .row.small-12.medium-12.large-3.columns
-      %p
-        .about
-          About PromoJob
-      %p
-        .about.subheader
-          With PromoJob you will be able to find your perfet job but only if you are enough cool! 
-      %p
-        %ul  
-          .inline-list.social
-            %a{href: "#"}
-              %i{class: "fa fa-facebook-official"}
-            %a{href: "#"}
-              %i{class: "fa fa-twitter"}
-            %a{href: "#"}
-              %i{class: "fa fa-linkedin"}   
+%table{class: "container", bgcolor: "#333333", aligh: "center", widht: "300px"}
+  %tbody
+    %tr
+      %td{class: "float-center", align: "center", valign: "top"}
+        %table{class: "row"}
+          %tbody
+            %tr
+              %th{class: "small-6 medium-6 large-6 first columns"}
+                %table
+                  %tr
+                    %th
+                      %h6
+                        PromoJob
+              %th{class: "small-6 medium-6 large-6 last columns"}
+                %table
+                  %tr
+                    %th 
+                      %h6
+                        %ul{class: "contact"}
+                          %li
+                            %i{class: "text-left"}
+                              Address
+                          %li
+                            %i{class: "text-left"}
+                              +658 1093 19283
+                          %li
+                            %i{class: "text-left"}
+                              promojob@promojob.com
